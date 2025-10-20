@@ -1,0 +1,23 @@
+---
+// App
+import { SITE_URL } from '@/lib/constants'
+
+// Internal
+import { CommandLineTabs } from './_module'
+import { PACKAGE_MANAGERS, PACKAGE_MANAGER_COMMAND_LINE_MAP, type CommandLine } from './lib'
+
+// Props
+interface Props {
+  registryName: string
+}
+const { registryName } = Astro.props
+
+// Command lines
+const commandLines: CommandLine[] = PACKAGE_MANAGERS.map((packageManager) => ({
+  packageManager,
+  command: `${PACKAGE_MANAGER_COMMAND_LINE_MAP[packageManager]} shadcn@latest add ${SITE_URL}/${registryName}.json`
+}))
+---
+
+<!-- Template -->
+<CommandLineTabs client:load commandLines={commandLines} />

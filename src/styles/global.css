@@ -1,7 +1,12 @@
+@layer base, starlight, theme, components, utilities;
+
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where([data-theme="dark"] *));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -39,6 +44,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-code: var(--code);
 }
 
 :root {
@@ -74,9 +81,11 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --color-code: var(--code);
 }
 
-.dark {
+[data-theme='dark'] {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -108,6 +117,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --code: var(--card);
 }
 
 @layer base {
@@ -116,5 +127,66 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer theme {
+  .expressive-code > figure.frame {
+    @apply shadow-none;
+    --code-background: var(--code);
+  }
+
+  .expressive-code > figure.frame > pre {
+    @apply rounded-md border-none;
+  }
+
+  .expressive-code > figure.frame.has-title > pre {
+    @apply rounded-t-none;
+  }
+
+  .sl-anchor-link:not(:where(.not-content *)) {
+    @apply hidden;
+  }
+
+  .sl-heading-wrapper > :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+    @apply border-none;
+  }
+
+  *::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .entry-title:not(a) {
+    @apply text-muted-foreground !font-normal;
+  }
+
+  .container-sidebar-entry > a {
+    @apply !text-foreground;
+  }
+
+  .container-wrapper,
+  .container-section {
+    @apply border-none;
+  }
+
+  .container-wrapper > .container > .hero {
+    @apply !pb-0 text-center;
+
+    & > .title,
+    & > .tagline {
+      @apply w-full text-center;
+    }
+
+    & > .actions {
+      @apply !justify-center;
+    }
+  }
+
+  .logo-size {
+    @apply !size-10;
+  }
+
+  .sl-link-card a {
+    @apply !no-underline;
   }
 }
