@@ -1,2 +1,4 @@
 pnpm lint-staged
 pnpm build
+pnpm registry:build
+git add ./public/r
