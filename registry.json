@@ -4,14 +4,28 @@
   "homepage": "https://shadcn-registry-xi.vercel.app",
   "items": [
     {
-      "name": "hello-world",
-      "type": "registry:component",
-      "title": "Hello World",
-      "description": "Hello world component to test",
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Displays a form input field or a component that looks like an input field.",
       "files": [
         {
-          "path": "src/registry/new-york/items/hello-world/components/hello-world.tsx",
-          "type": "registry:ui"
+          "path": "src/registry/new-york/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui"
+        }
+      ]
+    },
+    {
+      "name": "password-input",
+      "type": "registry:component",
+      "title": "Password input",
+      "description": "An input that can toggle visibility of the password text.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/password-input/components/password-input.tsx",
+          "type": "registry:component",
+          "target": "src/components/molecules"
         }
       ]
     }

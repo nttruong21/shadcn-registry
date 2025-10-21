@@ -66,7 +66,10 @@ export default defineConfig({
         },
         {
           label: 'Components',
-          autogenerate: { directory: 'components' }
+          items: [
+            { label: 'UI', autogenerate: { directory: 'ui' } },
+            { label: 'Molecules', autogenerate: { directory: 'molecules' } }
+          ]
         }
       ],
       customCss: ['./src/styles/global.css'],

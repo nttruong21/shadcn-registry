@@ -11,35 +11,63 @@ const ComponentFileSchema = z.object({
 })
 
 // Extract components
-const components = Object.entries(
-  import.meta.glob('../../../content/docs/components/*.mdx', {
+interface Component {
+  name: string
+  title: string
+}
+
+const uiComponents: Component[] = []
+const moleculesComponents: Component[] = []
+
+Object.entries(
+  import.meta.glob('../../../content/docs/components/**/*.mdx', {
     eager: true
   })
-).reduce<
-  Array<{
-    name: string
-    title: string
-  }>
->((acc, [filePath, content]) => {
+).forEach(([filePath, content]) => {
   const { success, data } = ComponentFileSchema.safeParse(content)
-  if (!success) {
-    return acc
-  }
+  if (!success) return
 
   const name = filePath.split('/').pop()?.split('.').shift()
-  if (!name) {
-    return acc
-  }
+  if (!name) return
 
-  acc.push({
+  const component: Component = {
     name,
     title: data.frontmatter.title
-  })
-  return acc
-}, [])
+  }
+
+  if (filePath.includes('ui')) {
+    return uiComponents.push(component)
+  }
+
+  moleculesComponents.push(component)
+})
 ---
 
 <!-- Template -->
-<div class='grid grid-cols-3 gap-6'>
-  {components.map((component) => <a href={`/components/${component.name}`}>{component.title}</a>)}
+<div class='space-y-6'>
+  <div class='space-y-2'>
+    <h3>UI</h3>
+    <div class='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-10'>
+      {
+        uiComponents.map((component) => (
+          <a href={`/components/ui/${component.name}`} class='no-underline hover:underline'>
+            {component.title}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class='space-y-2'>
+    <h3>Molecules</h3>
+    <div class='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-10'>
+      {
+        moleculesComponents.map((component) => (
+          <a href={`/components/molecules/${component.name}`} class='no-underline hover:underline'>
+            {component.title}
+          </a>
+        ))
+      }
+    </div>
+  </div>
 </div>
