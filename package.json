@@ -17,6 +17,7 @@
   },
   "lint-staged": {
     "**/*": [
+      "pnpm lint",
       "pnpm prettier:fix"
     ]
   },

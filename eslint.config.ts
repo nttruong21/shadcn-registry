@@ -7,29 +7,22 @@ import react from 'eslint-plugin-react'
 import astro from 'eslint-plugin-astro'
 import astroParser from 'astro-eslint-parser'
 import prettier from 'eslint-config-prettier'
+import { globalIgnores } from 'eslint/config'
 import reactHooks from 'eslint-plugin-react-hooks'
-import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default defineConfig([
-  // Ignores
+export default tseslint.config([
   globalIgnores(['node_modules/', '.astro/', '.github/', '.vscode/', 'dist/', 'public/r/', 'package-lock.json']),
-
-  // Markdown
   {
     files: ['**/*.{md,mdx}'],
     plugins: { markdown },
     extends: [markdown.configs.recommended]
   },
-
-  // JSON
   {
     files: ['**/*.json'],
     plugins: { json },
     language: 'json/json',
     extends: [json.configs.recommended]
   },
-
-  // JS
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     plugins: { js },
@@ -39,11 +32,7 @@ export default defineConfig([
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     languageOptions: { globals: { ...globals.browser } }
   },
-
-  // TS
   tseslint.configs.recommended,
-
-  // React
   {
     settings: {
       react: {
@@ -58,8 +47,6 @@ export default defineConfig([
       react.configs.flat['jsx-runtime']
     ]
   },
-
-  // Astro
   {
     plugins: { astro },
     languageOptions: {
@@ -75,7 +62,5 @@ export default defineConfig([
     ],
     files: ['**/*.astro']
   },
-
-  // Prettier
   prettier
 ])

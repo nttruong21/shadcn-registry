@@ -1,0 +1,45 @@
+---
+// Core
+import { z } from 'astro:content'
+
+// Schema
+const ComponentFileSchema = z.object({
+  frontmatter: z.object({
+    title: z.string().min(1)
+  }),
+  url: z.string().optional()
+})
+
+// Extract components
+const components = Object.entries(
+  import.meta.glob('../../../content/docs/components/*.mdx', {
+    eager: true
+  })
+).reduce<
+  Array<{
+    name: string
+    title: string
+  }>
+>((acc, [filePath, content]) => {
+  const { success, data } = ComponentFileSchema.safeParse(content)
+  if (!success) {
+    return acc
+  }
+
+  const name = filePath.split('/').pop()?.split('.').shift()
+  if (!name) {
+    return acc
+  }
+
+  acc.push({
+    name,
+    title: data.frontmatter.title
+  })
+  return acc
+}, [])
+---
+
+<!-- Template -->
+<div class='grid grid-cols-3 gap-6'>
+  {components.map((component) => <a href={`/components/${component.name}`}>{component.title}</a>)}
+</div>

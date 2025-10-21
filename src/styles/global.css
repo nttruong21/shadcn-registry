@@ -1,4 +1,4 @@
-@layer base, starlight, theme, components, utilities;
+@layer base, starlight, black, theme, components, utilities;
 
 @import 'tailwindcss';
 @import 'tw-animate-css';
@@ -166,7 +166,7 @@
 
   .container-wrapper,
   .container-section {
-    @apply border-none;
+    @apply border-0;
   }
 
   .container-wrapper > .container > .hero {
