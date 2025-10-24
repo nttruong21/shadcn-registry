@@ -6,8 +6,8 @@
   "description": "Displays a form input field or a component that looks like an input field.",
   "files": [
     {
-      "path": "src/registry/new-york/ui/input.tsx",
-      "content": "// Core\nimport * as React from 'react'\n\n// App\nimport { cn } from '@/lib/utils'\n\n// Components\n// Input\nexport type InputProps = React.ComponentProps<'input'>\nexport const Input = ({ className, type, ...props }: InputProps) => {\n  // Template\n  return (\n    <input\n      type={type}\n      data-slot='input'\n      className={cn(\n        'border-input bg-background ring-offset-background file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm text-ellipsis file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',\n        className\n      )}\n      {...props}\n    />\n  )\n}\n",
+      "path": "src/registry/new-york/ui/input/components/input.tsx",
+      "content": "// Core\nimport * as React from 'react'\n\n// App\nimport { cn } from '@/lib/utils'\n\n// Components\n// Input\nexport type InputProps = React.ComponentProps<'input'>\nexport const Input = ({ className, type, ...props }: InputProps) => {\n  // Template\n  return (\n    <input\n      type={type}\n      data-slot='input'\n      className={cn(\n        'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',\n        'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',\n        className\n      )}\n      {...props}\n    />\n  )\n}\n",
       "type": "registry:ui",
       "target": "src/components/ui"
     }

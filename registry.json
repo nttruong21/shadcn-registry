@@ -10,7 +10,7 @@
       "description": "Displays a form input field or a component that looks like an input field.",
       "files": [
         {
-          "path": "src/registry/new-york/ui/input.tsx",
+          "path": "src/registry/new-york/ui/input/components/input.tsx",
           "type": "registry:ui",
           "target": "src/components/ui"
         }

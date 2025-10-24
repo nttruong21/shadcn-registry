@@ -9,10 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 // Internal
-import { type CommandLine } from './command-line-tabs.lib'
+import { type CommandLine } from './lib'
 
 // Component
-export const CommandLineTabsModule = ({ commandLines }: { commandLines: CommandLine[] }) => {
+export const Module = ({ commandLines }: { commandLines: CommandLine[] }) => {
   // Refs
   const timeoutRef = useRef<NodeJS.Timeout>(undefined)
 
@@ -54,11 +54,7 @@ export const CommandLineTabsModule = ({ commandLines }: { commandLines: CommandL
 
               <TabsList className='bg-code'>
                 {commandLines.map((commandLine) => (
-                  <TabsTrigger
-                    key={commandLine.packageManager}
-                    value={commandLine.packageManager}
-                    className='data-[state=active]:!border-input !border-transparent'
-                  >
+                  <TabsTrigger key={commandLine.packageManager} value={commandLine.packageManager}>
                     {commandLine.packageManager}
                   </TabsTrigger>
                 ))}

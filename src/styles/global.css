@@ -82,7 +82,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --color-code: var(--code);
+  --code: oklch(0.98 0 0);
 }
 
 [data-theme='dark'] {
