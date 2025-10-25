@@ -67,8 +67,8 @@ export default defineConfig({
         {
           label: 'Components',
           items: [
-            { label: 'UI', autogenerate: { directory: 'ui' } },
-            { label: 'Molecules', autogenerate: { directory: 'molecules' } }
+            { label: 'UI', autogenerate: { directory: 'components/ui' } },
+            { label: 'Molecules', autogenerate: { directory: 'components/molecules' } }
           ]
         }
       ],

@@ -10,7 +10,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import type { ModuleProps } from './lib'
 
 // Component
-export const Module = ({ path, className, children }: ModuleProps) => {
+export const CodePreviewModule = ({ path, className, children }: ModuleProps) => {
   const Component = getComponent(path)
 
   // Template
@@ -18,7 +18,7 @@ export const Module = ({ path, className, children }: ModuleProps) => {
     <Card className={cn('not-content overflow-hidden p-0', className)}>
       <CardContent className='p-0'>
         <div className='bg-background text-foreground border-b'>
-          <div className='flex min-h-96 items-center justify-center p-8'>
+          <div className='component-container flex min-h-96 items-center justify-center p-8'>
             <Suspense fallback={<LoaderCircle className='mx-auto animate-spin' />}>
               {/* eslint-disable-next-line react-hooks/static-components */}
               <Component />

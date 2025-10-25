@@ -3,7 +3,7 @@
 import { SITE_URL } from '@/lib/constants'
 
 // Internal
-import { Module } from './_module'
+import { InstallationTabsModule } from './_module'
 import { PACKAGE_MANAGERS, PACKAGE_MANAGER_COMMAND_LINE_MAP, type CommandLine } from './lib'
 
 // Props
@@ -20,4 +20,4 @@ const commandLines: CommandLine[] = PACKAGE_MANAGERS.map((packageManager) => ({
 ---
 
 <!-- Template -->
-<Module client:load commandLines={commandLines} />
+<InstallationTabsModule client:load commandLines={commandLines} />

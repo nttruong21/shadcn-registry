@@ -2,7 +2,7 @@
 import { Input } from '@/components/ui/input'
 
 // Component
-export const BasicInput = () => {
+export const InputDemo = () => {
   // Template
   return <Input placeholder='Enter text' />
 }

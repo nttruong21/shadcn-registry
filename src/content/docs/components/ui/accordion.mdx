@@ -1,0 +1,28 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content.
+---
+
+import CodePreviewTabs from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+
+<CodePreviewTabs path='ui/accordion/demo' className='[&_.component-container]:items-start' />
+
+## Installation
+
+<InstallationCard registryName='accordion' />
+
+## Usage
+
+```tsx
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+```
+
+```tsx
+<Accordion type='single' collapsible>
+  <AccordionItem value='item-1'>
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```

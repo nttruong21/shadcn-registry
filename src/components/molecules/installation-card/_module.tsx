@@ -12,7 +12,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { type CommandLine } from './lib'
 
 // Component
-export const Module = ({ commandLines }: { commandLines: CommandLine[] }) => {
+export const InstallationTabsModule = ({ commandLines }: { commandLines: CommandLine[] }) => {
   // Refs
   const timeoutRef = useRef<NodeJS.Timeout>(undefined)
 

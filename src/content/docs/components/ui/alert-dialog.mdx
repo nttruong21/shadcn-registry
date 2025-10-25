@@ -1,0 +1,47 @@
+---
+title: Alert Dialog
+description: A modal dialog that interrupts the user with important content and expects a response.
+---
+
+import CodePreviewTabs from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+
+<CodePreviewTabs path='ui/alert-dialog/demo' />
+
+## Installation
+
+<InstallationCard registryName='alert-dialog' />
+
+## Usage
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTitle,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogTrigger,
+  AlertDialogDescription
+} from '@/components/ui/alert-dialog'
+```
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger>Open</AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
