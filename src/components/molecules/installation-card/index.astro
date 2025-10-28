@@ -15,7 +15,7 @@ const { registryName } = Astro.props
 // Command lines
 const commandLines: CommandLine[] = PACKAGE_MANAGERS.map((packageManager) => ({
   packageManager,
-  command: `${PACKAGE_MANAGER_COMMAND_LINE_MAP[packageManager]} shadcn@latest add ${SITE_URL}/${registryName}.json`
+  command: `${PACKAGE_MANAGER_COMMAND_LINE_MAP[packageManager]} shadcn@latest add ${SITE_URL}/r/${registryName}.json`
 }))
 ---
 

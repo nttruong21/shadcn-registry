@@ -1,0 +1,52 @@
+---
+title: Command
+description: Fast, composable, unstyled command menu for React.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='command' />
+
+<CodePreview path='ui/command/demo' className='[&_.component-container]:items-start' />
+
+## Installation
+
+<InstallationCard registryName='command' />
+
+## Usage
+
+```tsx
+import {
+  Command,
+  CommandItem,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandDialog,
+  CommandShortcut,
+  CommandSeparator
+} from '@/components/ui/command'
+```
+
+```tsx
+<Command>
+  <CommandInput placeholder='Type a command or search...' />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading='Suggestions'>
+      <CommandItem>Calendar</CommandItem>
+      <CommandItem>Search Emoji</CommandItem>
+      <CommandItem>Calculator</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading='Settings'>
+      <CommandItem>Profile</CommandItem>
+      <CommandItem>Billing</CommandItem>
+      <CommandItem>Settings</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```

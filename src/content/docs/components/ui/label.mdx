@@ -1,0 +1,26 @@
+---
+title: Label
+description: Renders an accessible label associated with controls.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='label' />
+
+<CodePreview path='ui/label/demo' />
+
+## Installation
+
+<InstallationCard registryName='label' />
+
+## Usage
+
+```tsx
+import { Label } from '@/components/ui/label'
+```
+
+```tsx
+<Label htmlFor='email'>Your email address</Label>
+```

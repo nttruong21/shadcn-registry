@@ -1,0 +1,29 @@
+---
+title: Button Group
+description: A container that groups related buttons together with consistent styling.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='button-group' />
+
+<CodePreview path='ui/button-group/demo' />
+
+## Installation
+
+<InstallationCard registryName='button-group' />
+
+## Usage
+
+```tsx
+import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'
+```
+
+```tsx
+<ButtonGroup>
+  <Button>Button 1</Button>
+  <Button>Button 2</Button>
+</ButtonGroup>
+```

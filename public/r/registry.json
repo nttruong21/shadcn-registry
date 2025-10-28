@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "NTT Shadcn Registry",
-  "homepage": "https://shadcn-registry-xi.vercel.app",
+  "homepage": "https://ntt-shadcn-registry.vercel.app",
   "items": [
     {
       "name": "accordion",
@@ -12,9 +12,11 @@
         {
           "path": "src/registry/new-york/ui/accordion/components/accordion.tsx",
           "type": "registry:ui",
-          "target": "src/components/ui"
+          "target": "src/components/ui/accordion.tsx"
         }
-      ]
+      ],
+      "dependencies": ["@radix-ui/react-accordion", "lucide-react"],
+      "registryDependencies": [""]
     },
     {
       "name": "alert-dialog",
@@ -25,9 +27,11 @@
         {
           "path": "src/registry/new-york/ui/alert-dialog/components/alert-dialog.tsx",
           "type": "registry:ui",
-          "target": "src/components/ui"
+          "target": "src/components/ui/alert-dialog.tsx"
         }
-      ]
+      ],
+      "dependencies": ["@radix-ui/react-alert-dialog"],
+      "registryDependencies": ["https://ntt-shadcn-registry.vercel.app/r/button"]
     },
     {
       "name": "avatar",
@@ -38,9 +42,10 @@
         {
           "path": "src/registry/new-york/ui/avatar/components/avatar.tsx",
           "type": "registry:ui",
-          "target": "src/components/ui"
+          "target": "src/components/ui/avatar.tsx"
         }
-      ]
+      ],
+      "dependencies": ["@radix-ui/react-avatar"]
     },
     {
       "name": "badge",
@@ -53,7 +58,94 @@
           "type": "registry:ui",
           "target": "src/components/ui"
         }
-      ]
+      ],
+      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Displays the path to the current resource using a hierarchy of links.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/breadcrumb/components/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/breadcrumb.tsx"
+        }
+      ],
+      "dependencies": ["@radix-ui/react-slot", "lucide-react"]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Displays a button or a component that looks like a button.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/button/components/button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/button.tsx"
+        }
+      ],
+      "dependencies": ["@radix-ui/react-slot", "lucide-react", "class-variance-authority"]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "A container that groups related buttons together with consistent styling.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/button-group/components/button-group.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/button-group.tsx"
+        }
+      ],
+      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+      "registryDependencies": ["https://ntt-shadcn-registry.vercel.app/r/separator"]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Fast, composable, unstyled command menu for React.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/command/components/command.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/command.tsx"
+        }
+      ],
+      "dependencies": ["lucide-react", "cmdk"],
+      "registryDependencies": ["https://ntt-shadcn-registry.vercel.app/r/dialog"]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/dialog/components/dialog.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/dialog.tsx"
+        }
+      ],
+      "dependencies": ["lucide-react", "@radix-ui/react-dialog"]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/dropdown-menu/components/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/dropdown-menu.tsx"
+        }
+      ],
+      "dependencies": ["lucide-react", "@radix-ui/react-dropdown-menu"]
     },
     {
       "name": "input",
@@ -64,22 +156,37 @@
         {
           "path": "src/registry/new-york/ui/input/components/input.tsx",
           "type": "registry:ui",
-          "target": "src/components/ui"
+          "target": "src/components/ui/input.tsx"
         }
       ]
     },
     {
-      "name": "password-input",
-      "type": "registry:component",
-      "title": "Password input",
-      "description": "An input that can toggle visibility of the password text.",
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Renders an accessible label associated with controls.",
       "files": [
         {
-          "path": "src/registry/new-york/molecules/password-input/components/password-input.tsx",
-          "type": "registry:component",
-          "target": "src/components/molecules"
+          "path": "src/registry/new-york/ui/label/components/label.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/label.tsx"
         }
-      ]
+      ],
+      "dependencies": ["@radix-ui/react-label"]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Visually or semantically separates content.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/separator/components/separator.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/separator.tsx"
+        }
+      ],
+      "dependencies": ["@radix-ui/react-separator"]
     }
   ]
 }
