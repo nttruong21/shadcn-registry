@@ -1,2 +1,7 @@
-export const SITE_URL = 'https://shadcn-registry-xi.vercel.app'
-export const GITHUB_REPO_URL = 'https://github.com/nttruong1006/shadcn-registry'
+// Core
+import { PUBLIC_SITE_URL, PUBLIC_GITHUB_REPO_URL, PUBLIC_SHADCN_URL } from 'astro:env/server'
+
+// Configs
+export const SITE_URL = PUBLIC_SITE_URL
+export const GITHUB_REPO_URL = PUBLIC_GITHUB_REPO_URL
+export const SHADCN_URL = PUBLIC_SHADCN_URL

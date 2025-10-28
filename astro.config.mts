@@ -1,15 +1,27 @@
 // @ts-check
+import { loadEnv } from 'vite'
 import react from '@astrojs/react'
-import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
+import { defineConfig, envField } from 'astro/config'
 
 import starlight from '@astrojs/starlight'
 import starlightThemeBlack from 'starlight-theme-black'
 
-import { GITHUB_REPO_URL } from './src/lib/constants'
+if (!process.env.NODE_ENV) {
+  throw new Error('NODE_ENV is not set.')
+}
+
+const { PUBLIC_GITHUB_REPO_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), '')
 
 // https://astro.build/config
 export default defineConfig({
+  env: {
+    schema: {
+      PUBLIC_SITE_URL: envField.string({ context: 'server', access: 'public', min: 1, url: true }),
+      PUBLIC_GITHUB_REPO_URL: envField.string({ context: 'server', access: 'public', min: 1, url: true }),
+      PUBLIC_SHADCN_URL: envField.string({ context: 'server', access: 'public', min: 1, url: true })
+    }
+  },
   integrations: [
     starlight({
       title: 'NTT Shadcn Registry',
@@ -53,7 +65,7 @@ export default defineConfig({
         {
           icon: 'github',
           label: 'GitHub',
-          href: GITHUB_REPO_URL
+          href: PUBLIC_GITHUB_REPO_URL
         }
       ],
       sidebar: [
@@ -93,6 +105,7 @@ export default defineConfig({
     react()
   ],
   vite: {
+    // @ts-expect-error: Astro still Vite v6 while tailwindcss will pull in Vite v7 => types mismatch
     plugins: [tailwindcss()]
   }
 })

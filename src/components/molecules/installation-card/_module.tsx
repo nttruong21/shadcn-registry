@@ -9,10 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 // Internal
-import { type CommandLine } from './lib'
+import { type ModuleProps } from './lib'
 
 // Component
-export const InstallationTabsModule = ({ commandLines }: { commandLines: CommandLine[] }) => {
+export const InstallationTabsModule = ({ commandLines }: ModuleProps) => {
   // Refs
   const timeoutRef = useRef<NodeJS.Timeout>(undefined)
 

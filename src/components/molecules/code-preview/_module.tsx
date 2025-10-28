@@ -1,13 +1,13 @@
 // Core
+import { Suspense } from 'react'
 import { LoaderCircle } from 'lucide-react'
-import { lazy, Suspense } from 'react'
 
 // App
 import { cn } from '@/lib/utils'
 import { Card, CardContent } from '@/components/ui/card'
 
 // Internal
-import type { ModuleProps } from './lib'
+import { getComponent, type ModuleProps } from './lib'
 
 // Component
 export const CodePreviewModule = ({ path, className, children }: ModuleProps) => {
@@ -29,16 +29,4 @@ export const CodePreviewModule = ({ path, className, children }: ModuleProps) =>
       </CardContent>
     </Card>
   )
-}
-
-const getComponent = (path: string) => {
-  const [type, name, example] = path.split('/')
-  return lazy(async () => {
-    const module = await import(`../../../registry/new-york/${type}/${name}/examples/${example}.tsx`)
-    const exportName =
-      Object.keys(module).find((key) => typeof module[key] === 'function' || typeof module[key] === 'object') ?? name
-    return {
-      default: module.default || module[exportName]
-    }
-  })
 }

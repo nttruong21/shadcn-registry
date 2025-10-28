@@ -4,6 +4,58 @@
   "homepage": "https://shadcn-registry-xi.vercel.app",
   "items": [
     {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/accordion/components/accordion.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A modal dialog that interrupts the user with important content and expects a response.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/alert-dialog/components/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "An image element with a fallback for representing the user.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/avatar/components/avatar.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Displays a badge or a component that looks like a badge.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/badge/components/badge.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",

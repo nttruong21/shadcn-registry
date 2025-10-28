@@ -1,0 +1,29 @@
+---
+title: Avatar
+description: An image element with a fallback for representing the user.
+---
+
+import CodePreviewTabs from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='avatar' />
+
+<CodePreviewTabs path='ui/avatar/demo' />
+
+## Installation
+
+<InstallationCard registryName='avatar' />
+
+## Usage
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+```
+
+```tsx
+<Avatar>
+  <AvatarImage src='https://github.com/shadcn.png' />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+```

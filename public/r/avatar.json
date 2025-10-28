@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "An image element with a fallback for representing the user.",
+  "files": [
+    {
+      "path": "src/registry/new-york/ui/avatar/components/avatar.tsx",
+      "content": "// Core\nimport * as React from 'react'\nimport * as AvatarPrimitive from '@radix-ui/react-avatar'\n\n// App\nimport { cn } from '@/lib/utils'\n\n// Components\n// Avatar\nexport const Avatar = ({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Root>) => {\n  // Template\n  return (\n    <AvatarPrimitive.Root\n      data-slot='avatar'\n      className={cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', className)}\n      {...props}\n    />\n  )\n}\n\n// Avatar image\nexport const AvatarImage = ({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) => {\n  // Template\n  return (\n    <AvatarPrimitive.Image data-slot='avatar-image' className={cn('aspect-square size-full', className)} {...props} />\n  )\n}\n\n// Avatar fallback\nexport const AvatarFallback = ({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) => {\n  // Template\n  return (\n    <AvatarPrimitive.Fallback\n      data-slot='avatar-fallback'\n      className={cn('bg-muted flex size-full items-center justify-center rounded-full', className)}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/ui"
+    }
+  ]
+}
