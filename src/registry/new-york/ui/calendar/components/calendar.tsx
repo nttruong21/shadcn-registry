@@ -110,7 +110,7 @@ export const Calendar = ({
       )}
       captionLayout={captionLayout}
       formatters={{
-        formatMonthDropdown: (date) => date.toLocaleString(locale.code, { month: 'short' }),
+        formatMonthDropdown: (date, options) => date.toLocaleString(options?.options.locale?.code, { month: 'short' }),
         ...formatters
       }}
       classNames={{
