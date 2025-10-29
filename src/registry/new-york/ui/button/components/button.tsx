@@ -36,6 +36,12 @@ export const buttonVariants = cva(
 	}
 )
 
+export type ButtonProps = React.ComponentProps<'button'> &
+	VariantProps<typeof buttonVariants> & {
+		asChild?: boolean
+		isLoading?: boolean
+	}
+
 export const Button = ({
 	className,
 	variant,
@@ -46,11 +52,7 @@ export const Button = ({
 	isLoading,
 	children,
 	...props
-}: React.ComponentProps<'button'> &
-	VariantProps<typeof buttonVariants> & {
-		asChild?: boolean
-		isLoading?: boolean
-	}) => {
+}: ButtonProps) => {
 	const isDisabled = disabled || isLoading
 	const Component = asChild ? Slot : 'button'
 	const isIconSize = size?.startsWith('icon') ?? false

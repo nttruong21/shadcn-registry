@@ -1,0 +1,58 @@
+---
+title: Carousel
+description: A carousel with motion and swipe built using Embla.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='carousel' />
+
+<CodePreview path='ui/carousel/demo' />
+
+## Installation
+
+<InstallationCard registryName='carousel' />
+
+## Usage
+
+```tsx
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+```
+
+```tsx
+<Carousel>
+  <CarouselContent>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+## Examples
+
+### Size
+To set the size of the items, you can use the `basis` utility class on the `<CarouselItem />`.
+<CodePreview path='ui/carousel/size' />
+
+### Spacing
+To set the spacing between the items, we use a `pl-[VALUE]` utility on the `<CarouselItem />` and a negative `-ml-[VALUE]` on the `<CarouselContent />`.
+<CodePreview path='ui/carousel/spacing' />
+
+### Orientation
+Use the `orientation` prop to set the orientation of the carousel.
+<CodePreview path='ui/carousel/orientation' />
+
+### Autoplay
+You can use the `plugins` prop to add plugins to the carousel.
+<CodePreview path='ui/carousel/autoplay' />

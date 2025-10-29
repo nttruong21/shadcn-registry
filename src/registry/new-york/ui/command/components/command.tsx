@@ -6,7 +6,8 @@ import { cn } from '@/lib/utils'
 
 // Components
 // Command
-export const Command = ({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) => {
+export type CommandProps = React.ComponentProps<typeof CommandPrimitive>
+export const Command = ({ className, ...props }: CommandProps) => {
 	// Template
 	return (
 		<CommandPrimitive
@@ -51,7 +52,8 @@ export const CommandDialog = ({
 }
 
 // Command input
-export const CommandInput = ({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Input>) => {
+export type CommandInputProps = React.ComponentProps<typeof CommandPrimitive.Input>
+export const CommandInput = ({ className, ...props }: CommandInputProps) => {
 	// Template
 	return (
 		<div data-slot='command-input-wrapper' className='flex h-9 items-center gap-2 border-b px-3'>
@@ -69,7 +71,8 @@ export const CommandInput = ({ className, ...props }: React.ComponentProps<typeo
 }
 
 // Command list
-export const CommandList = ({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.List>) => {
+export type CommandListProps = React.ComponentProps<typeof CommandPrimitive.List>
+export const CommandList = ({ className, ...props }: CommandListProps) => {
 	// Template
 	return (
 		<CommandPrimitive.List
@@ -114,7 +117,8 @@ export const CommandSeparator = ({ className, ...props }: React.ComponentProps<t
 }
 
 // Command item
-export const CommandItem = ({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Item>) => {
+export type CommandItemProps = React.ComponentProps<typeof CommandPrimitive.Item>
+export const CommandItem = ({ className, ...props }: CommandItemProps) => {
 	// Template
 	return (
 		<CommandPrimitive.Item

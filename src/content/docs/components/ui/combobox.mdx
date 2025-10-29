@@ -1,0 +1,30 @@
+---
+title: Combobox
+description: Autocomplete input and command palette with a list of suggestions.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='combobox' />
+
+<CodePreview path='ui/combobox/demo' className='[&_.component-container>button]:max-w-xs' />
+
+## Installation
+
+<InstallationCard registryName='combobox' />
+
+## Usage
+
+```tsx
+import { Combobox, type Option } from '@/components/ui/combobox'
+```
+
+```tsx
+	// States
+	const [value, setValue] = React.useState<string | null>(null)
+
+	// Template
+	return <Combobox value={value} options={OPTIONS} placeholder='Select framework' onValueChange={setValue} />
+```
