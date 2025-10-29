@@ -1,5 +1,5 @@
 // Lib
 export interface ModuleProps {
-  registryName: string
-  className?: string
+	registryName: string
+	className?: string
 }

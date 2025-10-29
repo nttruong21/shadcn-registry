@@ -132,8 +132,8 @@
 
 @layer theme {
   .expressive-code > figure.frame {
-    @apply shadow-none;
     --code-background: var(--code);
+    @apply shadow-none;
   }
 
   .expressive-code > figure.frame > pre {

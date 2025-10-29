@@ -1,21 +1,19 @@
 ---
-// App
 import { SITE_URL } from '@/lib/constants'
 
-// Internal
 import { InstallationTabsModule } from './_module'
-import { PACKAGE_MANAGERS, PACKAGE_MANAGER_COMMAND_LINE_MAP, type CommandLine } from './lib'
+import { type CommandLine, PACKAGE_MANAGER_COMMAND_LINE_MAP, PACKAGE_MANAGERS } from './lib'
 
 // Props
 interface Props {
-  registryName: string
+	registryName: string
 }
 const { registryName } = Astro.props
 
 // Command lines
 const commandLines: CommandLine[] = PACKAGE_MANAGERS.map((packageManager) => ({
-  packageManager,
-  command: `${PACKAGE_MANAGER_COMMAND_LINE_MAP[packageManager]} shadcn@latest add ${SITE_URL}/r/${registryName}.json`
+	packageManager,
+	command: `${PACKAGE_MANAGER_COMMAND_LINE_MAP[packageManager]} shadcn@latest add ${SITE_URL}/r/${registryName}.json`
 }))
 ---
 

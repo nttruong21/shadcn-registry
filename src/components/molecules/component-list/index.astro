@@ -1,45 +1,45 @@
 ---
-// Core
 import { z } from 'astro:content'
 
 // Schema
 const ComponentFileSchema = z.object({
-  frontmatter: z.object({
-    title: z.string().min(1)
-  }),
-  url: z.string().optional()
+	frontmatter: z.object({
+		title: z.string().min(1)
+	}),
+	url: z.string().optional()
 })
 
 // Extract components
 interface Component {
-  name: string
-  title: string
+	name: string
+	title: string
 }
 
 const uiComponents: Component[] = []
 const moleculesComponents: Component[] = []
 
 Object.entries(
-  import.meta.glob('../../../content/docs/components/**/*.mdx', {
-    eager: true
-  })
+	import.meta.glob('../../../content/docs/components/**/*.mdx', {
+		eager: true
+	})
 ).forEach(([filePath, content]) => {
-  const { success, data } = ComponentFileSchema.safeParse(content)
-  if (!success) return
+	const { success, data } = ComponentFileSchema.safeParse(content)
+	if (!success) return
 
-  const name = filePath.split('/').pop()?.split('.').shift()
-  if (!name) return
+	const name = filePath.split('/').pop()?.split('.').shift()
+	if (!name) return
 
-  const component: Component = {
-    name,
-    title: data.frontmatter.title
-  }
+	const component: Component = {
+		name,
+		title: data.frontmatter.title
+	}
 
-  if (filePath.includes('ui')) {
-    return uiComponents.push(component)
-  }
+	if (filePath.includes('ui')) {
+		uiComponents.push(component)
+		return
+	}
 
-  moleculesComponents.push(component)
+	moleculesComponents.push(component)
 })
 ---
 

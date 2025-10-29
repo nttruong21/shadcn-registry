@@ -1,15 +1,13 @@
 ---
-// Core
-import { readFileSync } from 'fs'
+import { readFileSync } from 'node:fs'
 import { Code } from '@astrojs/starlight/components'
 
-// Internal
 import { CodePreviewModule } from './_module'
 
 // Props
 interface Props {
-  path: string
-  className?: string
+	path: string
+	className?: string
 }
 const { path, className } = Astro.props
 
