@@ -183,7 +183,7 @@ export const Calendar = ({
         WeekNumber: CalendarWeekNumber,
         ...components
       }}
-      // locale={locale}
+      locale={locale}
       {...props}
     />
   )
