@@ -1,0 +1,38 @@
+---
+title: Calendar
+description: A date field component that allows users to enter and edit date.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='calendar' />
+
+<CodePreview path='ui/calendar/demo' />
+
+## Installation
+
+<InstallationCard registryName='calendar' />
+
+## Usage
+
+```tsx
+import { Calendar } from '@/components/ui/calendar'
+```
+
+```tsx
+const [date, setDate] = React.useState<Date | undefined>(new Date())
+
+return <Calendar mode='single' selected={date} onSelect={setDate} className='rounded-lg border' />
+```
+
+## Examples
+
+### Range Calendar
+
+<CodePreview path='ui/calendar/range' />
+
+### Month and Year Selector
+
+<CodePreview path='ui/calendar/month-and-year-selector' />
