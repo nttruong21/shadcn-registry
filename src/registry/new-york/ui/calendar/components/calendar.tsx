@@ -1,6 +1,7 @@
 // Core
 import * as React from 'react'
 import { enUS } from 'date-fns/locale'
+import { add, endOfYear } from 'date-fns'
 import {
   type DayButtonProps,
   DayPicker,
@@ -85,6 +86,9 @@ export const CalendarWeekNumber = ({ children, ...props }: WeekNumberProps) => {
 }
 
 // Calendar
+export const defaultCalendarStartMonth = new Date('1900-01-01')
+export const defaultCalendarEndMonth = endOfYear(add(new Date(), { years: 100 }))
+
 export const Calendar = ({
   className,
   classNames,
@@ -94,6 +98,8 @@ export const Calendar = ({
   formatters,
   components,
   locale = enUS,
+  startMonth = defaultCalendarStartMonth,
+  endMonth = defaultCalendarEndMonth,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>['variant']
@@ -184,6 +190,8 @@ export const Calendar = ({
         ...components
       }}
       locale={locale}
+      startMonth={startMonth}
+      endMonth={endMonth}
       {...props}
     />
   )
