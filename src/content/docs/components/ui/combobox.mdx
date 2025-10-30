@@ -28,3 +28,15 @@ import { Combobox, type Option } from '@/components/ui/combobox'
 	// Template
 	return <Combobox value={value} options={OPTIONS} placeholder='Select framework' onValueChange={setValue} />
 ```
+
+## Examples
+### Loading
+<CodePreview path='ui/combobox/loading' className='[&_.component-container>button]:max-w-xs' />
+
+### Input action
+You can add some actions on the right of the input when open the option list. For example, open the form dialog to create the new option.
+<CodePreview path='ui/combobox/input-action' className='[&_.component-container>button]:max-w-xs' />
+
+### Option action
+You can add some actions on the left of each option. For example, open the conformation dialog to delete the option.
+<CodePreview path='ui/combobox/option-action' className='[&_.component-container>button]:max-w-xs' />

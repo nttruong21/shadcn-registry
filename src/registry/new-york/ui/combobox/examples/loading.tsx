@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Combobox, type Option } from '@/components/ui/combobox'
 
 // Constants
@@ -26,10 +26,20 @@ const OPTIONS: Option[] = [
 ]
 
 // Component
-export const ComboboxDemo = () => {
+export function ComboboxLoading() {
 	// States
 	const [value, setValue] = React.useState<string | null>(null)
 
 	// Template
-	return <Combobox value={value} options={OPTIONS} placeholder='Select framework' onValueChange={setValue} />
+	return (
+		<Combobox
+			value={value}
+			options={OPTIONS}
+			placeholder='Select framework'
+			buttonTriggerProps={{
+				isLoading: true
+			}}
+			onValueChange={setValue}
+		/>
+	)
 }

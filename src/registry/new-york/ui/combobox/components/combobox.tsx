@@ -1,4 +1,4 @@
-import { CheckIcon, ChevronsUpDown } from 'lucide-react'
+import { Check, ChevronsUpDown, X } from 'lucide-react'
 import * as React from 'react'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import {
@@ -33,6 +33,7 @@ export interface ComboboxProps {
 	value: Option['value'] | null
 	options: Option[]
 	isValueCanBeEmptyString?: boolean
+	isCanRemoveValue?: boolean
 	placeholder?: string
 	popoverTriggerProps?: PopoverTriggerProps
 	buttonTriggerProps?: ButtonProps
@@ -41,9 +42,8 @@ export interface ComboboxProps {
 	commandProps?: CommandProps
 	commandInputProps?: CommandInputProps
 	commandListProps?: CommandListProps
-	commandItemProps?: Omit<CommandItemProps, 'children'> & {
-		children: (option: Option) => React.ReactNode
-	}
+	commandItemProps?: CommandItemProps
+	commandItemPrefix?: (option: Option) => React.ReactNode
 	commandGroupSlot?: React.ReactNode
 	onValueChange: (value: Option['value'] | null) => void
 }
@@ -78,6 +78,7 @@ export const Combobox = ({
 	value,
 	options,
 	isValueCanBeEmptyString = true,
+	isCanRemoveValue = true,
 	placeholder,
 	popoverProps,
 	popoverTriggerProps,
@@ -87,6 +88,7 @@ export const Combobox = ({
 	commandInputProps,
 	commandListProps,
 	commandItemProps,
+	commandItemPrefix,
 	commandGroupSlot,
 	onValueChange
 }: ComboboxProps) => {
@@ -109,14 +111,25 @@ export const Combobox = ({
 						role='combobox'
 						aria-expanded={isOpenPopover}
 						{...buttonTriggerProps}
-						className={cn('w-full justify-start', buttonTriggerProps?.className, {
+						className={cn('w-full justify-start [&_svg]:pointer-events-auto', buttonTriggerProps?.className, {
 							'text-muted-foreground': value == null || (value === '' && !isValueCanBeEmptyString)
 						})}
 					>
 						{buttonTriggerProps?.children ?? (
 							<React.Fragment>
 								<span className='line-clamp-1 block text-ellipsis'> {label ?? placeholder}</span>
-								<ChevronsUpDown className='text-muted-foreground ml-auto size-4 shrink-0' />
+
+								{isCanRemoveValue && value ? (
+									<X
+										className='text-muted-foreground ml-auto size-4 shrink-0 transition-transform hover:scale-125'
+										onClick={(e) => {
+											e.stopPropagation()
+											onValueChange(null)
+										}}
+									/>
+								) : (
+									<ChevronsUpDown className='text-muted-foreground ml-auto size-4 shrink-0' />
+								)}
 							</React.Fragment>
 						)}
 					</Button>
@@ -129,21 +142,33 @@ export const Combobox = ({
 			>
 				<Command {...commandProps}>
 					<CommandInput {...commandInputProps} />
+
 					<CommandList {...commandListProps} className={cn('scrollbar', commandListProps?.className)}>
 						<CommandEmpty>No option found.</CommandEmpty>
+
 						<CommandGroup>
 							{options.map((option) => (
-								<CommandItem
+								<div
 									key={option.value}
-									value={option.label}
-									onSelect={() => {
-										onValueChange(option.value)
-										setIsOpenPopover(false)
-									}}
+									className={cn('flex items-center gap-1', {
+										'pl-1': Boolean(commandItemPrefix)
+									})}
 								>
-									{commandItemProps?.children ? commandItemProps.children(option) : option.label}
-									<CheckIcon className={cn('mr-2 h-4 w-4', option.value === value ? 'opacity-100' : 'opacity-0')} />
-								</CommandItem>
+									{commandItemPrefix?.(option)}
+
+									<CommandItem
+										value={option.label}
+										className='grow'
+										onSelect={() => {
+											onValueChange(option.value)
+											setIsOpenPopover(false)
+										}}
+										{...commandItemProps}
+									>
+										<span>{option.label}</span>
+										<Check className={cn('ml-auto size-4', option.value === value ? 'opacity-100' : 'opacity-0')} />
+									</CommandItem>
+								</div>
 							))}
 
 							{commandGroupSlot && commandGroupSlot}

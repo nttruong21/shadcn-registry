@@ -53,11 +53,11 @@ export const CommandDialog = ({
 
 // Command input
 export type CommandInputProps = React.ComponentProps<typeof CommandPrimitive.Input>
-export const CommandInput = ({ className, ...props }: CommandInputProps) => {
+export const CommandInput = ({ className, children, ...props }: CommandInputProps) => {
 	// Template
 	return (
 		<div data-slot='command-input-wrapper' className='flex h-9 items-center gap-2 border-b px-3'>
-			<SearchIcon className='size-4 shrink-0 opacity-50' />
+			<SearchIcon className='size-4 shrink-0 text-muted-foreground' />
 			<CommandPrimitive.Input
 				data-slot='command-input'
 				className={cn(
@@ -66,6 +66,7 @@ export const CommandInput = ({ className, ...props }: CommandInputProps) => {
 				)}
 				{...props}
 			/>
+			{children}
 		</div>
 	)
 }
