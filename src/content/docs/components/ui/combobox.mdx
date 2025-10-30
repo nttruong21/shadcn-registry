@@ -9,7 +9,7 @@ import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.as
 
 <ShadcnLinkButton registryName='combobox' />
 
-<CodePreview path='ui/combobox/demo' className='[&_.component-container>button]:max-w-xs' />
+<CodePreview path='ui/combobox/demo' />
 
 ## Installation
 
@@ -22,11 +22,11 @@ import { Combobox, type Option } from '@/components/ui/combobox'
 ```
 
 ```tsx
-	// States
-	const [value, setValue] = React.useState<string | null>(null)
+  // States
+  const [value, setValue] = React.useState<string | null>(null)
 
-	// Template
-	return <Combobox value={value} options={OPTIONS} placeholder='Select framework' onValueChange={setValue} />
+  // Template
+  return <Combobox value={value} options={OPTIONS} placeholder='Select framework' onValueChange={setValue} />
 ```
 
 ## Examples

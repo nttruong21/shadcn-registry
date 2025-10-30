@@ -6,11 +6,16 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["src/**/*.astro", "src/**/*.mdx", "src/**/*.ts", "src/**/*.tsx"]
+		"includes": [
+			"src/**/*.astro",
+			"src/**/*.mdx",
+			"src/**/*.ts",
+			"src/**/*.tsx"
+		]
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab",
+		"indentStyle": "space",
 		"lineWidth": 120
 	},
 	"linter": {
@@ -38,7 +43,10 @@
 	},
 	"overrides": [
 		{
-			"includes": ["src/**/*.astro", "src/**/*.d.ts"],
+			"includes": [
+				"src/**/*.astro",
+				"src/**/*.d.ts"
+			],
 			"linter": {
 				"rules": {
 					"correctness": {

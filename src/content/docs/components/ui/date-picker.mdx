@@ -1,0 +1,31 @@
+---
+title: Date Picker
+description: A date picker component with range and presets.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='date-picker' />
+
+<CodePreview path='ui/date-picker/demo' />
+
+## Installation
+
+<InstallationCard registryName='date-picker' />
+
+## Usage
+
+```tsx
+import React from 'react'
+import { DatePicker, type DatePickerProps } from '@/components/ui/date-picker'
+```
+
+```tsx
+  // States
+  const [value, setValue] = React.useState<DatePickerProps['value']>(null)
+
+  // Template
+  return <DatePicker value={value} onValueChange={setValue} />
+```
