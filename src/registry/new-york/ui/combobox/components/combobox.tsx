@@ -114,7 +114,7 @@ export const Combobox = ({
               aria-expanded={isOpenPopover}
               {...buttonTriggerProps}
               className={cn(
-                'data-[empty=true]:text-muted-foreground w-full justify-start [&_svg]:pointer-events-auto font-normal',
+                'w-full justify-start font-normal data-[empty=true]:text-muted-foreground [&_svg]:pointer-events-auto',
                 buttonTriggerProps?.className
               )}
             >
@@ -124,14 +124,14 @@ export const Combobox = ({
 
                   {isCanRemoveValue && value ? (
                     <X
-                      className='text-muted-foreground ml-auto size-4 shrink-0 transition-transform hover:scale-125'
+                      className='ml-auto size-4 shrink-0 text-muted-foreground transition-transform hover:scale-125'
                       onClick={(e) => {
                         e.stopPropagation()
                         onValueChange(null)
                       }}
                     />
                   ) : (
-                    <ChevronsUpDown className='text-muted-foreground ml-auto size-4 shrink-0' />
+                    <ChevronsUpDown className='ml-auto size-4 shrink-0 text-muted-foreground' />
                   )}
                 </React.Fragment>
               )}

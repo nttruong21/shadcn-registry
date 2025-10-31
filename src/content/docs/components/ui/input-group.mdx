@@ -1,0 +1,77 @@
+---
+title: Input Group
+description: Display additional information or actions to an input or textarea.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='input-group' />
+
+<CodePreview path='ui/input-group/demo' />
+
+## Installation
+
+<InstallationCard registryName='input-group' />
+
+## Usage
+
+```tsx
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from "@/components/ui/input-group"
+```
+
+```tsx
+<InputGroup>
+  <InputGroupInput placeholder="Search..." />
+  <InputGroupAddon>
+    <SearchIcon />
+  </InputGroupAddon>
+  <InputGroupAddon align="inline-end">
+    <InputGroupButton>Search</InputGroupButton>
+  </InputGroupAddon>
+</InputGroup>
+```
+
+## Examples
+### Icon
+<CodePreview path='ui/input-group/icon' />
+
+### Text
+Display additional text information alongside inputs.
+<CodePreview path='ui/input-group/text' />
+
+### Button
+Add buttons to perform actions within the input group.
+<CodePreview path='ui/input-group/button' />
+
+### Tooltip
+Add tooltips to provide additional context or help.
+<CodePreview path='ui/input-group/tooltip' />
+
+### Textarea
+Input groups also work with textarea components. Use `block-start` or `block-end` for alignment.
+<CodePreview path='ui/input-group/textarea' />
+
+### Loading
+Show loading indicators while processing input.
+<CodePreview path='ui/input-group/loading' />
+
+### Label
+Add labels within input groups to improve accessibility.
+<CodePreview path='ui/input-group/label' />
+
+### Dropdown
+Pair input groups with dropdown menus for complex interactions.
+<CodePreview path='ui/input-group/dropdown' />
+
+### Button Group
+Wrap input groups with button groups to create prefixes and suffixes.
+<CodePreview path='ui/input-group/button-group' />

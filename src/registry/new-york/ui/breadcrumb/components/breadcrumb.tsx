@@ -16,7 +16,7 @@ export const BreadcrumbList = ({ className, ...props }: React.ComponentProps<'ol
     <ol
       data-slot='breadcrumb-list'
       className={cn(
-        'text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5',
+        'flex flex-wrap items-center gap-1.5 break-words text-muted-foreground text-sm sm:gap-2.5',
         className
       )}
       {...props}
@@ -44,7 +44,7 @@ export const BreadcrumbLink = ({
   return (
     <Comp
       data-slot='breadcrumb-link'
-      className={cn('hover:text-foreground cursor-pointer transition-colors', className)}
+      className={cn('cursor-pointer transition-colors hover:text-foreground', className)}
       {...props}
     />
   )
@@ -58,7 +58,7 @@ export const BreadcrumbPage = ({ className, ...props }: React.ComponentProps<'sp
       data-slot='breadcrumb-page'
       aria-disabled='true'
       aria-current='page'
-      className={cn('text-foreground font-normal', className)}
+      className={cn('font-normal text-foreground', className)}
       {...props}
     />
   )

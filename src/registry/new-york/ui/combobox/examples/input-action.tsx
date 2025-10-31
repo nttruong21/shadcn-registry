@@ -66,7 +66,7 @@ export function ComboboxInputAction() {
                 <DialogDescription>Fill all information below to create new option.</DialogDescription>
               </DialogHeader>
 
-              <form className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+              <form className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 <div className='space-y-2'>
                   <Label>Value</Label>
                   <Input placeholder='Enter value' />
