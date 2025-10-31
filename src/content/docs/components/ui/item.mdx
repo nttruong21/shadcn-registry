@@ -1,0 +1,74 @@
+---
+title: Item
+description: A versatile component that you can use to display any content.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='item' />
+
+<CodePreview path='ui/item/demo' />
+
+## Installation
+
+<InstallationCard registryName='item' />
+
+## Usage
+
+```tsx
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemHeader,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
+```
+
+```tsx
+<Item>
+  <ItemHeader>Item Header</ItemHeader>
+  <ItemMedia />
+  <ItemContent>
+    <ItemTitle>Item</ItemTitle>
+    <ItemDescription>Item</ItemDescription>
+  </ItemContent>
+  <ItemActions />
+  <ItemFooter>Item Footer</ItemFooter>
+</Item>
+```
+
+## Examples
+### Variants
+<CodePreview path='ui/item/variants' />
+
+### Size
+The `Item` component has different sizes for different use cases. For example, you can use the `sm` size for a compact item or the `default` size for a standard item.
+<CodePreview path='ui/item/size' />
+
+### Icon
+<CodePreview path='ui/item/icon' />
+
+### Avatar
+<CodePreview path='ui/item/avatar' />
+
+### Image
+<CodePreview path='ui/item/image' />
+
+### Group
+<CodePreview path='ui/item/group' />
+
+### Header
+<CodePreview path='ui/item/header' />
+
+### Link
+To render an item as a link, use the `asChild` prop. The hover and focus states will be applied to the anchor element.
+<CodePreview path='ui/item/link' />
+
+### Dropdown
+<CodePreview path='ui/item/dropdown' />
