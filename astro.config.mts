@@ -11,7 +11,7 @@ if (!process.env.NODE_ENV) {
   throw new Error('NODE_ENV is not set.')
 }
 
-const { PUBLIC_GITHUB_REPO_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), '')
+const { PUBLIC_SITE_URL, PUBLIC_GITHUB_REPO_URL } = loadEnv(process.env.NODE_ENV, process.cwd(), '')
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,6 +22,7 @@ export default defineConfig({
       PUBLIC_SHADCN_URL: envField.string({ context: 'server', access: 'public', min: 1, url: true })
     }
   },
+  site: PUBLIC_SITE_URL,
   integrations: [
     starlight({
       title: 'NTT Shadcn Registry',

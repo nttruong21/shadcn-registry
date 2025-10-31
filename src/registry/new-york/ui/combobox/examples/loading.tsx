@@ -37,6 +37,7 @@ export function ComboboxLoading() {
       options={OPTIONS}
       placeholder='Select framework'
       className='w-xs'
+      buttonTriggerProps={{ isLoading: true }}
       onValueChange={setValue}
     />
   )
