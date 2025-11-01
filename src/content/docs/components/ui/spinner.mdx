@@ -1,0 +1,33 @@
+---
+title: Spinner
+description: An indicator that can be used to show a loading state.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='spinner'/>
+
+<CodePreview path='ui/spinner/demo' />
+
+## Installation
+
+<InstallationCard registryName='spinner' />
+
+## Usage
+
+```tsx
+import { Spinner } from "@/components/ui/spinner"
+```
+
+```tsx
+<Spinner />
+```
+
+## Examples
+### Size
+<CodePreview path='ui/spinner/size' />
+
+### Color
+<CodePreview path='ui/spinner/color' />

@@ -1,0 +1,39 @@
+---
+title: Toggle
+description: A two-state button that can be either on or off.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='toggle'/>
+
+<CodePreview path='ui/toggle/demo' />
+
+## Installation
+
+<InstallationCard registryName='toggle' />
+
+## Usage
+
+```tsx
+import { Toggle } from "@/components/ui/toggle"
+```
+
+```tsx
+<Toggle>Toggle</Toggle>
+```
+
+## Examples
+### Outline
+<CodePreview path='ui/toggle/outline' />
+
+### With Text
+<CodePreview path='ui/toggle/with-text' />
+
+### Size
+<CodePreview path='ui/toggle/size' />
+
+### Custom
+<CodePreview path='ui/toggle/custom' />

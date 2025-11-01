@@ -1,0 +1,30 @@
+---
+title: Skeleton
+description: Use to show a placeholder while content is loading.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='skeleton' />
+
+<CodePreview path='ui/skeleton/demo' />
+
+## Installation
+
+<InstallationCard registryName='skeleton' />
+
+## Usage
+
+```tsx
+import { Skeleton } from "@/components/ui/skeleton"
+```
+
+```tsx
+<Skeleton className="h-[20px] w-[100px] rounded-full" />
+```
+
+## Examples
+### Card
+<CodePreview path='ui/skeleton/card' />

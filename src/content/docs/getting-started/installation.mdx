@@ -3,10 +3,10 @@ title: Installation
 description: How to install NTT Shadcn Component in your project.
 ---
 
-import { SHADCN_URL } from '@/lib/constants'
+import { SITE_URL } from '@/lib/constants'
 import InstallationCard from '@/components/molecules/installation-card/index.astro'
 
-export const BASE_INSTALLATION_COMMAND = `shadcn add ${SHADCN_URL}/<component>.json`
+export const BASE_INSTALLATION_COMMAND = `shadcn add ${SITE_URL}/<component>.json`
 
 It doesn't matter what framework or package manager you are using. Installing NTT Shadcn Component is as simple as running the <code>{BASE_INSTALLATION_COMMAND}</code> command and replacing `<component>` with the name of the component you want to install.
 
