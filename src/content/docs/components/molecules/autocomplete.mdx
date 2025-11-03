@@ -1,0 +1,36 @@
+---
+title: Autocomplete
+description: An input that provides real-time suggestions as users type into an input field, helping them quickly find and select from a list of matching options.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='molecules/autocomplete/demo' />
+
+## Installation
+
+<InstallationCard registryName='autocomplete' />
+
+## Usage
+
+```tsx
+import { Autocomplete, type AutocompleteProps, type Option } from '@/components/molecules/autocomplete'
+```
+
+```tsx
+// States
+const [value, setValue] = React.useState<AutocompleteProps['value']>('')
+
+// Template
+return (
+  <div className='w-full max-w-xs'>
+    <Autocomplete value={value} onValueChange={setValue} options={OPTIONS} />
+  </div>
+)
+```
+
+## Examples
+### Loading
+<CodePreview path='molecules/autocomplete/loading' />
