@@ -24,11 +24,7 @@ import { Autocomplete, type AutocompleteProps, type Option } from '@/components/
 const [value, setValue] = React.useState<AutocompleteProps['value']>('')
 
 // Template
-return (
-  <div className='w-full max-w-xs'>
-    <Autocomplete value={value} onValueChange={setValue} options={OPTIONS} />
-  </div>
-)
+<Autocomplete value={value} onValueChange={setValue} options={OPTIONS} />
 ```
 
 ## Examples

@@ -16,7 +16,7 @@ import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/compon
 import { Spinner } from '@/components/ui/spinner'
 import { cn } from '@/lib/utils'
 
-// Component
+// Autocomplete
 export interface Option {
   value: string
   label: string

@@ -1,0 +1,28 @@
+---
+title: Year picker
+description: A combobox to select a year.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='molecules/year-picker/demo' />
+
+## Installation
+
+<InstallationCard registryName='year-picker' />
+
+## Usage
+
+```tsx
+import { YearPicker, type YearPickerProps } from '@/components/molecules/year-picker'
+```
+
+```tsx
+// States
+const [value, setValue] = React.useState<YearPickerProps['value']>(null)
+
+// Template
+<YearPicker value={value} placeholder='Select month' onValueChange={setValue} />
+```

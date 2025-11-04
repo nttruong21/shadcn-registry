@@ -3,7 +3,7 @@ import { useState } from 'react'
 import type { InputProps } from '@/components/ui/input'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group'
 
-// Component
+// Password input
 export const PasswordInput = ({ className, ...props }: InputProps) => {
   // States
   const [passwordVisibility, setPasswordVisibility] = useState(false)

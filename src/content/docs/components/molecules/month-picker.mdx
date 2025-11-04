@@ -1,0 +1,28 @@
+---
+title: Month picker
+description: A combobox to select a month.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='molecules/month-picker/demo' />
+
+## Installation
+
+<InstallationCard registryName='month-picker' />
+
+## Usage
+
+```tsx
+import { MonthPicker, type MonthPickerProps } from '@/components/molecules/month-picker'
+```
+
+```tsx
+// States
+const [value, setValue] = React.useState<MonthPickerProps['value']>(null)
+
+// Template
+<MonthPicker value={value} placeholder='Select month' onValueChange={setValue} />
+```

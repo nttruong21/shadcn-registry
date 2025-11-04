@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown, X } from 'lucide-react'
+import { Check, ChevronDownIcon, X } from 'lucide-react'
 import * as React from 'react'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import {
@@ -131,7 +131,7 @@ export const Combobox = ({
                       }}
                     />
                   ) : (
-                    <ChevronsUpDown className='ml-auto size-4 shrink-0 text-muted-foreground' />
+                    <ChevronDownIcon className='ml-auto size-4 shrink-0 text-muted-foreground' />
                   )}
                 </React.Fragment>
               )}

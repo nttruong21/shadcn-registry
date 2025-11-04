@@ -81,7 +81,7 @@ export const DatePicker = ({
 
 // Date range picker
 export interface DateRangePickerProps {
-  value: DateRange
+  value?: DateRange
   isCanRemoveValue?: boolean
   className?: string
   isDisabled?: boolean
@@ -107,18 +107,18 @@ export const DateRangePicker = ({
         <PopoverTrigger asChild>
           <Button
             variant='outline'
-            data-empty={!value.from || !value.to}
+            data-empty={!value?.from || !value?.to}
             aria-expanded={isOpenPopover}
             disabled={isDisabled}
             className='w-full justify-start font-normal data-[empty=true]:text-muted-foreground [&_svg]:pointer-events-auto'
           >
             <span>
-              {value.from && value.to
+              {value?.from && value?.to
                 ? `${format(value.from, 'dd/MM/yyyy')} - ${format(value.to, 'dd/MM/yyyy')}`
                 : 'Pick a date'}
             </span>
 
-            {isCanRemoveValue && value ? (
+            {isCanRemoveValue && value?.from && value?.to ? (
               <X
                 className='ml-auto size-4 shrink-0 text-muted-foreground transition-transform hover:scale-125'
                 onClick={(e) => {
