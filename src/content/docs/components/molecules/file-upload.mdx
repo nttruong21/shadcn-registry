@@ -1,0 +1,51 @@
+---
+title: File upload
+description: A file upload component with drag and drop or upload files.
+---
+
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+import ServerToaster from '@/components/molecules/server-toaster/index.astro'
+
+<ServerToaster />
+
+<CodePreview path='molecules/file-upload/demo' />
+
+## Installation
+
+<InstallationCard registryName='file-upload' />
+
+## Usage
+
+```tsx
+import {
+  FileUpload,
+  FileUploadContent,
+  FileUploadInput,
+  FileUploadItem,
+  type FileUploadProps
+} from '@/components/molecules/file-upload'
+```
+
+```tsx
+// States
+const [value, setValue] = React.useState<FileUploadProps['value']>([])
+
+// Template
+<FileUpload
+  value={value}
+  dropzoneOptions={{
+    maxFiles: 5
+  }}
+  onValueChange={setValue}
+>
+  <FileUploadInput />
+  <FileUploadContent>
+    {value.map((item, index) => (
+      <FileUploadItem key={`${index}-${item instanceof File ? item.name : item.id}`} value={item} index={index} />
+    ))}
+  </FileUploadContent>
+</FileUpload>
+```
