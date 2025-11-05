@@ -161,7 +161,7 @@ export const FileUploadInput = ({ className, children, ...restProps }: FileUploa
       {...restProps}
       className={cn(
         'relative w-full rounded hover:bg-accent/40',
-        isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+        isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-default'
       )}
     >
       <div

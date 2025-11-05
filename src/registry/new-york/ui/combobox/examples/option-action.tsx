@@ -44,40 +44,41 @@ export function ComboboxCommandInputAction() {
 
   // Template
   return (
-    <Combobox
-      value={value}
-      options={OPTIONS}
-      placeholder='Select framework'
-      className='w-xs'
-      commandItemPrefix={(option) => (
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant='ghost' size='icon-sm' className='size-6 shrink-0'>
-              <Trash />
-            </Button>
-          </DialogTrigger>
+    <div className='w-full max-w-xs'>
+      <Combobox
+        value={value}
+        options={OPTIONS}
+        placeholder='Select framework'
+        commandItemPrefix={(option) => (
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant='ghost' size='icon-sm' className='size-6 shrink-0'>
+                <Trash />
+              </Button>
+            </DialogTrigger>
 
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Delete option {option.label}</DialogTitle>
-              <DialogDescription>
-                This action can not be undone. Are you sure that you want to delete this option.
-              </DialogDescription>
-            </DialogHeader>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Delete option {option.label}</DialogTitle>
+                <DialogDescription>
+                  This action can not be undone. Are you sure that you want to delete this option.
+                </DialogDescription>
+              </DialogHeader>
 
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant='outline'>Cancel</Button>
-              </DialogClose>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant='outline'>Cancel</Button>
+                </DialogClose>
 
-              <DialogClose asChild>
-                <Button>Submit</Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      )}
-      onValueChange={setValue}
-    />
+                <DialogClose asChild>
+                  <Button>Submit</Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        )}
+        onValueChange={setValue}
+      />
+    </div>
   )
 }

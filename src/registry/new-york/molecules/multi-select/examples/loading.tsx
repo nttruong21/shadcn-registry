@@ -1,7 +1,6 @@
 import React from 'react'
-import { Combobox, type Option } from '@/components/ui/combobox'
+import { MultiSelect, type MultiSelectProps, type Option } from '@/components/molecules/multi-select'
 
-// Constants
 const OPTIONS: Option[] = [
   {
     value: 'next.js',
@@ -26,18 +25,20 @@ const OPTIONS: Option[] = [
 ]
 
 // Component
-export function ComboboxLoading() {
+export const ComboboxLoading = () => {
   // States
-  const [value, setValue] = React.useState<string | null>(null)
+  const [value, setValue] = React.useState<MultiSelectProps['value']>([])
 
   // Template
   return (
     <div className='w-full max-w-xs'>
-      <Combobox
+      <MultiSelect
         value={value}
         options={OPTIONS}
         placeholder='Select framework'
-        buttonTriggerProps={{ isLoading: true }}
+        buttonTriggerProps={{
+          isLoading: true
+        }}
         onValueChange={setValue}
       />
     </div>

@@ -19,7 +19,7 @@ export const Checkbox = ({ className, ...props }: React.ComponentProps<typeof Ch
         data-slot='checkbox-indicator'
         className='grid place-content-center text-current transition-none'
       >
-        <CheckIcon className='size-3.5' />
+        <CheckIcon className='size-3.5 text-current' />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   )

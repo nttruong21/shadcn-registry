@@ -46,52 +46,53 @@ export function ComboboxInputAction() {
 
   // Template
   return (
-    <Combobox
-      value={value}
-      options={OPTIONS}
-      placeholder='Select framework'
-      className='w-xs'
-      commandInputProps={{
-        children: (
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant='ghost' size='icon-sm' className='-mr-2'>
-                <Plus />
-              </Button>
-            </DialogTrigger>
+    <div className='w-full max-w-xs'>
+      <Combobox
+        value={value}
+        options={OPTIONS}
+        placeholder='Select framework'
+        commandInputProps={{
+          children: (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant='ghost' size='icon-sm' className='-mr-2'>
+                  <Plus />
+                </Button>
+              </DialogTrigger>
 
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Create new option</DialogTitle>
-                <DialogDescription>Fill all information below to create new option.</DialogDescription>
-              </DialogHeader>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create new option</DialogTitle>
+                  <DialogDescription>Fill all information below to create new option.</DialogDescription>
+                </DialogHeader>
 
-              <form className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                <div className='space-y-2'>
-                  <Label>Value</Label>
-                  <Input placeholder='Enter value' />
-                </div>
+                <form className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <div className='space-y-2'>
+                    <Label>Value</Label>
+                    <Input placeholder='Enter value' />
+                  </div>
 
-                <div className='space-y-2'>
-                  <Label>Label</Label>
-                  <Input placeholder='Enter label' />
-                </div>
-              </form>
+                  <div className='space-y-2'>
+                    <Label>Label</Label>
+                    <Input placeholder='Enter label' />
+                  </div>
+                </form>
 
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant='outline'>Cancel</Button>
-                </DialogClose>
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button variant='outline'>Cancel</Button>
+                  </DialogClose>
 
-                <DialogClose asChild>
-                  <Button>Submit</Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        )
-      }}
-      onValueChange={setValue}
-    />
+                  <DialogClose asChild>
+                    <Button>Submit</Button>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          )
+        }}
+        onValueChange={setValue}
+      />
+    </div>
   )
 }

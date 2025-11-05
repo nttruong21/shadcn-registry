@@ -22,16 +22,11 @@ const badgeVariants = cva(
   }
 )
 
-const Badge = ({
-  className,
-  variant,
-  asChild = false,
-  ...props
-}: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) => {
+export type BadgeProps = React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }
+
+export const Badge = ({ className, variant, asChild = false, ...props }: BadgeProps) => {
   const Comp = asChild ? Slot : 'span'
 
   // Template
   return <Comp data-slot='badge' className={cn(badgeVariants({ variant }), className)} {...props} />
 }
-
-export { Badge, badgeVariants }

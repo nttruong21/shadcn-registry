@@ -1,0 +1,32 @@
+---
+title: Multi select
+description: A combobox to select multiple options.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='molecules/multi-select/demo' />
+
+## Installation
+
+<InstallationCard registryName='multi-select' />
+
+## Usage
+
+```tsx
+import { MultiSelect, type MultiSelectProps, type Option } from '@/components/molecules/multi-select'
+```
+
+```tsx
+// States
+const [value, setValue] = React.useState<MultiSelectProps['value']>([])
+
+// Template
+<MultiSelect value={value} options={OPTIONS} placeholder='Select framework' onValueChange={setValue} />
+```
+
+## Examples
+### Loading
+<CodePreview path='molecules/multi-select/loading' />

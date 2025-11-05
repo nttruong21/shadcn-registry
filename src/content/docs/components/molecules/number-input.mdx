@@ -1,0 +1,33 @@
+---
+title: Number input
+description: An input to type number.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='molecules/number-input/demo' />
+
+## Installation
+
+<InstallationCard registryName='number-input' />
+
+## Usage
+
+```tsx
+import { NumberInput, type NumberInputProps } from '@/components/molecules/number-input'
+```
+
+```tsx
+// States
+const [value, setValue] = React.useState<NumberInputProps['value']>('')
+
+// Template
+<NumberInput
+  value={value}
+  placeholder='Enter number'
+  onFieldChange={setValue}
+  onValueChange={({ value }) => setValue(value)}
+/>
+```
