@@ -46,7 +46,15 @@ export const AutocompleteDemo = () => {
   return (
     <div className='w-full max-w-xs space-y-2'>
       <Button onClick={() => setKey(Date.now)}>Toggle Loading</Button>
-      <Autocomplete value={value} onValueChange={setValue} options={options} isLoading={options.length === 0} />
+      <Autocomplete
+        value={value}
+        inputProps={{
+          placeholder: 'Select framework'
+        }}
+        onValueChange={setValue}
+        options={options}
+        isLoading={options.length === 0}
+      />
     </div>
   )
 }

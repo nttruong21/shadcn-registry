@@ -32,7 +32,14 @@ export const AutocompleteDemo = () => {
   // Template
   return (
     <div className='w-full max-w-xs'>
-      <Autocomplete value={value} onValueChange={setValue} options={OPTIONS} />
+      <Autocomplete
+        value={value}
+        inputProps={{
+          placeholder: 'Select framework'
+        }}
+        onValueChange={setValue}
+        options={OPTIONS}
+      />
     </div>
   )
 }

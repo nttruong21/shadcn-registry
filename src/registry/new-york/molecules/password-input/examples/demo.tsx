@@ -5,7 +5,7 @@ export const PasswordInputDemo = () => {
   // Template
   return (
     <div className='w-full max-w-xs'>
-      <PasswordInput />
+      <PasswordInput placeholder='Enter password' />
     </div>
   )
 }
