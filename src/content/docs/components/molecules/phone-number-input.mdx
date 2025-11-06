@@ -1,19 +1,19 @@
 ---
-title: Pagination
-description: Pagination with page navigation.
+title: Phone number input
+description: A component to select the country and input the phone number.
 ---
 
 import CodePreview from '@/components/molecules/code-preview/index.astro'
 import InstallationCard from '@/components/molecules/installation-card/index.astro'
 import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
 
-<ShadcnLinkButton registryName='pagination' />
+<ShadcnLinkButton registryName='phone-number-input' />
 
-<CodePreview path='molecules/pagination/demo' />
+<CodePreview path='molecules/phone-number-input/demo' />
 
 ## Installation
 
-<InstallationCard registryName='pagination' />
+<InstallationCard registryName='phone-number-input' />
 
 ## Usage
 
@@ -23,8 +23,8 @@ import { Pagination } from '@/components/molecules/pagination'
 
 ```tsx
 // States
-const [page, setPage] = React.useState(1)
+const [value, setValue] = React.useState('')
 
 // Template
-<Pagination page={page} pageCount={10} onChangePage={setPage} />
+<PhoneNumberInput value={value} onValueChange={setValue} />
 ```

@@ -30,7 +30,7 @@ export interface Option {
 }
 
 export interface ComboboxProps {
-  value: Option['value'] | null
+  value: Option['value'] | null | undefined
   options: Option[]
   isValueCanBeEmptyString?: boolean
   isCanRemoveValue?: boolean
@@ -42,7 +42,9 @@ export interface ComboboxProps {
   commandProps?: CommandProps
   commandInputProps?: CommandInputProps
   commandListProps?: CommandListProps
-  commandItemProps?: CommandItemProps
+  commandItemProps?: Omit<CommandItemProps, 'children'> & {
+    children: (option: Option) => React.ReactNode | React.ReactNode
+  }
   commandItemPrefix?: (option: Option) => React.ReactNode
   commandGroupSlot?: React.ReactNode
   onValueChange: (value: Option['value'] | null) => void
@@ -165,7 +167,7 @@ export const Combobox = ({
                     }}
                     {...commandItemProps}
                   >
-                    <span>{option.label}</span>
+                    {commandItemProps?.children ? commandItemProps.children(option) : <span>{option.label}</span>}
                     <Check className={cn('ml-auto size-4', option.value === value ? 'opacity-100' : 'opacity-0')} />
                   </CommandItem>
                 </div>
