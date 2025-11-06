@@ -1,0 +1,30 @@
+---
+title: Pagination
+description: Pagination with page navigation, next and previous links.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<ShadcnLinkButton registryName='pagination' />
+
+<CodePreview path='molecules/pagination/demo' />
+
+## Installation
+
+<InstallationCard registryName='pagination' />
+
+## Usage
+
+```tsx
+import { Pagination } from '@/components/molecules/pagination'
+```
+
+```tsx
+// States
+const [page, setPage] = React.useState(1)
+
+// Template
+<Pagination page={page} pageCount={10} onChangePage={setPage} />
+```
