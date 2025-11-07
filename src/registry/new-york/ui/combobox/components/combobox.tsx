@@ -35,9 +35,9 @@ export interface ComboboxProps {
   isValueCanBeEmptyString?: boolean
   isCanRemoveValue?: boolean
   placeholder?: string
+  popoverProps?: PopoverProps
   popoverTriggerProps?: PopoverTriggerProps
   buttonTriggerProps?: ButtonProps
-  popoverProps?: PopoverProps
   popoverContentProps?: PopoverContentProps
   commandProps?: CommandProps
   commandInputProps?: CommandInputProps
@@ -47,7 +47,7 @@ export interface ComboboxProps {
   }
   commandItemPrefix?: (option: Option) => React.ReactNode
   commandGroupSlot?: React.ReactNode
-  onValueChange: (value: Option['value'] | null) => void
+  onValueChange: (value: ComboboxProps['value']) => void
 }
 
 export const useLabel = (args: Pick<ComboboxProps, 'value' | 'options' | 'isValueCanBeEmptyString'>) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Combobox, type Option } from '@/components/ui/combobox'
+import { Combobox, type ComboboxProps, type Option } from '@/components/ui/combobox'
 
 // Constants
 const OPTIONS: Option[] = [
@@ -28,7 +28,7 @@ const OPTIONS: Option[] = [
 // Component
 export function ComboboxLoading() {
   // States
-  const [value, setValue] = React.useState<string | null>(null)
+  const [value, setValue] = React.useState<ComboboxProps['value']>(null)
 
   // Template
   return (

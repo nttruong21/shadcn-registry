@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { Combobox, type Option } from '@/components/ui/combobox'
+import { Combobox, type ComboboxProps, type Option } from '@/components/ui/combobox'
 import {
   Dialog,
   DialogClose,
@@ -42,7 +42,7 @@ const OPTIONS: Option[] = [
 // Component
 export function ComboboxInputAction() {
   // States
-  const [value, setValue] = React.useState<string | null>(null)
+  const [value, setValue] = React.useState<ComboboxProps['value']>(null)
 
   // Template
   return (

@@ -138,10 +138,7 @@ export const DateRangePicker = ({
             selected={value}
             captionLayout='dropdown'
             required
-            onSelect={(date) => {
-              onValueChange(date)
-              setIsOpenPopover(false)
-            }}
+            onSelect={onValueChange}
             {...calendarProps}
           />
         </PopoverContent>
