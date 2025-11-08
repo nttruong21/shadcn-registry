@@ -221,9 +221,19 @@ export const MultiSelect = ({
         className={cn('min-w-(--radix-popover-trigger-width) p-0', popoverContentProps?.className)}
       >
         <Command {...commandProps}>
-          <CommandInput placeholder='Search' {...commandInputProps}>
-            {isServerSideSearching && <Spinner />}
-          </CommandInput>
+          <div className='flex items-center gap-2 border-input border-b px-3'>
+            <Checkbox
+              checked={value.length === options.length || (value.length > 0 && 'indeterminate')}
+              onCheckedChange={(checked) => {
+                onValueChange(checked ? options.map((option) => option.value) : [])
+              }}
+            />
+            <div className='[&>div]:flex-1 [&>div]:border-b-0 [&>div]:border-b-none [&>div]:px-0'>
+              <CommandInput placeholder='Search' {...commandInputProps}>
+                {isServerSideSearching && <Spinner />}
+              </CommandInput>
+            </div>
+          </div>
 
           <div className='relative'>
             <CommandList {...commandListProps} className={cn('scrollbar', commandListProps?.className)}>

@@ -102,6 +102,11 @@ export const Combobox = ({
   // States
   const [isOpenPopover, setIsOpenPopover] = React.useState(false)
 
+  // Memos
+  const isEmpty = React.useMemo(() => {
+    return value == null || (value === '' && !isValueCanBeEmptyString)
+  }, [value, isValueCanBeEmptyString])
+
   return (
     <Popover {...popoverProps} open={isOpenPopover} onOpenChange={setIsOpenPopover}>
       <PopoverTrigger {...popoverTriggerProps} asChild={popoverTriggerProps?.asChild ?? true}>
@@ -109,7 +114,7 @@ export const Combobox = ({
           <Button
             variant='outline'
             role='combobox'
-            data-empty={value == null || (value === '' && !isValueCanBeEmptyString)}
+            data-empty={isEmpty}
             aria-expanded={isOpenPopover}
             {...buttonTriggerProps}
             className={cn(
@@ -121,7 +126,7 @@ export const Combobox = ({
               <React.Fragment>
                 <span className='line-clamp-1 block text-ellipsis'> {label ?? placeholder}</span>
 
-                {isCanRemoveValue && value ? (
+                {isCanRemoveValue && !isEmpty ? (
                   <X
                     className='ml-auto size-4 shrink-0 text-muted-foreground transition-transform hover:scale-125'
                     onClick={(e) => {

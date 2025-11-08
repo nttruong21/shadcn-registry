@@ -63,6 +63,11 @@ export const MonthPicker = ({
     onValueChange(date)
   }
 
+  // Memos
+  const isEmpty = React.useMemo(() => {
+    return value == null
+  }, [value])
+
   // Template
   return (
     <Popover {...popoverProps}>
@@ -71,7 +76,7 @@ export const MonthPicker = ({
           <Button
             variant='outline'
             role='combobox'
-            data-empty={value == null}
+            data-empty={isEmpty}
             {...buttonTriggerProps}
             className={cn(
               'w-full justify-start font-normal data-[empty=true]:text-muted-foreground [&_svg]:pointer-events-auto',
@@ -84,7 +89,7 @@ export const MonthPicker = ({
                   {value ? format(value, 'MM/yyyy') : placeholder}
                 </span>
 
-                {isCanRemoveValue && value ? (
+                {isCanRemoveValue && !isEmpty ? (
                   <X
                     className='ml-auto size-4 shrink-0 text-muted-foreground transition-transform hover:scale-125'
                     onClick={(e) => {
@@ -215,6 +220,11 @@ export const MonthRangePicker = ({
     })
   }
 
+  // Memos
+  const isEmpty = React.useMemo(() => {
+    return !value?.start || !value?.end
+  }, [value])
+
   // Template
   return (
     <Popover {...popoverProps}>
@@ -223,7 +233,7 @@ export const MonthRangePicker = ({
           <Button
             variant='outline'
             role='combobox'
-            data-empty={value == null}
+            data-empty={isEmpty}
             {...buttonTriggerProps}
             className={cn(
               'w-full justify-start font-normal data-[empty=true]:text-muted-foreground [&_svg]:pointer-events-auto',
@@ -238,7 +248,7 @@ export const MonthRangePicker = ({
                     : placeholder}
                 </span>
 
-                {isCanRemoveValue && value ? (
+                {isCanRemoveValue && !isEmpty ? (
                   <X
                     className='ml-auto size-4 shrink-0 text-muted-foreground transition-transform hover:scale-125'
                     onClick={(e) => {

@@ -4,7 +4,8 @@ import type * as React from 'react'
 import { cn } from '@/lib/utils'
 
 // Checkbox
-export const Checkbox = ({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) => {
+export type CheckboxProps = React.ComponentProps<typeof CheckboxPrimitive.Root>
+export const Checkbox = ({ className, ...props }: CheckboxProps) => {
   // Template
   return (
     <CheckboxPrimitive.Root
