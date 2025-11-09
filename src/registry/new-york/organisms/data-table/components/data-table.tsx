@@ -9,7 +9,7 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 import debounce from 'lodash.debounce'
-import { ChevronDown, CircleChevronLeft, CircleChevronRight, EllipsisVertical, ListChecks, X } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, EllipsisVertical, ListChecks, X } from 'lucide-react'
 import React from 'react'
 import type { NumberFormatValues } from 'react-number-format'
 import { LoadingOverlay } from '@/components/molecules/loading-overlay'
@@ -42,6 +42,10 @@ const getCommonPinningStyles = <TData extends RowData>(column: Column<TData>): R
     minWidth: column.getSize(),
     zIndex: pinningPosition ? 1 : 0
   }
+}
+
+export const getNumberOrder = (rowIndex: number, page: number = 1, pageSize: number = 10): number => {
+  return rowIndex + 1 + (page - 1) * pageSize
 }
 
 export const useDataTable = <TData extends RowData>(options: Omit<TableOptions<TData>, 'getCoreRowModel'>) => {
@@ -128,7 +132,7 @@ const DataTableHeader = <TData extends RowData>({
 
   // Template
   return (
-    <TableHeader className={cn('sticky top-0 z-20', className)}>
+    <TableHeader className={cn('sticky top-0 z-20 bg-background', className)}>
       {table.getHeaderGroups().map((headerGroup, headerGroupIndex) => (
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header, headerIndex) => {
@@ -150,7 +154,7 @@ const DataTableHeader = <TData extends RowData>({
                 key={header.id}
                 colSpan={header.colSpan}
                 rowSpan={rowSpan}
-                className={cn('relative space-y-1 bg-inherit py-2', header.column.columnDef.meta?.className, {
+                className={cn('relative space-y-1 bg-background py-2', header.column.columnDef.meta?.className, {
                   'border-l': isGroupColumn,
                   'first:border-l-0': headerGroupIndex === 0 && headerIndex === 0
                 })}
@@ -163,21 +167,23 @@ const DataTableHeader = <TData extends RowData>({
                 </div>
 
                 {header.column.getCanPin() && (
-                  <div className='flex justify-center gap-2'>
+                  <div className='flex gap-2'>
                     {pinningPosition !== 'left' && (
                       <Button
-                        className='size-fit p-0'
+                        variant='outline'
+                        size='icon-sm'
                         onClick={() => {
                           header.column.pin('left')
                         }}
                       >
-                        <CircleChevronLeft />
+                        <ChevronLeft />
                       </Button>
                     )}
 
                     {pinningPosition && (
                       <Button
-                        className='size-fit p-0'
+                        variant='outline'
+                        size='icon-sm'
                         onClick={() => {
                           header.column.pin(false)
                         }}
@@ -188,12 +194,13 @@ const DataTableHeader = <TData extends RowData>({
 
                     {pinningPosition !== 'right' && (
                       <Button
-                        className='size-fit p-0'
+                        variant='outline'
+                        size='icon-sm'
                         onClick={() => {
                           header.column.pin('right')
                         }}
                       >
-                        <CircleChevronRight />
+                        <ChevronRight />
                       </Button>
                     )}
                   </div>
@@ -234,7 +241,7 @@ const DataTableBody = <TData extends RowData>({
               className={cn('bg-background', isExpanded && 'border-b-0', rowClassName)}
             >
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id} className='bg-inherit' style={{ ...getCommonPinningStyles(cell.column) }}>
+                <TableCell key={cell.id} className='bg-background' style={{ ...getCommonPinningStyles(cell.column) }}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}
@@ -392,7 +399,7 @@ const DataTablePagination = <TData extends RowData>({
   )
 }
 
-export const DataTable = <TData = unknown>({
+export const DataTable = <TData extends RowData>({
   id,
   table,
   isLoading = false,
@@ -409,7 +416,7 @@ export const DataTable = <TData = unknown>({
       {/* Row selection */}
       <DataTableRowSelection table={table} />
 
-      <Table className={cn('bg-background', className?.table)}>
+      <Table className={className?.table}>
         {/* Table header */}
         <DataTableHeader table={table} className={className?.tableHeader} />
 
