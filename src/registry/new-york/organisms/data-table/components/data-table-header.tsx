@@ -2,7 +2,7 @@ import { flexRender, type RowData } from '@tanstack/react-table'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 import type { DataTableProps } from './data-table'
 import { getCommonPinningStyles } from './lib'
 

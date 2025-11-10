@@ -7,5 +7,5 @@ export const DatePickerDemo = () => {
   const [value, setValue] = React.useState<DatePickerProps['value']>(null)
 
   // Template
-  return <DatePicker value={value} className='w-xs' onValueChange={setValue} />
+  return <DatePicker value={value} className='w-xs' placeholder='Select date' onValueChange={setValue} />
 }

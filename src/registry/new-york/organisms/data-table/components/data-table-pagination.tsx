@@ -4,7 +4,7 @@ import type { NumberFormatValues } from 'react-number-format'
 import { NumberInput } from '@/components/molecules/number-input'
 import { Pagination } from '@/components/molecules/pagination'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 import type { DataTableProps } from './data-table'
 
 const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 30, 50, 100]

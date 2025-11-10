@@ -21,7 +21,7 @@ import {
   PopoverTrigger,
   type PopoverTriggerProps
 } from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 // Combobox
 export interface Option {

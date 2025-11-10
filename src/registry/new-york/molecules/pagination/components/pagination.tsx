@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, MoreHorizontal 
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 // Pagination
 export interface PaginationProps {

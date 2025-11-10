@@ -1,0 +1,37 @@
+---
+title: Smart filter
+description: Powerful component with search and filter by multiple conditions that can switch back and forth.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='organisms/smart-filter/demo' />
+
+## Installation
+
+<InstallationCard registryName='smart-filter' />
+
+## Usage
+```tsx
+import {
+  SmartFilter,
+  type SmartFilterProps,
+  SmartFilterType,
+  useSmartFilterForm
+} from '@/components/organisms/smart-filter'
+```
+
+```tsx
+// Hooks
+const form = useSmartFilterForm()
+
+// Memos
+const filters = React.useMemo<SmartFilterProps['filters']>(() => {
+  return []
+}, [])
+
+// Template
+<SmartFilter form={form} filters={filters} setFilters={setFilters} />
+```

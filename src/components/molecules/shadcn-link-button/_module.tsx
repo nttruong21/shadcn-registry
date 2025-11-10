@@ -1,7 +1,7 @@
 import { ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { SHADCN_URL } from '@/lib/constants'
-import { cn } from '@/lib/utils'
+import { SHADCN_URL } from '@/constants/base'
+import { cn } from '@/utils/ui'
 
 import type { ModuleProps } from './lib'
 

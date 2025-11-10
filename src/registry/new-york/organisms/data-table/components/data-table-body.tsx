@@ -1,7 +1,7 @@
 import { flexRender, type RowData } from '@tanstack/react-table'
 import React from 'react'
 import { TableBody, TableCell, TableRow } from '@/components/ui/table'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 import type { DataTableProps } from './data-table'
 import { getCommonPinningStyles } from './lib'
 

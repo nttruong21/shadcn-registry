@@ -109,6 +109,11 @@ export default defineConfig({
   ],
   vite: {
     // @ts-expect-error: Astro still Vite v6 while tailwindcss will pull in Vite v7 => types mismatch
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+     ssr: {
+      // FIXME: Once starlight supports Zod 4 we can probably remove this.
+      // Zod should normally be imported from astro, but I want my code to use its own zod version to reflect the version used in the shadcn components.
+      noExternal: ["zod"],
+    },
   }
 })

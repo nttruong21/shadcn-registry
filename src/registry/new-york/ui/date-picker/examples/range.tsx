@@ -7,5 +7,5 @@ export const DatePickerRange = () => {
   const [value, setValue] = React.useState<DateRangePickerProps['value']>({ from: undefined, to: undefined })
 
   // Template
-  return <DateRangePicker value={value} className='w-xs' onValueChange={setValue} />
+  return <DateRangePicker value={value} className='w-xs' placeholder='Select date range' onValueChange={setValue} />
 }

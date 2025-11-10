@@ -11,7 +11,7 @@ import flags from 'react-phone-number-input/flags'
 import en from 'react-phone-number-input/locale/en.json'
 import { Combobox, type Option } from '@/components/ui/combobox'
 import { Input, type InputProps } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 // Phone number input
 export type PhoneNumberInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> &

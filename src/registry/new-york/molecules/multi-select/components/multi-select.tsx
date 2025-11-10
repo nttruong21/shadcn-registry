@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
 import { Spinner } from '@/components/ui/spinner'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 // Multi select
 export interface Option {
@@ -152,8 +152,9 @@ export const MultiSelect = ({
         <Button
           {...buttonTriggerProps}
           variant='outline'
+          data-empty={value.length === 0}
           className={cn(
-            'h-fit min-h-10 w-full justify-start px-3 py-1 font-normal [&_svg]:pointer-events-auto',
+            'w-full justify-start font-normal data-[empty=true]:text-muted-foreground [&_svg]:pointer-events-auto',
             buttonTriggerProps?.className
           )}
         >

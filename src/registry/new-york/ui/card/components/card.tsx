@@ -1,5 +1,5 @@
 import type * as React from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 // Card
 export const Card = ({ className, ...props }: React.ComponentProps<'div'>) => {

@@ -14,7 +14,7 @@ import type { InputProps } from '@/components/ui/input'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Spinner } from '@/components/ui/spinner'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 // Autocomplete
 export interface Option {

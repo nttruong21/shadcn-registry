@@ -1,6 +1,6 @@
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'
 import type * as React from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 // Scroll area
 export const ScrollArea = ({

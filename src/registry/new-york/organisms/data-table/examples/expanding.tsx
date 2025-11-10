@@ -2,7 +2,7 @@ import { type ColumnDef, getExpandedRowModel, getPaginationRowModel } from '@tan
 import { ChevronRight } from 'lucide-react'
 import { DataTable, useDataTable } from '@/components/organisms/data-table'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 type Row = {
   id: string

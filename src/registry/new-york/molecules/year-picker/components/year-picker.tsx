@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Combobox, type ComboboxProps } from '@/components/ui/combobox'
 import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 export const generateOptions = (startYear: number, endYear: number): ComboboxProps['options'] => {
   return Array.from({

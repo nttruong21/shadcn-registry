@@ -12,7 +12,7 @@ import {
   PopoverTrigger,
   type PopoverTriggerProps
 } from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils/ui'
 
 export const MONTH_OPTIONS: Array<{
   value: number

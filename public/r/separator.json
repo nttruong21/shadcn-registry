@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "src/registry/new-york/ui/separator/components/separator.tsx",
-      "content": "import * as SeparatorPrimitive from '@radix-ui/react-separator'\nimport type * as React from 'react'\nimport { cn } from '@/lib/utils'\n\n// Separator\nexport const Separator = ({\n  className,\n  orientation = 'horizontal',\n  decorative = true,\n  ...props\n}: React.ComponentProps<typeof SeparatorPrimitive.Root>) => {\n  // Template\n  return (\n    <SeparatorPrimitive.Root\n      data-slot='separator'\n      decorative={decorative}\n      orientation={orientation}\n      className={cn(\n        'shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px',\n        className\n      )}\n      {...props}\n    />\n  )\n}\n",
+      "content": "import * as SeparatorPrimitive from '@radix-ui/react-separator'\nimport type * as React from 'react'\nimport { cn } from '@/utils/ui'\n\n// Separator\nexport const Separator = ({\n  className,\n  orientation = 'horizontal',\n  decorative = true,\n  ...props\n}: React.ComponentProps<typeof SeparatorPrimitive.Root>) => {\n  // Template\n  return (\n    <SeparatorPrimitive.Root\n      data-slot='separator'\n      decorative={decorative}\n      orientation={orientation}\n      className={cn(\n        'shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=vertical]:h-full data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px',\n        className\n      )}\n      {...props}\n    />\n  )\n}\n",
       "type": "registry:ui",
       "target": "src/components/ui/separator.tsx"
     }

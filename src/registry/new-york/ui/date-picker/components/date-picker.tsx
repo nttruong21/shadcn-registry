@@ -12,6 +12,7 @@ export interface DatePickerProps {
   isCanRemoveValue?: boolean
   className?: string
   isDisabled?: boolean
+  placeholder?: string
   calendarProps?: Omit<CalendarProps, 'mode' | 'selected' | 'required' | 'onSelect'>
   onValueChange: (value: Date | null | undefined) => void
 }
@@ -21,6 +22,7 @@ export const DatePicker = ({
   isCanRemoveValue = true,
   className,
   isDisabled,
+  placeholder,
   calendarProps,
   onValueChange
 }: DatePickerProps) => {
@@ -45,7 +47,7 @@ export const DatePicker = ({
             disabled={isDisabled}
             className='w-full justify-start font-normal data-[empty=true]:text-muted-foreground [&_svg]:pointer-events-auto'
           >
-            <span>{value ? format(value, 'dd/MM/yyyy') : 'Pick a date'}</span>
+            <span>{value ? format(value, 'dd/MM/yyyy') : placeholder}</span>
 
             {isCanRemoveValue && value ? (
               <X
@@ -85,6 +87,7 @@ export interface DateRangePickerProps {
   isCanRemoveValue?: boolean
   className?: string
   isDisabled?: boolean
+  placeholder?: string
   calendarProps?: Omit<CalendarProps, 'mode' | 'selected' | 'required' | 'onSelect'>
   onValueChange: (value: DateRange) => void
 }
@@ -94,6 +97,7 @@ export const DateRangePicker = ({
   isCanRemoveValue = true,
   className,
   isDisabled,
+  placeholder,
   calendarProps,
   onValueChange
 }: DateRangePickerProps) => {
@@ -115,7 +119,7 @@ export const DateRangePicker = ({
             <span>
               {value?.from && value?.to
                 ? `${format(value.from, 'dd/MM/yyyy')} - ${format(value.to, 'dd/MM/yyyy')}`
-                : 'Pick a date'}
+                : placeholder}
             </span>
 
             {isCanRemoveValue && value?.from && value?.to ? (
