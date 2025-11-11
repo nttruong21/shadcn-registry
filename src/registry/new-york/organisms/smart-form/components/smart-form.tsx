@@ -1,130 +1,311 @@
-import type { Accept } from 'react-dropzone'
-import type { FieldValues, UseFormReturn } from 'react-hook-form'
-import type { NumberInputProps } from '@/components/molecules/number-input'
-import type { DatePickerProps } from '@/components/ui/date-picker'
+import React from 'react'
+import { Controller, type FieldValues, FormProvider } from 'react-hook-form'
+import { Autocomplete } from '@/components/molecules/autocomplete'
+import {
+  FileUpload,
+  FileUploadContent,
+  FileUploadInput,
+  FileUploadItem,
+  type FileUploadValue
+} from '@/components/molecules/file-upload'
+import { MultiSelect } from '@/components/molecules/multi-select'
+import { NumberInput } from '@/components/molecules/number-input'
+import { PasswordInput } from '@/components/molecules/password-input'
+import { PhoneNumberInput } from '@/components/molecules/phone-number-input'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Combobox } from '@/components/ui/combobox'
+import { DatePicker } from '@/components/ui/date-picker'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from '@/components/ui/dialog'
+import { Field, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
-import type { Option } from '@/types/base'
+import { Textarea } from '@/components/ui/textarea'
+import { cn } from '@/utils/ui'
+import type { SmartFormProps } from './lib'
 
 // Smart form
-export interface FormData {
-  code: string
-  templates: Array<{
-    code: string
-    title: string
-    description?: string
-    className?: string
-    fields: Array<{
-      code: string
-      title: string
-      type:
-        | 'text'
-        | 'textarea'
-        | 'number'
-        | 'phone-number'
-        | 'password'
-        | 'select'
-        | 'select-with-infinite-query'
-        | 'multi-select'
-        | 'multi-select-with-infinite-query'
-        | 'select-or-text'
-        | 'select-or-text-with-infinite-query'
-        | 'date'
-        | 'checkbox'
-        | 'radio'
-        | 'file'
-        | 'multi-file'
-        | 'editor'
-        | 'label'
-        | 'slot'
-      config: {
-        validation?: Record<
-          string,
-          {
-            /**
-             * @field TEXT | TEXTAREA | PASSWORD | SELECT_OR_TEXT
-             * @type required (boolean), min (number), max (number), email (boolean), regex({pattern: string, flags: string}), phone(string[])
-             *
-             * @field PASSWORD
-             * @type required (boolean), min (number), max (number), regex({pattern: string, flags: string})
-             *
-             * @field SELECT | RADIO
-             * @type required (boolean)
-             *
-             * @field NUMBER
-             * @type min (number), max (number), negative (boolean), positive (boolean)
-             *
-             * @field MULTI_SELECT
-             * @type required (boolean)
-             *
-             * @field DATE
-             * @type required (boolean)
-             *
-             * @field FILE, MULTI_FILES
-             * @type required (boolean), max_size (number), mime_types (string[])
-             */
-            value: boolean | number | { pattern: string; flags: string } | string[]
-            message: string
-          }
-        >
-        // Number
-        numberInputProps: NumberInputProps
-        // Date
-        isPreviousDateDisabled?: boolean
-        isNextDateDisabled?: boolean
-        datePickerProps?: DatePickerProps
-        // Select, multi select, select or text
-        options?: Option[]
-        apiPath?: string
-        // File, multi file
-        dropzoneOptions?: {
-          maxFiles?: number
-          maxSize?: number
-          accept?: Accept
-        }
-        // Password
-        isPasswordConfirmation?: boolean
-      }
-      description?: string
-      className?: string
-    }>
-  }>
-}
-
-export interface SmartFormProps {
-  form: UseFormReturn
-  formData: FormData
-  isUpdateMode?: boolean
-  isPending?: boolean
-  slots?: Record<string, React.ReactNode>
-  hiddenFields?: string[]
-  disabledFields?: string[]
-  submitButtonText?: string
-  actionButtonsClassName?: string
-  updateConfirmationDialogSlot?: React.ReactNode
-  onCancel?: () => void
-  onValidate?: (fieldValues: FieldValues) => boolean | Promise<boolean>
-  onSubmit?: (fieldValues: FieldValues) => void | Promise<void>
-}
-
 export const SmartForm = ({
-  form
-  // formData,
-  // isPending,
-  // isUpdateMode = false,
-  // slots,
-  // hiddenFields,
-  // disabledFields,
-  // submitButtonText,
-  // actionButtonsClassName,
-  // updateConfirmationDialogSlot,
-  // onCancel,
-  // onValidate,
-  // onSubmit
+  form,
+  formData,
+  isPending,
+  isUpdateMode = false,
+  slots,
+  hiddenFields,
+  disabledFields,
+  submitButtonText,
+  actionButtonsClassName,
+  updateConfirmationDialogSlot,
+  cancel,
+  validate,
+  submit
 }: SmartFormProps) => {
+  // Refs
+  const formValueRef = React.useRef<FieldValues>(() => form.getValues())
+
+  // States
+  const [isOpenConfirmationDialog, setIsOpenConfirmationDialog] = React.useState(false)
+
+  // Methods
+  const startValidation = async (formValue: FieldValues) => {
+    const isValidationPassed = (await validate?.(formValue)) ?? true
+    if (!isValidationPassed) return
+    formValueRef.current = formValue
+    return isUpdateMode ? setIsOpenConfirmationDialog(true) : submit?.(formValue)
+  }
+
+  const submitUpdateConfirmationDialog = async () => {
+    await submit?.(formValueRef.current)
+    if (isUpdateMode) {
+      setIsOpenConfirmationDialog(false)
+    }
+  }
+
   // Template
   if (form.formState.isLoading) {
     return <Spinner className='size-6' />
   }
 
-  return <div></div>
+  return (
+    <FormProvider {...form}>
+      {/* Form */}
+      <form className='space-y-6' onSubmit={form.handleSubmit(startValidation)}>
+        {formData.templates.map((template) => (
+          <div key={template.code} className={cn('grid grid-cols-12 gap-x-4 gap-y-6', template.className)}>
+            {/* Form template name */}
+            <h1 className='col-span-full font-bold text-base'>{template.title}</h1>
+
+            {/* Form template fields */}
+            {template.fields.map((field) => {
+              const code = field.code
+
+              // Hidden
+              if (hiddenFields?.[field.code]) {
+                return null
+              }
+
+              const type = field.type
+              const className = field.className
+              const label = field.title
+              // const isRequired = field.config.validation?.['required']
+              const isDisabled = disabledFields?.[field.code]
+
+              // LABEL
+              if (field.type === 'label') {
+                return (
+                  <div key={code} id={`dynamic-form-label-field-${code}`} className={cn('col-span-full', className)}>
+                    <span className='font-bold text-base text-muted-foreground'>{label}</span>
+                  </div>
+                )
+              }
+
+              // SLOT
+              if (field.type === 'slot') {
+                return (
+                  <div key={code} className={cn('col-span-full', field.className)}>
+                    {slots?.[code]}
+                  </div>
+                )
+              }
+
+              // Others
+              return (
+                <Controller
+                  key={code}
+                  control={form.control}
+                  name={code}
+                  render={({ field: formField, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <FieldLabel htmlFor={field.title}>Bug Title</FieldLabel>
+
+                      {(type === 'text' && (
+                        <Input
+                          {...formField}
+                          placeholder={`Enter ${field.title.toLowerCase()}`}
+                          disabled={isDisabled}
+                          aria-invalid={fieldState.invalid}
+                        />
+                      )) ||
+                        (type === 'textarea' && (
+                          <Textarea
+                            {...formField}
+                            placeholder={`Enter ${field.title.toLowerCase()}`}
+                            disabled={isDisabled}
+                            aria-invalid={fieldState.invalid}
+                          />
+                        )) ||
+                        (type === 'number' && (
+                          <NumberInput
+                            {...field.config.numberInputProps}
+                            value={formField.value}
+                            disabled={isDisabled}
+                            placeholder={`Enter ${field.title.toLowerCase()}`}
+                            onFieldChange={formField.onChange}
+                            onValueChange={(event) => formField.onChange(event.value)}
+                          />
+                        )) ||
+                        (type === 'phone-number' && (
+                          <PhoneNumberInput
+                            {...formField}
+                            onValueChange={formField.onChange}
+                            placeholder={`Enter ${field.title.toLowerCase()}`}
+                            disabled={isDisabled}
+                          />
+                        )) ||
+                        (type === 'password' && (
+                          <PasswordInput
+                            {...formField}
+                            placeholder={`Enter ${field.title.toLowerCase()}`}
+                            disabled={isDisabled}
+                          />
+                        )) ||
+                        (type === 'select' && (
+                          <Combobox
+                            value={formField.value}
+                            options={field.config.options ?? []}
+                            onValueChange={formField.onChange}
+                          />
+                        )) ||
+                        (type === 'select-with-infinite-query' && (
+                          <Combobox
+                            value={formField.value}
+                            options={field.config.options ?? []}
+                            onValueChange={formField.onChange}
+                          />
+                        )) ||
+                        (type === 'multi-select' && (
+                          <MultiSelect
+                            value={formField.value}
+                            options={field.config.options ?? []}
+                            onValueChange={formField.onChange}
+                          />
+                        )) ||
+                        (type === 'multi-select-with-infinite-query' && (
+                          <MultiSelect
+                            value={formField.value}
+                            options={field.config.options ?? []}
+                            onValueChange={formField.onChange}
+                          />
+                        )) ||
+                        (type === 'select-or-text' && (
+                          <Autocomplete
+                            value={formField.value}
+                            options={field.config.options ?? []}
+                            onValueChange={formField.onChange}
+                          />
+                        )) ||
+                        (type === 'select-or-text-with-infinite-query' && (
+                          <Autocomplete
+                            value={formField.value}
+                            options={field.config.options ?? []}
+                            onValueChange={formField.onChange}
+                          />
+                        )) ||
+                        (type === 'date' && (
+                          <DatePicker value={formField.value} onValueChange={formField.onChange} />
+                        )) ||
+                        (type === 'checkbox' && (
+                          <Checkbox
+                            checked={formField.value}
+                            disabled={isDisabled}
+                            onCheckedChange={formField.onChange}
+                          />
+                        )) ||
+                        (type === 'radio' && null) ||
+                        (type === 'file' && (
+                          <FileUpload
+                            value={formField.value}
+                            dropzoneOptions={field.config.dropzoneOptions}
+                            isDisabled={isDisabled}
+                            onValueChange={(files) => formField.onChange(files[0])}
+                          >
+                            <FileUploadInput />
+
+                            {formField.value && (
+                              <FileUploadContent className='flex-1'>
+                                <FileUploadItem value={formField.value} index={0} />
+                              </FileUploadContent>
+                            )}
+                          </FileUpload>
+                        )) ||
+                        (type === 'multi-file' && (
+                          <FileUpload
+                            value={formField.value}
+                            dropzoneOptions={field.config.dropzoneOptions}
+                            isDisabled={isDisabled}
+                            onValueChange={formField.onChange}
+                          >
+                            <FileUploadInput />
+
+                            {formField.value && (
+                              <FileUploadContent className='flex-1'>
+                                {(formField.value as FileUploadValue).map((value, index) => (
+                                  // biome-ignore lint/suspicious/noArrayIndexKey: ignore
+                                  <FileUploadItem key={index} index={index} value={value} />
+                                ))}
+                              </FileUploadContent>
+                            )}
+                          </FileUpload>
+                        )) ||
+                        (type === 'editor' && null) ||
+                        'Invalid field.'}
+                    </Field>
+                  )}
+                />
+              )
+            })}
+          </div>
+        ))}
+
+        {/* Action buttons */}
+        {slots?.Actions === undefined ? (
+          <div className={cn('flex flex-col justify-stretch gap-4 xl:flex-row xl:justify-end', actionButtonsClassName)}>
+            <Button variant='outline' onClick={cancel}>
+              Cancel
+            </Button>
+
+            <Button isLoading={isPending || form.formState.isSubmitting} onClick={form.handleSubmit(startValidation)}>
+              {submitButtonText ?? 'Submit'}
+            </Button>
+          </div>
+        ) : (
+          slots.Actions
+        )}
+      </form>
+
+      {/* Update confirmation dialog */}
+      {isUpdateMode && (
+        <Dialog open={isOpenConfirmationDialog} onOpenChange={setIsOpenConfirmationDialog}>
+          <DialogContent className='max-w-2xl'>
+            <DialogHeader>
+              <DialogTitle>Update information</DialogTitle>
+              <DialogDescription>Are you sure that you want to save the updated information?</DialogDescription>
+            </DialogHeader>
+
+            {updateConfirmationDialogSlot && <main>{updateConfirmationDialogSlot}</main>}
+
+            <DialogFooter className='mt-6'>
+              <DialogClose asChild>
+                <Button type='button' variant='outline'>
+                  Cancel
+                </Button>
+              </DialogClose>
+
+              <Button isLoading={isPending || form.formState.isSubmitting} onClick={submitUpdateConfirmationDialog}>
+                Save
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
+    </FormProvider>
+  )
 }
