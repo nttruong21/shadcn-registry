@@ -88,17 +88,17 @@ const SmartFilterAdvancedFilter = ({
         onOpenAutoFocus={executeLogicOnOpenPopover}
       >
         <h3 className='typography-h3'>Filters</h3>
-        <div className='-mx-1 my-5 max-h-72 space-y-4 overflow-y-auto px-1 py-1'>
+        <div className='-mx-1 my-2 max-h-72 overflow-y-auto px-1'>
           {/* Filters */}
           {formFilters.fields.map((field, index) => (
-            <div key={field.id} className='flex gap-4'>
-              <div className='flex w-full grow flex-col gap-4 xl:w-auto xl:flex-row'>
+            <div key={field.id} className='flex gap-x-4'>
+              <div className='flex grow flex-col gap-4 overflow-hidden py-2 xl:w-auto xl:flex-row'>
                 {/* Name */}
                 <Controller
                   name={`filters.${index}.name`}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid} className='min-w-60'>
+                    <Field data-invalid={fieldState.invalid} className='w-full shrink-0 xl:w-52'>
                       <SmartFilterAdvancedFilterNameField
                         index={index}
                         field={field}
@@ -114,7 +114,7 @@ const SmartFilterAdvancedFilter = ({
                   name={`filters.${index}.operation`}
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid} className='min-w-60'>
+                    <Field data-invalid={fieldState.invalid} className='w-full shrink-0 xl:w-52'>
                       <SmartFilterAdvancedFilterOperationField index={index} field={field} />
                       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                     </Field>
@@ -122,14 +122,17 @@ const SmartFilterAdvancedFilter = ({
                 />
 
                 {/* Value */}
-                <div className='min-w-60 grow'>
-                  <SmartFilterAdvancedFilterValueField index={index} />
-                </div>
+                <SmartFilterAdvancedFilterValueField index={index} />
               </div>
 
               {/* Remove button */}
               {formFilters.fields.length > 1 && (
-                <Button variant='outline' size='icon' className='shrink-0' onClick={() => formFilters.remove(index)}>
+                <Button
+                  variant='outline'
+                  size='icon'
+                  className='mt-2 shrink-0'
+                  onClick={() => formFilters.remove(index)}
+                >
                   <TrashIcon className='h-4 w-4' />
                 </Button>
               )}

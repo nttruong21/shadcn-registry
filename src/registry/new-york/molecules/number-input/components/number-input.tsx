@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
 import { Input, type InputProps } from '@/components/ui/input'
 import { InputGroup } from '@/components/ui/input-group'
+import { cn } from '@/utils/ui'
 
 // Number input
 export type NumberInputProps = NumericFormatProps<InputProps> & {
@@ -64,7 +65,7 @@ export const NumberInput = ({
 
   // Template
   return (
-    <ButtonGroup>
+    <ButtonGroup className={cn('w-full', className)}>
       <Button
         aria-label='Decrease value'
         variant='outline'

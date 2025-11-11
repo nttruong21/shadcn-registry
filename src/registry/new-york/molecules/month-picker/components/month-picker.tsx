@@ -242,7 +242,7 @@ export const MonthRangePicker = ({
           >
             {buttonTriggerProps?.children ?? (
               <React.Fragment>
-                <span className='line-clamp-1 block text-ellipsis'>
+                <span className='line-clamp-1 text-ellipsis'>
                   {value?.start && value?.end
                     ? `${format(value.start, 'MM/yyyy')} - ${format(value.end, 'MM/yyyy')}`
                     : placeholder}

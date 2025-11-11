@@ -77,7 +77,7 @@ export const useLabel = (args: Pick<ComboboxProps, 'value' | 'options' | 'isValu
 export const Combobox = ({
   value,
   options,
-  isValueCanBeEmptyString = true,
+  isValueCanBeEmptyString = false,
   isCanRemoveValue = true,
   placeholder,
   popoverProps,
@@ -124,7 +124,7 @@ export const Combobox = ({
           >
             {buttonTriggerProps?.children ?? (
               <React.Fragment>
-                <span className='line-clamp-1 block text-ellipsis'> {label ?? placeholder}</span>
+                <span className='line-clamp-1 text-ellipsis'> {label ?? placeholder}</span>
 
                 {isCanRemoveValue && !isEmpty ? (
                   <X

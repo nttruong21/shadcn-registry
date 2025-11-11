@@ -58,5 +58,9 @@ export const SmartFilterDemo = () => {
   }, [])
 
   // Template
-  return <SmartFilter form={form} filters={filters} setFilters={setFilters} />
+  return (
+    <div className='w-sm'>
+      <SmartFilter form={form} filters={filters} setFilters={setFilters} />
+    </div>
+  )
 }

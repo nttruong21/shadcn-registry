@@ -98,7 +98,7 @@ export const SmartFilter = ({
       }}
     >
       <FormProvider {...form}>
-        <form className='w-full grow' onSubmit={(e) => e.preventDefault()}>
+        <form className='w-full' onSubmit={(e) => e.preventDefault()}>
           {filters.length === 0 ? (
             <SmartFilterBasicSearch setFilters={setFilters} />
           ) : isHideSearchMode ? (

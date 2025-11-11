@@ -209,10 +209,10 @@ export const MultiSelect = ({
               <Separator orientation='vertical' className='flex h-full min-h-6' />
             </React.Fragment>
           ) : (
-            <div className='grow text-left text-muted-foreground text-sm'>{placeholder}</div>
+            <div className='line-clamp-1 text-ellipsis'>{placeholder}</div>
           )}
 
-          <ChevronDown className='size-4 text-muted-foreground' />
+          <ChevronDown className='ml-auto size-4 shrink-0 text-muted-foreground' />
         </Button>
       </PopoverTrigger>
 

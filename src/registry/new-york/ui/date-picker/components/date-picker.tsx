@@ -47,7 +47,7 @@ export const DatePicker = ({
             disabled={isDisabled}
             className='w-full justify-start font-normal data-[empty=true]:text-muted-foreground [&_svg]:pointer-events-auto'
           >
-            <span>{value ? format(value, 'dd/MM/yyyy') : placeholder}</span>
+            <span className='line-clamp-1 text-ellipsis'>{value ? format(value, 'dd/MM/yyyy') : placeholder}</span>
 
             {isCanRemoveValue && value ? (
               <X
@@ -116,7 +116,7 @@ export const DateRangePicker = ({
             disabled={isDisabled}
             className='w-full justify-start font-normal data-[empty=true]:text-muted-foreground [&_svg]:pointer-events-auto'
           >
-            <span>
+            <span className='line-clamp-1 text-ellipsis'>
               {value?.from && value?.to
                 ? `${format(value.from, 'dd/MM/yyyy')} - ${format(value.to, 'dd/MM/yyyy')}`
                 : placeholder}
