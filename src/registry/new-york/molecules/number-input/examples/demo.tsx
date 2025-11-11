@@ -11,6 +11,7 @@ export const NumberInputDemo = () => {
     <NumberInput
       value={value}
       placeholder='Enter number'
+      className='w-xs'
       onFieldChange={setValue}
       onValueChange={({ value }) => setValue(value)}
     />

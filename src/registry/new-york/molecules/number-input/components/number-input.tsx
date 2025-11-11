@@ -66,15 +66,17 @@ export const NumberInput = ({
   // Template
   return (
     <ButtonGroup className={cn('w-full', className)}>
-      <Button
-        aria-label='Decrease value'
-        variant='outline'
-        size='icon'
-        onClick={decrement}
-        disabled={disabled || (value != null && +value <= +min)}
-      >
-        <ChevronDown />
-      </Button>
+      {isDisplayStepper && (
+        <Button
+          aria-label='Decrease value'
+          variant='outline'
+          size='icon'
+          onClick={decrement}
+          disabled={disabled || (value != null && +value <= +min)}
+        >
+          <ChevronDown />
+        </Button>
+      )}
 
       <InputGroup>
         <NumericFormat
@@ -88,22 +90,24 @@ export const NumberInput = ({
           step={step}
           min={min}
           max={max}
-          className='rounded-none border-none'
+          className={cn(isDisplayStepper && 'rounded-none border-none')}
           disabled={disabled}
           {...props}
           onBlur={blur}
         />
       </InputGroup>
 
-      <Button
-        aria-label='Increase value'
-        size='icon'
-        variant='outline'
-        onClick={increment}
-        disabled={disabled || (value != null && +value >= +max)}
-      >
-        <ChevronUp />
-      </Button>
+      {isDisplayStepper && (
+        <Button
+          aria-label='Increase value'
+          size='icon'
+          variant='outline'
+          onClick={increment}
+          disabled={disabled || (value != null && +value >= +max)}
+        >
+          <ChevronUp />
+        </Button>
+      )}
     </ButtonGroup>
   )
 }
