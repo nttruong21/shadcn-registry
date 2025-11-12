@@ -23,6 +23,7 @@ import {
   PopoverTrigger,
   type PopoverTriggerProps
 } from '@/components/ui/popover'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { Spinner } from '@/components/ui/spinner'
 import { cn } from '@/utils/ui'
@@ -147,7 +148,7 @@ export const MultiSelect = ({
 
   // Template
   return (
-    <Popover {...popoverProps}>
+    <Popover {...popoverProps} modal>
       <PopoverTrigger {...popoverTriggerProps} asChild={popoverTriggerProps?.asChild ?? true}>
         <Button
           {...buttonTriggerProps}
@@ -238,28 +239,30 @@ export const MultiSelect = ({
 
           <div className='relative'>
             <CommandList {...commandListProps} className={cn('scrollbar', commandListProps?.className)}>
-              <CommandEmpty>No option found.</CommandEmpty>
+              <ScrollArea className='max-h-72'>
+                <CommandEmpty>No option found.</CommandEmpty>
 
-              <CommandGroup>
-                {options.map((option) => {
-                  const isSelected = value.includes(option.value)
-                  const isDisabled = !isSelected && value.length === max
+                <CommandGroup>
+                  {options.map((option) => {
+                    const isSelected = value.includes(option.value)
+                    const isDisabled = !isSelected && value.length === max
 
-                  return (
-                    <CommandItem
-                      disabled={isDisabled}
-                      key={option.value}
-                      value={option.label}
-                      onSelect={() => toggleOption(option.value)}
-                    >
-                      <Checkbox checked={isSelected} />
-                      {commandItemProps?.children ? commandItemProps.children(option) : option.label}
-                    </CommandItem>
-                  )
-                })}
+                    return (
+                      <CommandItem
+                        disabled={isDisabled}
+                        key={option.value}
+                        value={option.label}
+                        onSelect={() => toggleOption(option.value)}
+                      >
+                        <Checkbox checked={isSelected} />
+                        {commandItemProps?.children ? commandItemProps.children(option) : option.label}
+                      </CommandItem>
+                    )
+                  })}
 
-                {commandGroupSlot && commandGroupSlot}
-              </CommandGroup>
+                  {commandGroupSlot && commandGroupSlot}
+                </CommandGroup>
+              </ScrollArea>
             </CommandList>
           </div>
         </Command>

@@ -21,6 +21,7 @@ import {
   PopoverTrigger,
   type PopoverTriggerProps
 } from '@/components/ui/popover'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/utils/ui'
 
 // Combobox
@@ -108,7 +109,7 @@ export const Combobox = ({
   }, [value, isValueCanBeEmptyString])
 
   return (
-    <Popover {...popoverProps} open={isOpenPopover} onOpenChange={setIsOpenPopover}>
+    <Popover {...popoverProps} open={isOpenPopover} modal onOpenChange={setIsOpenPopover}>
       <PopoverTrigger {...popoverTriggerProps} asChild={popoverTriggerProps?.asChild ?? true}>
         {popoverTriggerProps?.children ?? (
           <Button
@@ -150,36 +151,50 @@ export const Combobox = ({
         <Command {...commandProps}>
           <CommandInput placeholder='Search' {...commandInputProps} />
 
-          <CommandList {...commandListProps} className={cn('scrollbar', commandListProps?.className)}>
-            <CommandEmpty>No option found.</CommandEmpty>
+          <CommandList {...commandListProps}>
+            <ScrollArea className='max-h-72'>
+              <CommandEmpty>No option found.</CommandEmpty>
 
-            <CommandGroup>
-              {options.map((option) => (
-                <div
-                  key={option.value}
-                  className={cn('flex items-center gap-1', {
-                    'pl-1': Boolean(commandItemPrefix)
-                  })}
-                >
-                  {commandItemPrefix?.(option)}
+              <CommandGroup>
+                {options.map((option) => {
+                  const commandItemChildren = commandItemProps?.children ? (
+                    commandItemProps.children(option)
+                  ) : (
+                    <span>{option.label}</span>
+                  )
 
-                  <CommandItem
-                    value={option.label}
-                    className='grow'
-                    onSelect={() => {
-                      onValueChange(option.value)
-                      setIsOpenPopover(false)
-                    }}
-                    {...commandItemProps}
-                  >
-                    {commandItemProps?.children ? commandItemProps.children(option) : <span>{option.label}</span>}
-                    <Check className={cn('ml-auto size-4', option.value === value ? 'opacity-100' : 'opacity-0')} />
-                  </CommandItem>
-                </div>
-              ))}
+                  if (!commandItemChildren) {
+                    return null
+                  }
 
-              {commandGroupSlot && commandGroupSlot}
-            </CommandGroup>
+                  return (
+                    <div
+                      key={option.value}
+                      className={cn('flex items-center gap-1', {
+                        'pl-1': Boolean(commandItemPrefix)
+                      })}
+                    >
+                      {commandItemPrefix?.(option)}
+
+                      <CommandItem
+                        value={option.label}
+                        className='grow'
+                        onSelect={() => {
+                          onValueChange(option.value)
+                          setIsOpenPopover(false)
+                        }}
+                        {...commandItemProps}
+                      >
+                        {commandItemChildren}
+                        <Check className={cn('ml-auto size-4', option.value === value ? 'opacity-100' : 'opacity-0')} />
+                      </CommandItem>
+                    </div>
+                  )
+                })}
+
+                {commandGroupSlot && commandGroupSlot}
+              </CommandGroup>
+            </ScrollArea>
           </CommandList>
         </Command>
       </PopoverContent>

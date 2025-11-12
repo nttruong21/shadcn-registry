@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 
 // Date picker
 export interface DatePickerProps {
+  id?: string
   value: Date | string | null | undefined
   isCanRemoveValue?: boolean
   className?: string
@@ -18,6 +19,7 @@ export interface DatePickerProps {
 }
 
 export const DatePicker = ({
+  id,
   value,
   isCanRemoveValue = true,
   className,
@@ -38,9 +40,10 @@ export const DatePicker = ({
   // Template
   return (
     <div className={className}>
-      <Popover open={isOpenPopover} onOpenChange={setIsOpenPopover}>
+      <Popover open={isOpenPopover} modal onOpenChange={setIsOpenPopover}>
         <PopoverTrigger asChild>
           <Button
+            id={id}
             variant='outline'
             data-empty={!value}
             aria-expanded={isOpenPopover}

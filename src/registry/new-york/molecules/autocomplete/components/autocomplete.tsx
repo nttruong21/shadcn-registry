@@ -13,6 +13,7 @@ import {
 import type { InputProps } from '@/components/ui/input'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Spinner } from '@/components/ui/spinner'
 import { cn } from '@/utils/ui'
 
@@ -25,6 +26,7 @@ export interface Option {
 export interface AutocompleteProps {
   value: string
   options: Option[]
+  placeholder?: string
   isValueAsLabel?: boolean
   isLoading?: boolean
   commandProps?: CommandProps
@@ -37,6 +39,7 @@ export interface AutocompleteProps {
 export const Autocomplete = ({
   value,
   options,
+  placeholder,
   isValueAsLabel = true,
   isLoading = false,
   commandProps,
@@ -69,7 +72,7 @@ export const Autocomplete = ({
   // Template
   return (
     <div>
-      <Popover open={isOpenPopover} onOpenChange={setIsOpenPopover}>
+      <Popover open={isOpenPopover} modal onOpenChange={setIsOpenPopover}>
         <Command {...commandProps} className={cn('overflow-visible', commandProps?.className)}>
           <PopoverAnchor>
             <div>
@@ -78,6 +81,7 @@ export const Autocomplete = ({
                   <InputGroup>
                     <InputGroupInput
                       value={value}
+                      placeholder={placeholder}
                       onChange={({ target: { value } }) => onValueChange(value)}
                       {...inputProps}
                     />
@@ -101,27 +105,29 @@ export const Autocomplete = ({
                 </div>
               ) : (
                 <CommandList {...commandListProps}>
-                  <CommandEmpty>No option found.</CommandEmpty>
-                  <CommandGroup>
-                    {options.map((option) => {
-                      const optionValue = isValueAsLabel ? option.label : option.value
-                      const isSelected = optionValue === value
+                  <ScrollArea className='max-h-72'>
+                    <CommandEmpty>No option found.</CommandEmpty>
+                    <CommandGroup>
+                      {options.map((option) => {
+                        const optionValue = isValueAsLabel ? option.label : option.value
+                        const isSelected = optionValue === value
 
-                      return (
-                        <CommandItem
-                          key={option.value}
-                          value={option.label}
-                          className='group/selected'
-                          onSelect={() => onValueChange(optionValue)}
-                        >
-                          {option.label}
-                          <Check className={cn('ml-auto size-4', isSelected ? 'visible' : 'invisible')} />
-                        </CommandItem>
-                      )
-                    })}
+                        return (
+                          <CommandItem
+                            key={option.value}
+                            value={option.label}
+                            className='group/selected'
+                            onSelect={() => onValueChange(optionValue)}
+                          >
+                            {option.label}
+                            <Check className={cn('ml-auto size-4', isSelected ? 'visible' : 'invisible')} />
+                          </CommandItem>
+                        )
+                      })}
 
-                    {commandGroupSlot && commandGroupSlot}
-                  </CommandGroup>
+                      {commandGroupSlot && commandGroupSlot}
+                    </CommandGroup>
+                  </ScrollArea>
                 </CommandList>
               )
             ) : null}

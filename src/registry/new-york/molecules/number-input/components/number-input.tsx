@@ -65,9 +65,15 @@ export const NumberInput = ({
 
   // Template
   return (
-    <ButtonGroup className={cn('w-full', className)}>
+    <ButtonGroup
+      className={cn(
+        'aria-invalid:!border-destructive aria-invalid:!ring-destructive/20 w-full dark:aria-invalid:ring-destructive/40',
+        className
+      )}
+    >
       {isDisplayStepper && (
         <Button
+          aria-invalid={props['aria-invalid']}
           aria-label='Decrease value'
           variant='outline'
           size='icon'
@@ -102,6 +108,7 @@ export const NumberInput = ({
           aria-label='Increase value'
           size='icon'
           variant='outline'
+          aria-invalid={props['aria-invalid']}
           onClick={increment}
           disabled={disabled || (value != null && +value >= +max)}
         >

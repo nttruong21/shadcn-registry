@@ -25,7 +25,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
-import { Field, FieldLabel } from '@/components/ui/field'
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { Textarea } from '@/components/ui/textarea'
@@ -80,13 +80,11 @@ export const SmartForm = ({
       <form className='space-y-6' onSubmit={form.handleSubmit(startValidation)}>
         {formData.templates.map((template) => (
           <div key={template.code} className={cn('grid grid-cols-12 gap-x-4 gap-y-6', template.className)}>
-            {/* Form template name */}
-            <h1 className='col-span-full font-bold text-base'>{template.title}</h1>
+            {/* Form template label */}
+            <h1 className='col-span-full font-bold text-base'>{template.label}</h1>
 
             {/* Form template fields */}
             {template.fields.map((field) => {
-              const code = field.code
-
               // Hidden
               if (hiddenFields?.[field.code]) {
                 return null
@@ -94,14 +92,14 @@ export const SmartForm = ({
 
               const type = field.type
               const className = field.className
-              const label = field.title
+              const label = field.label
               // const isRequired = field.config.validation?.['required']
               const isDisabled = disabledFields?.[field.code]
 
               // LABEL
               if (field.type === 'label') {
                 return (
-                  <div key={code} id={`dynamic-form-label-field-${code}`} className={cn('col-span-full', className)}>
+                  <div key={field.code} className={cn('col-span-full', className)}>
                     <span className='font-bold text-base text-muted-foreground'>{label}</span>
                   </div>
                 )
@@ -110,8 +108,8 @@ export const SmartForm = ({
               // SLOT
               if (field.type === 'slot') {
                 return (
-                  <div key={code} className={cn('col-span-full', field.className)}>
-                    {slots?.[code]}
+                  <div key={field.code} className={cn('col-span-full', field.className)}>
+                    {slots?.[field.code]}
                   </div>
                 )
               }
@@ -119,17 +117,28 @@ export const SmartForm = ({
               // Others
               return (
                 <Controller
-                  key={code}
+                  key={field.code}
                   control={form.control}
-                  name={code}
+                  name={field.code}
                   render={({ field: formField, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor={field.title}>Bug Title</FieldLabel>
+                    <Field
+                      data-invalid={fieldState.invalid}
+                      className={cn(
+                        'group/field',
+                        {
+                          'flex-row-reverse': field.type === 'checkbox'
+                        },
+                        field.className
+                      )}
+                      orientation={field.type === 'checkbox' ? 'horizontal' : 'vertical'}
+                    >
+                      <FieldLabel htmlFor={field.code}>{label}</FieldLabel>
 
                       {(type === 'text' && (
                         <Input
                           {...formField}
-                          placeholder={`Enter ${field.title.toLowerCase()}`}
+                          id={field.code}
+                          placeholder={`Enter ${label.toLowerCase()}`}
                           disabled={isDisabled}
                           aria-invalid={fieldState.invalid}
                         />
@@ -137,17 +146,20 @@ export const SmartForm = ({
                         (type === 'textarea' && (
                           <Textarea
                             {...formField}
-                            placeholder={`Enter ${field.title.toLowerCase()}`}
+                            id={field.code}
+                            placeholder={`Enter ${label.toLowerCase()}`}
                             disabled={isDisabled}
                             aria-invalid={fieldState.invalid}
                           />
                         )) ||
                         (type === 'number' && (
                           <NumberInput
-                            {...field.config.numberInputProps}
+                            {...field.config?.numberInputProps}
+                            id={field.code}
                             value={formField.value}
                             disabled={isDisabled}
-                            placeholder={`Enter ${field.title.toLowerCase()}`}
+                            placeholder={`Enter ${label.toLowerCase()}`}
+                            aria-invalid={fieldState.invalid}
                             onFieldChange={formField.onChange}
                             onValueChange={(event) => formField.onChange(event.value)}
                           />
@@ -155,65 +167,101 @@ export const SmartForm = ({
                         (type === 'phone-number' && (
                           <PhoneNumberInput
                             {...formField}
-                            onValueChange={formField.onChange}
-                            placeholder={`Enter ${field.title.toLowerCase()}`}
+                            id={field.code}
+                            placeholder={`Enter ${label.toLowerCase()}`}
                             disabled={isDisabled}
+                            aria-invalid={fieldState.invalid}
+                            onValueChange={formField.onChange}
                           />
                         )) ||
                         (type === 'password' && (
                           <PasswordInput
                             {...formField}
-                            placeholder={`Enter ${field.title.toLowerCase()}`}
+                            id={field.code}
+                            placeholder={`Enter ${label.toLowerCase()}`}
                             disabled={isDisabled}
+                            aria-invalid={fieldState.invalid}
                           />
                         )) ||
                         (type === 'select' && (
                           <Combobox
                             value={formField.value}
-                            options={field.config.options ?? []}
+                            options={field.config?.options ?? []}
+                            placeholder={`Select ${label.toLowerCase()}`}
+                            buttonTriggerProps={{
+                              id: field.code
+                            }}
                             onValueChange={formField.onChange}
                           />
                         )) ||
                         (type === 'select-with-infinite-query' && (
                           <Combobox
                             value={formField.value}
-                            options={field.config.options ?? []}
+                            options={field.config?.options ?? []}
+                            placeholder={`Select ${label.toLowerCase()}`}
+                            buttonTriggerProps={{
+                              id: field.code
+                            }}
                             onValueChange={formField.onChange}
                           />
                         )) ||
                         (type === 'multi-select' && (
                           <MultiSelect
                             value={formField.value}
-                            options={field.config.options ?? []}
+                            options={field.config?.options ?? []}
+                            placeholder={`Select ${label.toLowerCase()}`}
+                            buttonTriggerProps={{
+                              id: field.code
+                            }}
                             onValueChange={formField.onChange}
                           />
                         )) ||
                         (type === 'multi-select-with-infinite-query' && (
                           <MultiSelect
                             value={formField.value}
-                            options={field.config.options ?? []}
+                            options={field.config?.options ?? []}
+                            placeholder={`Select ${label.toLowerCase()}`}
+                            buttonTriggerProps={{
+                              id: field.code
+                            }}
                             onValueChange={formField.onChange}
                           />
                         )) ||
-                        (type === 'select-or-text' && (
+                        (type === 'autocomplete' && (
                           <Autocomplete
                             value={formField.value}
-                            options={field.config.options ?? []}
+                            options={field.config?.options ?? []}
+                            placeholder={`Enter ${label.toLowerCase()}`}
+                            inputProps={{
+                              id: field.code,
+                              'aria-invalid': fieldState.invalid
+                            }}
                             onValueChange={formField.onChange}
                           />
                         )) ||
-                        (type === 'select-or-text-with-infinite-query' && (
+                        (type === 'autocomplete-with-infinite-query' && (
                           <Autocomplete
                             value={formField.value}
-                            options={field.config.options ?? []}
+                            options={field.config?.options ?? []}
+                            placeholder={`Enter ${label.toLowerCase()}`}
+                            inputProps={{
+                              id: field.code,
+                              'aria-invalid': fieldState.invalid
+                            }}
                             onValueChange={formField.onChange}
                           />
                         )) ||
                         (type === 'date' && (
-                          <DatePicker value={formField.value} onValueChange={formField.onChange} />
+                          <DatePicker
+                            id={field.code}
+                            value={formField.value}
+                            placeholder={`Select ${label.toLowerCase()}`}
+                            onValueChange={formField.onChange}
+                          />
                         )) ||
                         (type === 'checkbox' && (
                           <Checkbox
+                            id={field.code}
                             checked={formField.value}
                             disabled={isDisabled}
                             onCheckedChange={formField.onChange}
@@ -223,7 +271,7 @@ export const SmartForm = ({
                         (type === 'file' && (
                           <FileUpload
                             value={formField.value}
-                            dropzoneOptions={field.config.dropzoneOptions}
+                            dropzoneOptions={field.config?.dropzoneOptions}
                             isDisabled={isDisabled}
                             onValueChange={(files) => formField.onChange(files[0])}
                           >
@@ -239,7 +287,7 @@ export const SmartForm = ({
                         (type === 'multi-file' && (
                           <FileUpload
                             value={formField.value}
-                            dropzoneOptions={field.config.dropzoneOptions}
+                            dropzoneOptions={field.config?.dropzoneOptions}
                             isDisabled={isDisabled}
                             onValueChange={formField.onChange}
                           >
@@ -248,8 +296,12 @@ export const SmartForm = ({
                             {formField.value && (
                               <FileUploadContent className='flex-1'>
                                 {(formField.value as FileUploadValue).map((value, index) => (
-                                  // biome-ignore lint/suspicious/noArrayIndexKey: ignore
-                                  <FileUploadItem key={index} index={index} value={value} />
+                                  <FileUploadItem
+                                    // biome-ignore lint/suspicious/noArrayIndexKey: ignore
+                                    key={index}
+                                    index={index}
+                                    value={value}
+                                  />
                                 ))}
                               </FileUploadContent>
                             )}
@@ -257,6 +309,10 @@ export const SmartForm = ({
                         )) ||
                         (type === 'editor' && null) ||
                         'Invalid field.'}
+
+                      {field.description && <FieldDescription>{field.description}</FieldDescription>}
+
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                     </Field>
                   )}
                 />
