@@ -13,7 +13,6 @@ import {
 import type { InputProps } from '@/components/ui/input'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { Spinner } from '@/components/ui/spinner'
 import { cn } from '@/utils/ui'
 
@@ -105,29 +104,27 @@ export const Autocomplete = ({
                 </div>
               ) : (
                 <CommandList {...commandListProps}>
-                  <ScrollArea className='max-h-72'>
-                    <CommandEmpty>No option found.</CommandEmpty>
-                    <CommandGroup>
-                      {options.map((option) => {
-                        const optionValue = isValueAsLabel ? option.label : option.value
-                        const isSelected = optionValue === value
+                  <CommandEmpty>No option found.</CommandEmpty>
+                  <CommandGroup>
+                    {options.map((option) => {
+                      const optionValue = isValueAsLabel ? option.label : option.value
+                      const isSelected = optionValue === value
 
-                        return (
-                          <CommandItem
-                            key={option.value}
-                            value={option.label}
-                            className='group/selected'
-                            onSelect={() => onValueChange(optionValue)}
-                          >
-                            {option.label}
-                            <Check className={cn('ml-auto size-4', isSelected ? 'visible' : 'invisible')} />
-                          </CommandItem>
-                        )
-                      })}
+                      return (
+                        <CommandItem
+                          key={option.value}
+                          value={option.label}
+                          className='group/selected'
+                          onSelect={() => onValueChange(optionValue)}
+                        >
+                          {option.label}
+                          <Check className={cn('ml-auto size-4', isSelected ? 'visible' : 'invisible')} />
+                        </CommandItem>
+                      )
+                    })}
 
-                      {commandGroupSlot && commandGroupSlot}
-                    </CommandGroup>
-                  </ScrollArea>
+                    {commandGroupSlot && commandGroupSlot}
+                  </CommandGroup>
                 </CommandList>
               )
             ) : null}

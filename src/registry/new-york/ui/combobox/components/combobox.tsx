@@ -21,7 +21,6 @@ import {
   PopoverTrigger,
   type PopoverTriggerProps
 } from '@/components/ui/popover'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/utils/ui'
 
 // Combobox
@@ -150,51 +149,47 @@ export const Combobox = ({
       >
         <Command {...commandProps}>
           <CommandInput placeholder='Search' {...commandInputProps} />
-
           <CommandList {...commandListProps}>
-            <ScrollArea className='max-h-72'>
-              <CommandEmpty>No option found.</CommandEmpty>
+            <CommandEmpty>No option found.</CommandEmpty>
+            <CommandGroup>
+              {options.map((option) => {
+                const commandItemChildren = commandItemProps?.children ? (
+                  commandItemProps.children(option)
+                ) : (
+                  <span>{option.label}</span>
+                )
 
-              <CommandGroup>
-                {options.map((option) => {
-                  const commandItemChildren = commandItemProps?.children ? (
-                    commandItemProps.children(option)
-                  ) : (
-                    <span>{option.label}</span>
-                  )
+                if (!commandItemChildren) {
+                  return null
+                }
 
-                  if (!commandItemChildren) {
-                    return null
-                  }
+                return (
+                  <div
+                    key={option.value}
+                    className={cn('flex items-center gap-1', {
+                      'pl-1': Boolean(commandItemPrefix)
+                    })}
+                  >
+                    {commandItemPrefix?.(option)}
 
-                  return (
-                    <div
-                      key={option.value}
-                      className={cn('flex items-center gap-1', {
-                        'pl-1': Boolean(commandItemPrefix)
-                      })}
+                    <CommandItem
+                      value={option.label}
+                      className='grow'
+                      onSelect={() => {
+                        onValueChange(option.value)
+                        setIsOpenPopover(false)
+                      }}
+                      {...commandItemProps}
                     >
-                      {commandItemPrefix?.(option)}
+                      {commandItemChildren}
+                      <Check className={cn('ml-auto size-4', option.value === value ? 'opacity-100' : 'opacity-0')} />
+                    </CommandItem>
+                  </div>
+                )
+              })}
 
-                      <CommandItem
-                        value={option.label}
-                        className='grow'
-                        onSelect={() => {
-                          onValueChange(option.value)
-                          setIsOpenPopover(false)
-                        }}
-                        {...commandItemProps}
-                      >
-                        {commandItemChildren}
-                        <Check className={cn('ml-auto size-4', option.value === value ? 'opacity-100' : 'opacity-0')} />
-                      </CommandItem>
-                    </div>
-                  )
-                })}
-
-                {commandGroupSlot && commandGroupSlot}
-              </CommandGroup>
-            </ScrollArea>
+              {commandGroupSlot && commandGroupSlot}
+            </CommandGroup>
           </CommandList>
         </Command>
       </PopoverContent>

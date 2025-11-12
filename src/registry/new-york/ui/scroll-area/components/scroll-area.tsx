@@ -3,11 +3,8 @@ import type * as React from 'react'
 import { cn } from '@/utils/ui'
 
 // Scroll area
-export const ScrollArea = ({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) => {
+export type ScrollAreaProps = React.ComponentProps<typeof ScrollAreaPrimitive.Root>
+export const ScrollArea = ({ className, children, ...props }: ScrollAreaProps) => {
   // Template
   return (
     <ScrollAreaPrimitive.Root data-slot='scroll-area' className={cn('relative', className)} {...props}>

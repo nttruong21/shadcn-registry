@@ -270,18 +270,16 @@ export const SmartForm = ({
                         (type === 'radio' && null) ||
                         (type === 'file' && (
                           <FileUpload
-                            value={formField.value}
+                            value={formField.value ? [formField.value] : []}
                             dropzoneOptions={field.config?.dropzoneOptions}
                             isDisabled={isDisabled}
                             onValueChange={(files) => formField.onChange(files[0])}
                           >
-                            <FileUploadInput />
+                            <FileUploadInput id={field.code} aria-invalid={fieldState.invalid} />
 
-                            {formField.value && (
-                              <FileUploadContent className='flex-1'>
-                                <FileUploadItem value={formField.value} index={0} />
-                              </FileUploadContent>
-                            )}
+                            <FileUploadContent>
+                              {formField.value && <FileUploadItem value={formField.value} index={0} />}
+                            </FileUploadContent>
                           </FileUpload>
                         )) ||
                         (type === 'multi-file' && (
@@ -291,20 +289,18 @@ export const SmartForm = ({
                             isDisabled={isDisabled}
                             onValueChange={formField.onChange}
                           >
-                            <FileUploadInput />
+                            <FileUploadInput id={field.code} aria-invalid={fieldState.invalid} />
 
-                            {formField.value && (
-                              <FileUploadContent className='flex-1'>
-                                {(formField.value as FileUploadValue).map((value, index) => (
-                                  <FileUploadItem
-                                    // biome-ignore lint/suspicious/noArrayIndexKey: ignore
-                                    key={index}
-                                    index={index}
-                                    value={value}
-                                  />
-                                ))}
-                              </FileUploadContent>
-                            )}
+                            <FileUploadContent>
+                              {(formField.value as FileUploadValue).map((value, index) => (
+                                <FileUploadItem
+                                  // biome-ignore lint/suspicious/noArrayIndexKey: ignore
+                                  key={index}
+                                  index={index}
+                                  value={value}
+                                />
+                              ))}
+                            </FileUploadContent>
                           </FileUpload>
                         )) ||
                         (type === 'editor' && null) ||

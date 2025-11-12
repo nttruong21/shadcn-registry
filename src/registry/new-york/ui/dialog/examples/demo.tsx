@@ -6,6 +6,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogScrollableContent,
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
@@ -22,22 +23,24 @@ export const DialogDemo = () => {
           <Button variant='outline'>Open Dialog</Button>
         </DialogTrigger>
 
-        <DialogContent className='max-h-[calc(100dvh_-_2rem)] sm:max-w-xl'>
+        <DialogContent className='sm:max-w-xl'>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>Make changes to your profile here. Click save when you&apos;re done.</DialogDescription>
           </DialogHeader>
 
-          <div className='grid gap-4'>
-            <div className='grid gap-3'>
-              <Label htmlFor='name-1'>Name</Label>
-              <Input id='name-1' name='name' defaultValue='Pedro Duarte' />
+          <DialogScrollableContent>
+            <div className='grid gap-4'>
+              <div className='grid gap-3'>
+                <Label htmlFor='name-1'>Name</Label>
+                <Input id='name-1' name='name' defaultValue='Pedro Duarte' />
+              </div>
+              <div className='grid gap-3'>
+                <Label htmlFor='username-1'>Username</Label>
+                <Input id='username-1' name='username' defaultValue='@peduarte' />
+              </div>
             </div>
-            <div className='grid gap-3'>
-              <Label htmlFor='username-1'>Username</Label>
-              <Input id='username-1' name='username' defaultValue='@peduarte' />
-            </div>
-          </div>
+          </DialogScrollableContent>
 
           <DialogFooter>
             <DialogClose asChild>

@@ -77,6 +77,11 @@ export interface SmartFormData {
             message: string
           }
         >
+        referenceFields?: Array<{
+          code: string
+          key: string
+          message: string
+        }>
         // Number
         numberInputProps?: NumberInputProps
         // Date
@@ -133,7 +138,7 @@ export const DEFAULT_VALUE_PER_FIELD_TYPE: Record<SmartFormFieldType, string | n
   text: '', // string
   textarea: '', // string
   'phone-number': '', // string
-  number: 0, // number
+  number: '', // string | number
   password: '', // string
   select: null, // string | null
   'select-with-infinite-query': null, // string | null
@@ -172,9 +177,16 @@ export const getDefaultFormValue = (formData: SmartFormData, slots?: FieldValues
 export const getFormSchema = (formData: SmartFormData, schemaOptions?: SchemaOptions) => {
   const shape: Record<string, ZodType> = {}
 
+  const passwordConfirmationFields: Array<{
+    code: string
+    referenceFields: NonNullable<
+      NonNullable<SmartFormData['templates'][number]['fields'][number]['config']>['referenceFields']
+    >
+  }> = []
+
   formData.templates.forEach((template) => {
     template.fields.forEach((field) => {
-      const { code, type, config: { validation, isPasswordConfirmation } = {} } = field
+      const { code, type, config: { validation, isPasswordConfirmation, referenceFields } = {} } = field
 
       // Hidden fields
       if (schemaOptions?.hiddenFields?.[code]) return
@@ -250,6 +262,13 @@ export const getFormSchema = (formData: SmartFormData, schemaOptions?: SchemaOpt
           let fieldSchema: ZodString | ZodPipe<ZodType> = z.string().trim()
 
           if (isPasswordConfirmation) {
+            if (referenceFields && referenceFields.length > 0) {
+              passwordConfirmationFields.push({
+                code,
+                referenceFields
+              })
+            }
+
             shape[code] = fieldSchema
             break
           }
@@ -436,8 +455,26 @@ export const getFormSchema = (formData: SmartFormData, schemaOptions?: SchemaOpt
   })
 
   let schema = z.object(shape)
+
+  if (passwordConfirmationFields.length > 0) {
+    schema = schema.superRefine((arg, ctx) => {
+      passwordConfirmationFields.forEach((passwordConfirmationField) => {
+        const { code, referenceFields } = passwordConfirmationField
+        const referenceField = referenceFields[0]
+        if (arg[code] !== arg[referenceField.code]) {
+          ctx.addIssue({
+            code: 'custom',
+            message: referenceField.message,
+            path: [code]
+          })
+        }
+      })
+    })
+  }
+
   if (schemaOptions?.refinement) {
     schema = schema.superRefine(schemaOptions.refinement)
   }
+
   return schema
 }

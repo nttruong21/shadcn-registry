@@ -19,24 +19,7 @@ import { getDefaultFormValue, getFormSchema, SmartForm, type SmartFormData } fro
 ```
 
 ```tsx
-const FORM_DATA: SmartFormData = {
-  code: 'demo',
-  templates: [
-    {
-      code: 'template-1',
-      title: 'Template 1',
-      description: 'Template 1',
-      fields: [
-        {
-          code: 'full-name',
-          type: 'text',
-          title: 'Full name',
-          description: 'Full name'
-        }
-      ]
-    }
-  ]
-}
+const FORM_DATA: SmartFormData = {}
 
 const FORM_SCHEMA = getFormSchema(FORM_DATA)
 

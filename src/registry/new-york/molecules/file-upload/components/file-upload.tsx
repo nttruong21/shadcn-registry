@@ -4,6 +4,7 @@ import { type DropzoneOptions, type DropzoneState, type FileRejection, useDropzo
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import type { ScrollAreaProps } from '@/components/ui/scroll-area'
 import { cn } from '@/utils/ui'
 
 // File upload
@@ -85,15 +86,12 @@ export const FileUpload = ({
           }
         })
 
-        console.log({ acceptedFiles, rejectedFiles })
-
         onValueChange(newValues)
 
         if (rejectedFiles.length > 0) {
           if (
             rejectedFiles.some((rejectedFile) => rejectedFile.errors.some((error) => error.code === 'too-many-files'))
           ) {
-            console.log('go here ...')
             toast.warning('The number of files exceeds the allowed number', {
               description: `Only ${maxFiles} files are allowed to be uploaded`
             })
@@ -150,7 +148,7 @@ export const FileUpload = ({
 // File upload input
 export type FileUploadInputProps = React.HTMLAttributes<HTMLDivElement>
 
-export const FileUploadInput = ({ className, children, ...restProps }: FileUploadInputProps) => {
+export const FileUploadInput = ({ id, className, children, ...restProps }: FileUploadInputProps) => {
   // Hooks
   const { dropzoneState, isDisabled } = useFileUploadContext()
   const dropzoneRootProps = isDisabled ? {} : dropzoneState.getRootProps()
@@ -158,47 +156,35 @@ export const FileUploadInput = ({ className, children, ...restProps }: FileUploa
   // Template
   return (
     <div
-      {...restProps}
       className={cn(
-        'relative w-full rounded hover:bg-accent/40',
-        isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-default'
+        'relative w-full rounded-md border bg-transparent text-sm hover:bg-accent/40 aria-invalid:border-destructive dark:bg-input/30',
+        isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-default',
+        className
       )}
+      {...dropzoneRootProps}
+      {...restProps}
     >
-      <div
-        className={cn(`w-full rounded-lg border border-dashed hover:border-solid`, className)}
-        {...dropzoneRootProps}
-      >
-        {children ?? (
-          <div className='flex w-full flex-col items-center justify-center gap-4 p-4 text-muted-foreground'>
-            <CloudUpload className='size-10' />
-            <span className='text-center'>Drag and drop a file here or select a file</span>
-          </div>
-        )}
-      </div>
+      {children ?? (
+        <div className='flex w-full flex-col items-center justify-center gap-4 p-4 text-muted-foreground'>
+          <CloudUpload className='size-10' />
+          <span className='text-center'>Drag and drop a file here or select a file</span>
+        </div>
+      )}
 
-      <Input
-        ref={dropzoneState.inputRef}
-        disabled={isDisabled}
-        {...dropzoneState.getInputProps()}
-        className={cn(isDisabled ? 'cursor-not-allowed' : '')}
-      />
+      <Input ref={dropzoneState.inputRef} id={id} disabled={isDisabled} {...dropzoneState.getInputProps()} />
     </div>
   )
 }
 
 // File upload content
-export type FileUploadContentProps = React.HTMLAttributes<HTMLDivElement>
-
+export type FileUploadContentProps = ScrollAreaProps
 export const FileUploadContent = ({ className, children, ...props }: FileUploadContentProps) => {
-  // Hooks
-  const { value } = useFileUploadContext()
-
   // Template
-  return value.length ? (
-    <div className={cn('max-h-80 space-y-2 overflow-auto', className)} {...props}>
-      {children}
+  return (
+    <div className={cn('max-h-80 overflow-auto', className)} {...props}>
+      <div className='space-y-2'>{children}</div>
     </div>
-  ) : null
+  )
 }
 
 // File uploader item
@@ -236,7 +222,7 @@ export const FileUploadItem = ({ value, index, className, children }: FileUpload
       {children ?? (
         <div className='flex items-center gap-2 overflow-hidden'>
           <div className='flex size-10 shrink-0 items-center justify-center rounded-full border'>
-            <FileIcon className='size-6' />
+            <FileIcon className='size-4' />
           </div>
 
           <div className='space-y-2'>

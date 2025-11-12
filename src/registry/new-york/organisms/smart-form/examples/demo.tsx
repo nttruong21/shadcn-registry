@@ -7,61 +7,80 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogScrollableContent,
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
 
 const FORM_DATA: SmartFormData = {
-  code: 'demo',
+  code: 'user',
   templates: [
     {
-      code: 'template-1',
-      label: 'Template 1',
+      code: 'personal',
+      label: 'Personal',
       fields: [
         {
-          code: 'text',
+          code: 'fullName',
           type: 'text',
-          label: 'Text',
+          label: 'Full name',
           className: 'xl:col-span-4',
           config: {
             validation: {
               required: {
                 value: true,
-                message: 'Please enter the text'
+                message: 'Please enter the full name'
               }
             }
           }
         },
         {
-          code: 'textarea',
-          type: 'textarea',
-          label: 'Textarea',
-          className: 'xl:col-span-4',
-          config: {
-            validation: {
-              required: {
-                value: true,
-                message: 'Please enter the textarea'
-              }
-            }
-          }
-        },
-        {
-          code: 'number',
+          code: 'age',
           type: 'number',
-          label: 'Number',
+          label: 'Age',
           className: 'xl:col-span-4',
           config: {
             validation: {
               required: {
                 value: true,
-                message: 'Please enter the number'
+                message: 'Please enter the age'
               }
             }
           }
         },
         {
-          code: 'phone-number',
+          code: 'birthdate',
+          type: 'date',
+          label: 'Birthdate',
+          className: 'xl:col-span-4',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please select the birthdate'
+              }
+            }
+          }
+        },
+        {
+          code: 'gender',
+          type: 'select',
+          label: 'Gender',
+          className: 'xl:col-span-4',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please select the gender'
+              }
+            },
+            options: [
+              { value: 'male', label: 'Male' },
+              { value: 'female', label: 'Female' }
+            ]
+          }
+        },
+        {
+          code: 'phoneNumber',
           type: 'phone-number',
           label: 'Phone number',
           className: 'xl:col-span-4',
@@ -74,6 +93,183 @@ const FORM_DATA: SmartFormData = {
               phone: {
                 value: true,
                 message: 'Phone number is invalid'
+              }
+            }
+          }
+        },
+        {
+          code: 'email',
+          type: 'text',
+          label: 'Email',
+          className: 'xl:col-span-4',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please enter the email'
+              },
+              email: {
+                value: true,
+                message: 'Email is invalid'
+              }
+            }
+          }
+        },
+        {
+          code: 'description',
+          type: 'textarea',
+          label: 'Description',
+          className: 'xl:col-span-full',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please enter the description'
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      code: 'professionalSkills',
+      label: 'Professional skills',
+      fields: [
+        {
+          code: 'department',
+          type: 'select',
+          label: 'Department',
+          className: 'xl:col-span-4',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please select the department'
+              }
+            },
+            options: [
+              {
+                value: 'front-end',
+                label: 'Front-end'
+              },
+              {
+                value: 'back-end',
+                label: 'Back-end'
+              },
+              {
+                value: 'ba',
+                label: 'BA'
+              },
+              {
+                value: 'qa-qc',
+                label: 'QA-QC'
+              }
+            ]
+          }
+        },
+        {
+          code: 'technologies',
+          type: 'multi-select',
+          label: 'Technologies',
+          className: 'xl:col-span-4',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please select the technologies'
+              }
+            },
+            options: [
+              {
+                value: 'next.js',
+                label: 'Next.js'
+              },
+              {
+                value: 'sveltekit',
+                label: 'SvelteKit'
+              },
+              {
+                value: 'nuxt.js',
+                label: 'Nuxt.js'
+              },
+              {
+                value: 'remix',
+                label: 'Remix'
+              },
+              {
+                value: 'astro',
+                label: 'Astro'
+              }
+            ]
+          }
+        },
+        {
+          code: 'graduatedUniversity',
+          type: 'autocomplete',
+          label: 'Graduated university',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please enter the graduated university'
+              }
+            },
+            options: [
+              {
+                value: 'TDTU',
+                label: 'Ton Duc Thang University'
+              },
+              {
+                value: 'VLU',
+                label: 'Van Lang University'
+              },
+              {
+                value: 'UIT',
+                label: 'University of information technology'
+              }
+            ]
+          },
+          className: 'xl:col-span-4'
+        },
+        {
+          code: 'resumes',
+          type: 'multi-file',
+          label: 'Resumes',
+          className: 'xl:col-span-full',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please select the file'
+              }
+            },
+            dropzoneOptions: {
+              maxFiles: 10
+            }
+          }
+        },
+        {
+          code: 'deep-knowledge',
+          type: 'checkbox',
+          label: 'Is has deep knowledge about these techs',
+          className: 'xl:col-span-full'
+        }
+      ]
+    },
+    {
+      code: 'account',
+      label: 'Account',
+      fields: [
+        {
+          code: 'username',
+          type: 'text',
+          label: 'Username',
+          className: 'xl:col-span-4',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please enter the username'
               }
             }
           }
@@ -93,139 +289,25 @@ const FORM_DATA: SmartFormData = {
           }
         },
         {
-          code: 'select',
-          type: 'select',
-          label: 'Select',
+          code: 'password-confirmation',
+          type: 'password',
+          label: 'Password confirmation',
           className: 'xl:col-span-4',
           config: {
             validation: {
               required: {
                 value: true,
-                message: 'Please enter the select'
+                message: 'Please enter the password confirmation'
               }
             },
-            options: [
+            referenceFields: [
               {
-                value: 'next.js',
-                label: 'Next.js'
-              },
-              {
-                value: 'sveltekit',
-                label: 'SvelteKit'
-              },
-              {
-                value: 'nuxt.js',
-                label: 'Nuxt.js'
-              },
-              {
-                value: 'remix',
-                label: 'Remix'
-              },
-              {
-                value: 'astro',
-                label: 'Astro'
+                code: 'password',
+                key: 'password-confirmation',
+                message: 'Password confirmation does not match with the password'
               }
-            ]
-          }
-        },
-        {
-          code: 'multi-select',
-          type: 'multi-select',
-          label: 'Multi select',
-          className: 'xl:col-span-4',
-          config: {
-            validation: {
-              required: {
-                value: true,
-                message: 'Please enter the multi select'
-              }
-            },
-            options: [
-              {
-                value: 'next.js',
-                label: 'Next.js'
-              },
-              {
-                value: 'sveltekit',
-                label: 'SvelteKit'
-              },
-              {
-                value: 'nuxt.js',
-                label: 'Nuxt.js'
-              },
-              {
-                value: 'remix',
-                label: 'Remix'
-              },
-              {
-                value: 'astro',
-                label: 'Astro'
-              }
-            ]
-          }
-        },
-        {
-          code: 'autocomplete',
-          type: 'autocomplete',
-          label: 'Autocomplete',
-          className: 'xl:col-span-4',
-          config: {
-            validation: {
-              required: {
-                value: true,
-                message: 'Please enter the autocomplete'
-              }
-            },
-            options: [
-              {
-                value: 'next.js',
-                label: 'Next.js'
-              },
-              {
-                value: 'sveltekit',
-                label: 'SvelteKit'
-              },
-              {
-                value: 'nuxt.js',
-                label: 'Nuxt.js'
-              },
-              {
-                value: 'remix',
-                label: 'Remix'
-              },
-              {
-                value: 'astro',
-                label: 'Astro'
-              }
-            ]
-          }
-        },
-        {
-          code: 'date',
-          type: 'date',
-          label: 'Date',
-          className: 'xl:col-span-4',
-          config: {
-            validation: {
-              required: {
-                value: true,
-                message: 'Please select the date'
-              }
-            }
-          }
-        },
-        {
-          code: 'checkbox',
-          type: 'checkbox',
-          label: 'Checkbox',
-          className: 'xl:col-span-4',
-          config: {
-            validation: {
-              required: {
-                value: true,
-                message: 'Please select the checkbox'
-              }
-            }
+            ],
+            isPasswordConfirmation: true
           }
         }
       ]
@@ -258,7 +340,10 @@ export const SmartFormDemo = () => {
           <DialogTitle>Smart form</DialogTitle>
           <DialogDescription>Smart form demo</DialogDescription>
         </DialogHeader>
-        <SmartForm form={form} formData={FORM_DATA} />
+
+        <DialogScrollableContent>
+          <SmartForm form={form} formData={FORM_DATA} />
+        </DialogScrollableContent>
       </DialogContent>
     </Dialog>
   )
