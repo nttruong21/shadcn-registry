@@ -12,6 +12,7 @@ import { MultiSelect } from '@/components/molecules/multi-select'
 import { NumberInput } from '@/components/molecules/number-input'
 import { PasswordInput } from '@/components/molecules/password-input'
 import { PhoneNumberInput } from '@/components/molecules/phone-number-input'
+import { Editor } from '@/components/organisms/editor'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Combobox } from '@/components/ui/combobox'
@@ -303,7 +304,9 @@ export const SmartForm = ({
                             </FileUploadContent>
                           </FileUpload>
                         )) ||
-                        (type === 'editor' && null) ||
+                        (type === 'editor' && (
+                          <Editor value={formField.value} editable={!isDisabled} onValueChange={formField.onChange} />
+                        )) ||
                         'Invalid field.'}
 
                       {field.description && <FieldDescription>{field.description}</FieldDescription>}

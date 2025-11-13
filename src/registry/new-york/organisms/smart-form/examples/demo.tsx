@@ -323,8 +323,8 @@ const DEFAULT_FORM_VALUE = getDefaultFormValue(FORM_DATA)
 export const SmartFormDemo = () => {
   // Hooks
   const form = useForm({
-    // biome-ignore lint/suspicious/noExplicitAny: ignore
-    resolver: zodResolver(FORM_SCHEMA as any),
+    // @ts-expect-error - type mismatch from zod
+    resolver: zodResolver(FORM_SCHEMA),
     defaultValues: DEFAULT_FORM_VALUE
   })
 

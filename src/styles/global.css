@@ -190,3 +190,128 @@
     @apply !no-underline;
   }
 }
+
+@layer components {
+  .tiptap {
+    @apply border-gray-200;
+
+    h1 {
+     @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+    }
+
+    h2 {
+       @apply scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0;
+    }
+
+    h3 {
+      @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+    }
+
+    h4 {
+       @apply scroll-m-20 text-xl font-semibold tracking-tight;
+    }
+
+    mark {
+      @apply rounded-md p-1;
+    }
+
+    a {
+      @apply cursor-pointer text-blue-600 underline-offset-4 hover:underline;
+    }
+
+    blockquote {
+      @apply mx-2 border-l-4 pl-2;
+    }
+
+    ul,
+    ol {
+      @apply my-1 ms-4 me-0.5 py-1;
+      li p {
+        @apply mt-0.5 mb-0.5;
+      }
+    }
+
+    ul {
+      @apply list-disc;
+    }
+    ol {
+      @apply list-decimal;
+    }
+
+    ul[data-type='taskList'] {
+      @apply ml-0 list-none p-0;
+
+      li {
+        @apply flex items-start gap-2;
+
+        > label {
+          @apply pt-0.5 select-none;
+        }
+
+        > div {
+          @apply flex-1;
+        }
+
+        p {
+          @apply m-0;
+        }
+
+        &[data-checked='true'] {
+          p {
+            @apply line-through opacity-40;
+          }
+        }
+      }
+
+      input[type='checkbox'] {
+        @apply cursor-pointer;
+      }
+
+      ul[data-type='taskList'] {
+        @apply m-0;
+      }
+    }
+
+    table {
+      @apply m-0 w-full table-fixed border-collapse overflow-hidden;
+
+      th,
+      td {
+        @apply relative box-border min-w-1 border p-4 align-top font-normal;
+      }
+
+      th {
+        @apply whitespace-nowrap text-left;
+      }
+
+      .selectedCell:after {
+        @apply pointer-events-none absolute top-0 right-0 bottom-0 left-0 bg-gray-200/40 content-[''];
+      }
+
+      .column-resize-handle {
+        @apply bg-secondary pointer-events-none absolute top-0 -right-0.5 -bottom-0.5 w-1;
+      }
+    }
+
+    .tableWrapper {
+      @apply m-0 overflow-x-auto;
+    }
+
+    &.resize-cursor {
+      @apply cursor-col-resize;
+    }
+
+    /* Placeholder */
+    p.is-editor-empty:first-child::before {
+      @apply text-muted-foreground pointer-events-none content-[attr(data-placeholder)];
+    }
+
+    /* Image */
+    img {
+      @apply rounded-md;
+      &.ProseMirror-selectednode {
+        @apply outline-2 outline-offset-2;
+      }
+    }
+  }
+}

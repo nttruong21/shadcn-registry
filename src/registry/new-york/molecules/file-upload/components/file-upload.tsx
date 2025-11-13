@@ -6,22 +6,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import type { ScrollAreaProps } from '@/components/ui/scroll-area'
 import { cn } from '@/utils/ui'
+import { getSizeText, type UploadedFile } from './lib'
 
 // File upload
-export interface UploadedFile {
-  id: string
-  path: string
-  original: string
-  mime: string
-  compress_info: Record<
-    string,
-    {
-      ext: string
-      size: number
-    }
-  >
-}
-
 export type FileUploadValue = Array<File | UploadedFile>
 
 export type FileUploadProps = {
@@ -191,10 +178,6 @@ export const FileUploadContent = ({ className, children, ...props }: FileUploadC
 export type FileUploaderItemProps = React.HTMLAttributes<HTMLDivElement> & {
   value: FileUploadValue[number]
   index: number
-}
-
-export const getSizeText = (size: number) => {
-  return size < 1024 * 1024 ? `${(size / 1024).toFixed(2)}Kb` : `${(size / 1024 / 1024).toFixed(2)}MB`
 }
 
 export const FileUploadItem = ({ value, index, className, children }: FileUploaderItemProps) => {

@@ -16,6 +16,6 @@ const [type, name, example] = path.split('/')
 const componentFileContent = readFileSync(`src/registry/new-york/${type}/${name}/examples/${example}.tsx`, 'utf-8')
 ---
 
-<CodePreviewModule client:load path={path} className={className}>
+<CodePreviewModule client:load  path={path} className={className}>
   <Code code={componentFileContent} lang='tsx' />
 </CodePreviewModule>

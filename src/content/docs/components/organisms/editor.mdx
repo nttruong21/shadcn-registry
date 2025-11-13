@@ -1,0 +1,26 @@
+---
+title: Editor
+description: Rich text editor built with Tiptap providing essential formatting tools and markdown support.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='organisms/editor/demo' />
+
+## Installation
+
+<InstallationCard registryName='editor' />
+
+## Usage
+```tsx
+import { Editor } from '@/components/organisms/editor'
+```
+
+```tsx
+// States
+const [value, setValue] = React.useState<Content>('')
+
+<Editor value={value} onValueChange={setValue} />
+```
