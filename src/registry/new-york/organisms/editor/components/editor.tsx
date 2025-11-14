@@ -109,7 +109,7 @@ export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
             containerClassName
           )}
         >
-          <div className='rounded-md border border-input ring-offset-background placeholder:text-muted-foreground has-[.ProseMirror-focused]:ring-2 has-[.ProseMirror-focused]:ring-ring has-[.ProseMirror-focused]:ring-offset-2'>
+          <div className='text rounded-md border border-input text-foreground ring-offset-background transition-[color,box-shadow] placeholder:text-muted-foreground has-[.ProseMirror-focused]:border-ring has-[.ProseMirror-focused]:ring-[3px] has-[.ProseMirror-focused]:ring-ring/50 group-data-[invalid=true]/field:border-destructive group-data-[invalid=true]/field:ring-destructive/20 group-data-[invalid=true]/field:has-[.ProseMirror-focused]:border-destructive group-data-[invalid=true]/field:dark:ring-destructive/40'>
             <FixedToolbar />
             <EditorContent
               editor={editor}

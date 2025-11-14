@@ -311,6 +311,26 @@ const FORM_DATA: SmartFormData = {
           }
         }
       ]
+    },
+    {
+      code: 'others',
+      label: 'Others',
+      fields: [
+        {
+          code: 'hobby',
+          type: 'editor',
+          label: 'Hobby',
+          className: 'xl:col-span-full',
+          config: {
+            validation: {
+              required: {
+                value: true,
+                message: 'Please enter the hobby'
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }
@@ -337,8 +357,8 @@ export const SmartFormDemo = () => {
 
       <DialogContent className='w-7xl'>
         <DialogHeader>
-          <DialogTitle>Smart form</DialogTitle>
-          <DialogDescription>Smart form demo</DialogDescription>
+          <DialogTitle>Sign up form</DialogTitle>
+          <DialogDescription>Fill information below to create the account</DialogDescription>
         </DialogHeader>
 
         <DialogScrollableContent>
