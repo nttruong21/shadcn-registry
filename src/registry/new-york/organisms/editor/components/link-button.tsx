@@ -206,7 +206,7 @@ const LinkButton = React.memo(() => {
               )}
             />
 
-            <div className='flex items-center justify-end gap-1'>
+            <div className='flex items-center justify-end gap-2'>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button size='icon' variant='outline' disabled={!linkFormUrl} onClick={openLinkInNewTab}>

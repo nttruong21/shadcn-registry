@@ -40,10 +40,16 @@ export const useColorPicker = () => {
 export type ColorPickerProps = React.HTMLAttributes<HTMLDivElement> & {
   value?: Parameters<typeof Color>[0]
   defaultValue?: Parameters<typeof Color>[0]
-  onChange?: (value: Parameters<typeof Color.rgb>[0]) => void
+  onValueChange?: (value: ColorInstance) => void
 }
 
-export const ColorPicker = ({ value, defaultValue = '#000000', onChange, className, ...props }: ColorPickerProps) => {
+export const ColorPicker = ({
+  value,
+  defaultValue = '#FFFFFF',
+  onValueChange,
+  className,
+  ...props
+}: ColorPickerProps) => {
   const selectedColor = Color(value)
   const defaultColor = Color(defaultValue)
 
@@ -68,12 +74,11 @@ export const ColorPicker = ({ value, defaultValue = '#000000', onChange, classNa
 
   // Notify parent of changes
   React.useEffect(() => {
-    if (onChange) {
+    if (onValueChange) {
       const color = Color.hsl(hue, saturation, lightness).alpha(alpha / 100)
-      const rgba = color.rgb().array()
-      onChange([rgba[0], rgba[1], rgba[2], alpha / 100])
+      onValueChange(color)
     }
-  }, [hue, saturation, lightness, alpha, onChange])
+  }, [hue, saturation, lightness, alpha, onValueChange])
 
   // Template
   return (
@@ -258,14 +263,7 @@ export const ColorPickerEyeDropper = ({ className, ...props }: ColorPickerEyeDro
 
   // Template
   return (
-    <Button
-      className={cn('shrink-0 text-muted-foreground', className)}
-      onClick={dropColor}
-      size='icon'
-      variant='outline'
-      type='button'
-      {...props}
-    >
+    <Button onClick={dropColor} size='icon' variant='outline' {...props}>
       <PipetteIcon size={16} />
     </Button>
   )
@@ -307,7 +305,7 @@ const getColorOutput = ({ color, format }: { color: ColorInstance; format: Forma
           if (index === 3) {
             return value
           }
-          return `${Math.round(value)}%`
+          return `${Math.round(value)}`
         })
         .join(', ')})`
     case 'hsl':

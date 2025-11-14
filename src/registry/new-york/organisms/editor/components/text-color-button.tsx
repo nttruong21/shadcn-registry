@@ -1,13 +1,15 @@
 import { useCurrentEditor } from '@tiptap/react'
+import type { ColorInstance } from 'color'
 import { Baseline, Check, ChevronDown, CircleSlash } from 'lucide-react'
 import { memo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import ColorPickerButton from './color-picker-button'
 
 // [C] Colors
 const COLORS: string[] = [
-  'oklch(0.27 0.01 34);',
+  'oklch(0.27 0.01 34)',
   'oklch(0.27 0.01 286)',
   'oklch(0.28 0.04 260)',
   'oklch(0.44 0.16 27)',
@@ -41,6 +43,11 @@ const TextColorButton = memo(() => {
   const setColor = (color: string) => {
     setSelectedColor(color)
     editor?.chain().focus().setColor(color).run()
+  }
+
+  const changeColorFromPicker = (color: ColorInstance) => {
+    setSelectedColor(null)
+    editor?.chain().setColor(color.hex()).run()
   }
 
   const clearColor = () => {
@@ -78,8 +85,10 @@ const TextColorButton = memo(() => {
               {selectedColor === color && <Check className='text-background' />}
             </Button>
           ))}
+        </div>
 
-          {/* <ColorPickerButton onSubmit={handleSetColor} /> */}
+        <div className='flex justify-end gap-2'>
+          <ColorPickerButton onValueChange={changeColorFromPicker} />
 
           <Tooltip>
             <TooltipTrigger asChild>
