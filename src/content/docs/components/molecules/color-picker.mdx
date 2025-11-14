@@ -1,0 +1,45 @@
+---
+title: Color picker
+description: A component to pick the color.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='molecules/color-picker/demo' />
+
+## Installation
+
+<InstallationCard registryName='color-picker' />
+
+## Usage
+
+```tsx
+import {
+  ColorPicker,
+  ColorPickerAlpha,
+  ColorPickerEyeDropper,
+  ColorPickerFormat,
+  ColorPickerHue,
+  ColorPickerOutput,
+  ColorPickerSelection
+} from '@/components/molecules/color-picker'
+```
+
+```tsx
+<ColorPicker className='w-sm rounded-md border bg-background p-4 shadow-sm'>
+  <ColorPickerSelection />
+  <div className='flex items-center gap-4'>
+    <ColorPickerEyeDropper />
+    <div className='grid w-full gap-1'> 
+      <ColorPickerHue />
+      <ColorPickerAlpha />
+    </div>
+  </div>
+  <div className='flex items-center gap-2'>
+    <ColorPickerFormat />
+    <ColorPickerOutput />
+  </div>
+</ColorPicker>
+```

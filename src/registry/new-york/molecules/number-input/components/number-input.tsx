@@ -96,7 +96,7 @@ export const NumberInput = ({
           step={step}
           min={min}
           max={max}
-          className={cn(isDisplayStepper && 'rounded-none border-none')}
+          className={cn(isDisplayStepper && 'rounded-none')}
           disabled={disabled}
           {...props}
           onBlur={blur}
