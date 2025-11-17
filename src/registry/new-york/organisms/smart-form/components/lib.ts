@@ -2,15 +2,7 @@ import { toDate } from 'date-fns'
 import type { Accept } from 'react-dropzone'
 import type { FieldValues, UseFormReturn } from 'react-hook-form'
 import { isValidPhoneNumber } from 'react-phone-number-input'
-import z, {
-  type ZodArray,
-  type ZodEmail,
-  type ZodNullable,
-  type ZodNumber,
-  type ZodPipe,
-  type ZodString,
-  type ZodType
-} from 'zod'
+import z, { type ZodArray, type ZodNullable, type ZodNumber, type ZodPipe, type ZodString, type ZodType } from 'zod'
 import type { UploadedFile } from '@/components/molecules/file-upload'
 import type { NumberInputProps } from '@/components/molecules/number-input'
 import type { DatePickerProps } from '@/components/ui/date-picker'
@@ -28,16 +20,19 @@ export interface SmartFormData {
       code: string
       label: string
       type:
-        | 'text'
+        | 'input'
         | 'textarea'
         | 'number'
         | 'phone-number'
         | 'password'
-        | 'select'
+        | 'select-with-options'
+        | 'select-with-query'
         | 'select-with-infinite-query'
-        | 'multi-select'
+        | 'multi-select-with-options'
+        | 'multi-select-with-query'
         | 'multi-select-with-infinite-query'
-        | 'autocomplete'
+        | 'autocomplete-with-options'
+        | 'autocomplete-with-query'
         | 'autocomplete-with-infinite-query'
         | 'date'
         | 'checkbox'
@@ -106,6 +101,9 @@ export interface SmartFormData {
   }>
 }
 
+// [T] Smart form field data
+export type SmartFormFieldData = SmartFormData['templates'][number]['fields'][number]
+
 // [T] Smart form field type
 export type SmartFormFieldType = SmartFormData['templates'][number]['fields'][number]['type']
 
@@ -135,16 +133,19 @@ export interface SmartFormProps {
 
 // [C] Default value per field type
 export const DEFAULT_VALUE_PER_FIELD_TYPE: Record<SmartFormFieldType, string | number | boolean | null | string[]> = {
-  text: '', // string
+  input: '', // string
   textarea: '', // string
   'phone-number': '', // string
   number: '', // string | number
   password: '', // string
-  select: null, // string | null
+  'select-with-options': null, // string | null
+  'select-with-query': null, // string | null
   'select-with-infinite-query': null, // string | null
-  'multi-select': [], // string[]
+  'multi-select-with-options': [], // string[]
+  'multi-select-with-query': [], // string[]
   'multi-select-with-infinite-query': [], // string[]
-  autocomplete: '', // string
+  'autocomplete-with-options': '', // string
+  'autocomplete-with-query': '', // string
   'autocomplete-with-infinite-query': '',
   date: null, // Date | null
   checkbox: false, // boolean
@@ -193,30 +194,34 @@ export const getFormSchema = (formData: SmartFormData, schemaOptions?: SchemaOpt
 
       // Visible fields
       switch (type) {
-        // text | textarea | phone-number | autocomplete | autocomplete-with-infinite-query | editor (string)
-        case 'text':
+        // input | textarea | phone-number | autocomplete | autocomplete-with-infinite-query | editor (string)
+        case 'input':
         case 'textarea':
         case 'phone-number':
-        case 'autocomplete':
+        case 'autocomplete-with-options':
+        case 'autocomplete-with-query':
         case 'autocomplete-with-infinite-query':
         case 'editor': {
-          // Email
-          if (validation?.email) {
-            let fieldSchema: ZodEmail = z.email().trim()
+          let fieldSchema: ZodString | ZodPipe<ZodType> = z.string().trim()
 
-            // Required
-            if (validation.required) {
-              fieldSchema = fieldSchema.min(1, validation.required.message)
-            }
-
+          if (!validation) {
             shape[code] = fieldSchema
             break
           }
 
-          // Not the email
-          let fieldSchema: ZodString | ZodPipe<ZodType> = z.string().trim()
+          // Email
+          if (validation?.email) {
+            fieldSchema = fieldSchema.refine((value) => {
+              try {
+                if (!validation.required && !value) {
+                  return true
+                }
+                return Boolean(z.email().parse(value))
+              } catch {
+                return false
+              }
+            }, validation.email.message)
 
-          if (!validation) {
             shape[code] = fieldSchema
             break
           }
@@ -306,8 +311,9 @@ export const getFormSchema = (formData: SmartFormData, schemaOptions?: SchemaOpt
           break
         }
 
-        // select | select-with-infinite-query | radio (string)
-        case 'select':
+        // select-with-options | select-with-query | select-with-infinite-query | radio (string)
+        case 'select-with-options':
+        case 'select-with-query':
         case 'select-with-infinite-query':
         case 'radio': {
           let fieldSchema: ZodNullable<ZodString> | ZodPipe<ZodNullable<ZodString>> = z.string().trim().nullable()
@@ -354,8 +360,9 @@ export const getFormSchema = (formData: SmartFormData, schemaOptions?: SchemaOpt
           break
         }
 
-        // multi-select | multi-select-with-infinite-query (string[])
-        case 'multi-select':
+        // multi-select-with-options | multi-select-with-query | multi-select-with-infinite-query (string[])
+        case 'multi-select-with-options':
+        case 'multi-select-with-query':
         case 'multi-select-with-infinite-query': {
           let fieldSchema: ZodArray<ZodString> = z.array(z.string())
 

@@ -5,6 +5,7 @@ import {
   type UseEditorOptions,
   useEditor
 } from '@tiptap/react'
+import throttle from 'lodash.throttle'
 import React from 'react'
 import { cn } from '@/utils/ui'
 import FixedToolbar from './fixed-toolbar'
@@ -58,14 +59,22 @@ export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
       }
     },
     immediatelyRender: false,
-    // onUpdate: ({ editor }) => handleUpdate(editor),
+    onUpdate: React.useMemo(() => {
+      return throttle(
+        ({ editor }) => {
+          console.log('go here ...')
+          onValueChange(getEditorValue(editor, 'html'))
+        },
+        1000,
+        {
+          trailing: false
+        }
+      )
+    }, [onValueChange]),
     onCreate: ({ editor }) => {
       if (value && editor.isEmpty) {
         editor.commands.setContent(value)
       }
-    },
-    onBlur: ({ editor }) => {
-      onValueChange(getEditorValue(editor, 'html'))
     },
     ...props
   })

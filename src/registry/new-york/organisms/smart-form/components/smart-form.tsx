@@ -1,22 +1,6 @@
 import React from 'react'
-import { Controller, type FieldValues, FormProvider } from 'react-hook-form'
-import { Autocomplete } from '@/components/molecules/autocomplete'
-import {
-  FileUpload,
-  FileUploadContent,
-  FileUploadInput,
-  FileUploadItem,
-  type FileUploadValue
-} from '@/components/molecules/file-upload'
-import { MultiSelect } from '@/components/molecules/multi-select'
-import { NumberInput } from '@/components/molecules/number-input'
-import { PasswordInput } from '@/components/molecules/password-input'
-import { PhoneNumberInput } from '@/components/molecules/phone-number-input'
-import { Editor } from '@/components/organisms/editor'
+import { type FieldValues, FormProvider } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Combobox } from '@/components/ui/combobox'
-import { DatePicker } from '@/components/ui/date-picker'
 import {
   Dialog,
   DialogClose,
@@ -26,12 +10,55 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
-import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
+import { FieldDescription, FieldLegend, FieldSet } from '@/components/ui/field'
 import { Spinner } from '@/components/ui/spinner'
-import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/utils/ui'
-import type { SmartFormProps } from './lib'
+import AutocompleteWithInfiniteQueryField from './autocomplete-with-infinite-query-field'
+import AutocompleteWithOptionsField from './autocomplete-with-options-field'
+import AutocompleteWithQueryField from './autocomplete-with-query-field'
+import CheckboxField from './checkbox-field'
+import DateField from './date-field'
+import EditorField from './editor-field'
+import type { FieldProps } from './field-container'
+import FileField from './file-field'
+import InputField from './input-field'
+import type { SmartFormFieldType, SmartFormProps } from './lib'
+import MultiFileField from './multi-file-field'
+import MultiSelectWithInfiniteQueryField from './multi-select-with-infinite-query-field'
+import MultiSelectWithOptionsField from './multi-select-with-options-field'
+import MultiSelectWithQueryField from './multi-select-with-query-field'
+import NumberField from './number-field'
+import PasswordField from './password-field'
+import PhoneNumberField from './phone-number-field'
+import SelectWithInfiniteQueryField from './select-with-infinite-query-field'
+import SelectWithOptionsField from './select-with-options-field'
+import SelectWithQueryField from './select-with-query-field'
+import TextareaField from './textarea-field'
+
+const FIELD_COMPONENTS: Record<SmartFormFieldType, React.FC<FieldProps>> = {
+  input: InputField,
+  textarea: TextareaField,
+  number: NumberField,
+  'phone-number': PhoneNumberField,
+  password: PasswordField,
+  'select-with-options': SelectWithOptionsField,
+  'select-with-query': SelectWithQueryField,
+  'select-with-infinite-query': SelectWithInfiniteQueryField,
+  'multi-select-with-options': MultiSelectWithOptionsField,
+  'multi-select-with-query': MultiSelectWithQueryField,
+  'multi-select-with-infinite-query': MultiSelectWithInfiniteQueryField,
+  'autocomplete-with-options': AutocompleteWithOptionsField,
+  'autocomplete-with-query': AutocompleteWithQueryField,
+  'autocomplete-with-infinite-query': AutocompleteWithInfiniteQueryField,
+  date: DateField,
+  checkbox: CheckboxField,
+  radio: () => null,
+  file: FileField,
+  'multi-file': MultiFileField,
+  editor: EditorField,
+  label: () => null,
+  slot: () => null
+}
 
 // Smart form
 export const SmartForm = ({
@@ -80,244 +107,41 @@ export const SmartForm = ({
       {/* Form */}
       <form className='space-y-6' onSubmit={form.handleSubmit(startValidation)}>
         {formData.templates.map((template) => (
-          <div key={template.code} className={cn('grid grid-cols-12 gap-x-4 gap-y-6', template.className)}>
+          <FieldSet key={template.code} className={cn('grid grid-cols-12 gap-x-4 gap-y-6', template.className)}>
             {/* Form template label */}
-            <h1 className='col-span-full font-bold text-base'>{template.label}</h1>
+            <FieldLegend>{template.label}</FieldLegend>
+            {template.description && <FieldDescription>{template.description}</FieldDescription>}
 
             {/* Form template fields */}
-            {template.fields.map((field) => {
+            {template.fields.map((fieldData) => {
               // Hidden
-              if (hiddenFields?.[field.code]) {
+              if (hiddenFields?.[fieldData.code]) {
                 return null
               }
 
-              const type = field.type
-              const className = field.className
-              const label = field.label
-              // const isRequired = field.config.validation?.['required']
-              const isDisabled = disabledFields?.[field.code]
-
-              // LABEL
-              if (field.type === 'label') {
+              // Label
+              if (fieldData.type === 'label') {
                 return (
-                  <div key={field.code} className={cn('col-span-full', className)}>
-                    <span className='font-bold text-base text-muted-foreground'>{label}</span>
+                  <div key={fieldData.code} className={cn('col-span-full', fieldData.className)}>
+                    <span className='font-bold text-base text-muted-foreground'>{fieldData.label}</span>
                   </div>
                 )
               }
 
-              // SLOT
-              if (field.type === 'slot') {
+              // Slot
+              if (fieldData.type === 'slot') {
                 return (
-                  <div key={field.code} className={cn('col-span-full', field.className)}>
-                    {slots?.[field.code]}
+                  <div key={fieldData.code} className={cn('col-span-full', fieldData.className)}>
+                    {slots?.[fieldData.code]}
                   </div>
                 )
               }
 
               // Others
-              return (
-                <Controller
-                  key={field.code}
-                  control={form.control}
-                  name={field.code}
-                  render={({ field: formField, fieldState }) => (
-                    <Field
-                      data-invalid={fieldState.invalid}
-                      className={cn(
-                        'group/field',
-                        {
-                          'flex-row-reverse': field.type === 'checkbox'
-                        },
-                        field.className
-                      )}
-                      orientation={field.type === 'checkbox' ? 'horizontal' : 'vertical'}
-                    >
-                      <FieldLabel htmlFor={field.code}>{label}</FieldLabel>
-
-                      {(type === 'text' && (
-                        <Input
-                          {...formField}
-                          id={field.code}
-                          placeholder={`Enter ${label.toLowerCase()}`}
-                          disabled={isDisabled}
-                          aria-invalid={fieldState.invalid}
-                        />
-                      )) ||
-                        (type === 'textarea' && (
-                          <Textarea
-                            {...formField}
-                            id={field.code}
-                            placeholder={`Enter ${label.toLowerCase()}`}
-                            disabled={isDisabled}
-                            aria-invalid={fieldState.invalid}
-                          />
-                        )) ||
-                        (type === 'number' && (
-                          <NumberInput
-                            {...field.config?.numberInputProps}
-                            id={field.code}
-                            value={formField.value}
-                            disabled={isDisabled}
-                            placeholder={`Enter ${label.toLowerCase()}`}
-                            aria-invalid={fieldState.invalid}
-                            onFieldChange={formField.onChange}
-                            onValueChange={(event) => formField.onChange(event.value)}
-                          />
-                        )) ||
-                        (type === 'phone-number' && (
-                          <PhoneNumberInput
-                            {...formField}
-                            id={field.code}
-                            placeholder={`Enter ${label.toLowerCase()}`}
-                            disabled={isDisabled}
-                            aria-invalid={fieldState.invalid}
-                            onValueChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'password' && (
-                          <PasswordInput
-                            {...formField}
-                            id={field.code}
-                            placeholder={`Enter ${label.toLowerCase()}`}
-                            disabled={isDisabled}
-                            aria-invalid={fieldState.invalid}
-                          />
-                        )) ||
-                        (type === 'select' && (
-                          <Combobox
-                            value={formField.value}
-                            options={field.config?.options ?? []}
-                            placeholder={`Select ${label.toLowerCase()}`}
-                            buttonTriggerProps={{
-                              id: field.code
-                            }}
-                            onValueChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'select-with-infinite-query' && (
-                          <Combobox
-                            value={formField.value}
-                            options={field.config?.options ?? []}
-                            placeholder={`Select ${label.toLowerCase()}`}
-                            buttonTriggerProps={{
-                              id: field.code
-                            }}
-                            onValueChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'multi-select' && (
-                          <MultiSelect
-                            value={formField.value}
-                            options={field.config?.options ?? []}
-                            placeholder={`Select ${label.toLowerCase()}`}
-                            buttonTriggerProps={{
-                              id: field.code
-                            }}
-                            onValueChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'multi-select-with-infinite-query' && (
-                          <MultiSelect
-                            value={formField.value}
-                            options={field.config?.options ?? []}
-                            placeholder={`Select ${label.toLowerCase()}`}
-                            buttonTriggerProps={{
-                              id: field.code
-                            }}
-                            onValueChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'autocomplete' && (
-                          <Autocomplete
-                            value={formField.value}
-                            options={field.config?.options ?? []}
-                            placeholder={`Enter ${label.toLowerCase()}`}
-                            inputProps={{
-                              id: field.code,
-                              'aria-invalid': fieldState.invalid
-                            }}
-                            onValueChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'autocomplete-with-infinite-query' && (
-                          <Autocomplete
-                            value={formField.value}
-                            options={field.config?.options ?? []}
-                            placeholder={`Enter ${label.toLowerCase()}`}
-                            inputProps={{
-                              id: field.code,
-                              'aria-invalid': fieldState.invalid
-                            }}
-                            onValueChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'date' && (
-                          <DatePicker
-                            id={field.code}
-                            value={formField.value}
-                            placeholder={`Select ${label.toLowerCase()}`}
-                            onValueChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'checkbox' && (
-                          <Checkbox
-                            id={field.code}
-                            checked={formField.value}
-                            disabled={isDisabled}
-                            onCheckedChange={formField.onChange}
-                          />
-                        )) ||
-                        (type === 'radio' && null) ||
-                        (type === 'file' && (
-                          <FileUpload
-                            value={formField.value ? [formField.value] : []}
-                            dropzoneOptions={field.config?.dropzoneOptions}
-                            isDisabled={isDisabled}
-                            onValueChange={(files) => formField.onChange(files[0])}
-                          >
-                            <FileUploadInput id={field.code} aria-invalid={fieldState.invalid} />
-
-                            <FileUploadContent>
-                              {formField.value && <FileUploadItem value={formField.value} index={0} />}
-                            </FileUploadContent>
-                          </FileUpload>
-                        )) ||
-                        (type === 'multi-file' && (
-                          <FileUpload
-                            value={formField.value}
-                            dropzoneOptions={field.config?.dropzoneOptions}
-                            isDisabled={isDisabled}
-                            onValueChange={formField.onChange}
-                          >
-                            <FileUploadInput id={field.code} aria-invalid={fieldState.invalid} />
-
-                            <FileUploadContent>
-                              {(formField.value as FileUploadValue).map((value, index) => (
-                                <FileUploadItem
-                                  // biome-ignore lint/suspicious/noArrayIndexKey: ignore
-                                  key={index}
-                                  index={index}
-                                  value={value}
-                                />
-                              ))}
-                            </FileUploadContent>
-                          </FileUpload>
-                        )) ||
-                        (type === 'editor' && (
-                          <Editor value={formField.value} editable={!isDisabled} onValueChange={formField.onChange} />
-                        )) ||
-                        'Invalid field.'}
-
-                      {field.description && <FieldDescription>{field.description}</FieldDescription>}
-
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-                    </Field>
-                  )}
-                />
-              )
+              const FieldComponent = FIELD_COMPONENTS[fieldData.type]
+              return <FieldComponent key={fieldData.code} fieldData={fieldData} disabledFields={disabledFields} />
             })}
-          </div>
+          </FieldSet>
         ))}
 
         {/* Action buttons */}

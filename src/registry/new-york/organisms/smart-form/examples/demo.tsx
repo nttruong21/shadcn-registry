@@ -21,7 +21,7 @@ const FORM_DATA: SmartFormData = {
       fields: [
         {
           code: 'fullName',
-          type: 'text',
+          type: 'input',
           label: 'Full name',
           className: 'xl:col-span-4',
           config: {
@@ -63,7 +63,7 @@ const FORM_DATA: SmartFormData = {
         },
         {
           code: 'gender',
-          type: 'select',
+          type: 'select-with-options',
           label: 'Gender',
           className: 'xl:col-span-4',
           config: {
@@ -99,7 +99,7 @@ const FORM_DATA: SmartFormData = {
         },
         {
           code: 'email',
-          type: 'text',
+          type: 'input',
           label: 'Email',
           className: 'xl:col-span-4',
           config: {
@@ -137,7 +137,7 @@ const FORM_DATA: SmartFormData = {
       fields: [
         {
           code: 'department',
-          type: 'select',
+          type: 'select-with-options',
           label: 'Department',
           className: 'xl:col-span-4',
           config: {
@@ -169,7 +169,7 @@ const FORM_DATA: SmartFormData = {
         },
         {
           code: 'technologies',
-          type: 'multi-select',
+          type: 'multi-select-with-options',
           label: 'Technologies',
           className: 'xl:col-span-4',
           config: {
@@ -205,7 +205,7 @@ const FORM_DATA: SmartFormData = {
         },
         {
           code: 'graduatedUniversity',
-          type: 'autocomplete',
+          type: 'autocomplete-with-options',
           label: 'Graduated university',
           config: {
             validation: {
@@ -262,7 +262,7 @@ const FORM_DATA: SmartFormData = {
       fields: [
         {
           code: 'username',
-          type: 'text',
+          type: 'input',
           label: 'Username',
           className: 'xl:col-span-4',
           config: {

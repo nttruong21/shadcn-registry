@@ -3,7 +3,6 @@ import { Check, ChevronDown } from 'lucide-react'
 import * as React from 'react'
 import {
   Command,
-  CommandEmpty,
   CommandGroup,
   CommandItem,
   CommandList,
@@ -51,20 +50,19 @@ export const Autocomplete = ({
   const [isOpenPopover, setIsOpenPopover] = React.useState(false)
 
   // Methods
-  const downKey = React.useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Escape') {
+  const downKey = React.useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
       close()
     }
   }, [])
 
-  const openAuto = React.useCallback((event: Event) => {
-    event.preventDefault()
+  const openAuto = React.useCallback((e: Event) => {
+    e.preventDefault()
   }, [])
 
-  const interactOutside = React.useCallback((event: Event) => {
-    const { target, preventDefault } = event
-    if (target instanceof Element && target.hasAttribute('cmdk-input')) {
-      preventDefault()
+  const interactOutside = React.useCallback((e: Event) => {
+    if (e.target instanceof Element && e.target.hasAttribute('cmdk-input')) {
+      e.preventDefault()
     }
   }, [])
 
@@ -93,7 +91,9 @@ export const Autocomplete = ({
 
           <PopoverContent
             align='start'
-            className={cn('min-w-(--radix-popover-trigger-width) p-0')}
+            className={cn(
+              'min-w-(--radix-popover-trigger-width) border-0 p-0 has-[[cmdk-group-items]:not(:empty)]:border'
+            )}
             onOpenAutoFocus={openAuto}
             onInteractOutside={interactOutside}
           >
@@ -104,7 +104,6 @@ export const Autocomplete = ({
                 </div>
               ) : (
                 <CommandList {...commandListProps}>
-                  <CommandEmpty>No option found.</CommandEmpty>
                   <CommandGroup>
                     {options.map((option) => {
                       const optionValue = isValueAsLabel ? option.label : option.value
