@@ -8,7 +8,7 @@ import type { SmartFilterFormInput, SmartFilterFormOutput } from './lib'
 import type { SmartFilterProps } from './smart-filter'
 
 // Component
-const SmartFilterBasicSearch = ({ setFilters }: Pick<SmartFilterProps, 'setFilters'>) => {
+const BasicSearch = ({ setFilters }: Pick<SmartFilterProps, 'setFilters'>) => {
   // Hooks
   const form = useFormContext<SmartFilterFormInput, unknown, SmartFilterFormOutput>()
 
@@ -43,4 +43,4 @@ const SmartFilterBasicSearch = ({ setFilters }: Pick<SmartFilterProps, 'setFilte
   )
 }
 
-export default SmartFilterBasicSearch
+export default BasicSearch

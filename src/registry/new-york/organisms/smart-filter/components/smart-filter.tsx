@@ -2,6 +2,8 @@ import { ListFilter, Search } from 'lucide-react'
 import React from 'react'
 import { FormProvider, type SubmitHandler, type UseFormReturn, useFieldArray } from 'react-hook-form'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import AdvancedFilter from './advanced-filter'
+import BasicSearch from './basic-search'
 import {
   DEFAULT_VALUE_PER_OPERATION,
   type Filter,
@@ -9,8 +11,6 @@ import {
   type SmartFilterFormInput,
   type SmartFilterFormOutput
 } from './lib'
-import SmartFilterAdvancedFilter from './smart-filter-advanced-filter'
-import SmartFilterBasicSearch from './smart-filter-basic-search'
 
 // Smart filter
 enum Mode {
@@ -100,9 +100,9 @@ export const SmartFilter = ({
       <FormProvider {...form}>
         <form className='w-full' onSubmit={(e) => e.preventDefault()}>
           {filters.length === 0 ? (
-            <SmartFilterBasicSearch setFilters={setFilters} />
+            <BasicSearch setFilters={setFilters} />
           ) : isHideSearchMode ? (
-            <SmartFilterAdvancedFilter formFilters={formFilters} addFilter={addFilter} setFilters={setFilters} />
+            <AdvancedFilter formFilters={formFilters} addFilter={addFilter} setFilters={setFilters} />
           ) : (
             <div className='flex items-center gap-2'>
               <ToggleGroup
@@ -123,9 +123,9 @@ export const SmartFilter = ({
               </ToggleGroup>
 
               {mode === Mode.BasicSearch ? (
-                <SmartFilterBasicSearch setFilters={setFilters} />
+                <BasicSearch setFilters={setFilters} />
               ) : (
-                <SmartFilterAdvancedFilter formFilters={formFilters} addFilter={addFilter} setFilters={setFilters} />
+                <AdvancedFilter formFilters={formFilters} addFilter={addFilter} setFilters={setFilters} />
               )}
             </div>
           )}

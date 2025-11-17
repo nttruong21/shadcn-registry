@@ -35,7 +35,7 @@ const OPERATION_LABELS: Record<string, Record<string, string | undefined> | unde
 }
 
 // Component
-const SmartFilterAdvancedFilterOperationField = ({
+const AdvancedFilterOperationField = ({
   index,
   field
 }: {
@@ -72,4 +72,4 @@ const SmartFilterAdvancedFilterOperationField = ({
   return <Combobox value={field.value} options={options} isCanRemoveValue={false} onValueChange={changeValue} />
 }
 
-export default SmartFilterAdvancedFilterOperationField
+export default AdvancedFilterOperationField

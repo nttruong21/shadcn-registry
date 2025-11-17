@@ -5,6 +5,9 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Field, FieldError } from '@/components/ui/field'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import AdvancedFilterNameField from './advanced-filter-name-field'
+import AdvancedFilterOperationField from './advanced-filter-operation-field'
+import AdvancedFilterValueField from './advanced-filter-value-field'
 import {
   DEFAULT_SMART_FILTER_FORM_VALUE,
   type Filter,
@@ -12,12 +15,9 @@ import {
   type SmartFilterFormOutput
 } from './lib'
 import { type SmartFilterProps, useSmartFilterContext } from './smart-filter'
-import SmartFilterAdvancedFilterNameField from './smart-filter-advanced-filter-name-field'
-import SmartFilterAdvancedFilterOperationField from './smart-filter-advanced-filter-operation-field'
-import SmartFilterAdvancedFilterValueField from './smart-filter-advanced-filter-value-field'
 
 // Component
-const SmartFilterAdvancedFilter = ({
+const AdvancedFilter = ({
   formFilters,
   addFilter,
   setFilters
@@ -92,18 +92,14 @@ const SmartFilterAdvancedFilter = ({
           {/* Filters */}
           {formFilters.fields.map((field, index) => (
             <div key={field.id} className='flex gap-x-4'>
-              <div className='flex grow flex-col gap-4 overflow-hidden py-2 xl:w-auto xl:flex-row'>
+              <div className='flex grow flex-col gap-4 py-2 xl:w-auto xl:flex-row'>
                 {/* Name */}
                 <Controller
                   name={`filters.${index}.name`}
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid} className='w-full shrink-0 xl:w-52'>
-                      <SmartFilterAdvancedFilterNameField
-                        index={index}
-                        field={field}
-                        formFiltersWatcher={formFiltersWatcher}
-                      />
+                      <AdvancedFilterNameField index={index} field={field} formFiltersWatcher={formFiltersWatcher} />
                       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                     </Field>
                   )}
@@ -115,14 +111,14 @@ const SmartFilterAdvancedFilter = ({
                   control={form.control}
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid} className='w-full shrink-0 xl:w-52'>
-                      <SmartFilterAdvancedFilterOperationField index={index} field={field} />
+                      <AdvancedFilterOperationField index={index} field={field} />
                       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                     </Field>
                   )}
                 />
 
                 {/* Value */}
-                <SmartFilterAdvancedFilterValueField index={index} />
+                <AdvancedFilterValueField index={index} />
               </div>
 
               {/* Remove button */}
@@ -164,4 +160,4 @@ const SmartFilterAdvancedFilter = ({
   )
 }
 
-export default SmartFilterAdvancedFilter
+export default AdvancedFilter

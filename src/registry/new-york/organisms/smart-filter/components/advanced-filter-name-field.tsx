@@ -10,7 +10,7 @@ import {
 import { useSmartFilterContext } from './smart-filter'
 
 // Component
-const SmartFilterAdvancedFilterNameField = ({
+const AdvancedFilterNameField = ({
   index,
   field,
   formFiltersWatcher
@@ -53,4 +53,4 @@ const SmartFilterAdvancedFilterNameField = ({
   return <Combobox value={field.value} options={options} isCanRemoveValue={false} onValueChange={changeValue} />
 }
 
-export default SmartFilterAdvancedFilterNameField
+export default AdvancedFilterNameField

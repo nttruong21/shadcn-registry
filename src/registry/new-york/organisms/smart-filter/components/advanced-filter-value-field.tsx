@@ -12,7 +12,7 @@ import { type SmartFilterFormInput, type SmartFilterFormOutput, SmartFilterOpera
 import { useSmartFilterContext } from './smart-filter'
 
 // Component
-const SmartFilterAdvancedFilterValueField = ({ index }: { index: number }) => {
+const AdvancedFilterValueField = ({ index }: { index: number }) => {
   // Hooks
   const { filters } = useSmartFilterContext()
   const form = useFormContext<SmartFilterFormInput, unknown, SmartFilterFormOutput>()
@@ -253,4 +253,4 @@ const SmartFilterAdvancedFilterValueField = ({ index }: { index: number }) => {
   }
 }
 
-export default SmartFilterAdvancedFilterValueField
+export default AdvancedFilterValueField
