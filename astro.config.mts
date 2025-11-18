@@ -85,7 +85,7 @@ export default defineConfig({
             { label: 'Organisms', autogenerate: { directory: 'components/organisms' } }
           ]
         },
-        
+
       ],
       customCss: ['./src/styles/global.css'],
       plugins: [
@@ -108,12 +108,24 @@ export default defineConfig({
     react()
   ],
   vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.indexOf('node_modules') === -1) return
+            const packageNameWithPnpmPrefix = id.split('node_modules/')[1]
+            const [prefix, packageName] = packageNameWithPnpmPrefix.split('/')
+            return prefix !== '.pnpm' ? prefix : packageName.split('@')[packageName[0] === '@' ? 1 : 0]
+          }
+        }
+      }
+    },
     // @ts-expect-error: Astro still Vite v6 while tailwindcss will pull in Vite v7 => types mismatch
     plugins: [tailwindcss()],
-     ssr: {
+    ssr: {
       // FIXME: Once starlight supports Zod 4 we can probably remove this.
       // Zod should normally be imported from astro, but I want my code to use its own zod version to reflect the version used in the shadcn components.
       noExternal: ["zod"],
     },
-  }
+  },
 })

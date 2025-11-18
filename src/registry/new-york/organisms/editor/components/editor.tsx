@@ -114,7 +114,7 @@ export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
       >
         <div
           className={cn(
-            'transition-all [&_.tiptap]:max-h-[500px] [&_.tiptap]:min-h-64 [&_.tiptap]:overflow-auto [&_.tiptap]:border-none [&_.tiptap]:p-6 [&_.tiptap]:outline-none',
+            'w-full transition-all [&_.tiptap]:max-h-[500px] [&_.tiptap]:min-h-64 [&_.tiptap]:overflow-auto [&_.tiptap]:border-none [&_.tiptap]:p-6 [&_.tiptap]:outline-none',
             containerClassName
           )}
         >

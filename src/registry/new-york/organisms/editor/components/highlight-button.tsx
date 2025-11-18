@@ -5,7 +5,8 @@ import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import ColorPickerButton from './color-picker-button'
+
+const ColorPickerButton = React.lazy(() => import('./color-picker-button'))
 
 // [C] Colors
 const COLORS: string[] = [
@@ -89,7 +90,9 @@ const HighlightButton = React.memo(() => {
         </div>
 
         <div className='flex justify-end gap-2'>
-          <ColorPickerButton onValueChange={changeColorFromPicker} />
+          <React.Suspense fallback={<Button size='icon' variant='outline' className='animate-pulse bg-muted' />}>
+            <ColorPickerButton onValueChange={changeColorFromPicker} />
+          </React.Suspense>
 
           <Tooltip>
             <TooltipTrigger asChild>

@@ -16,7 +16,8 @@ interface Component {
 }
 
 const uiComponents: Component[] = []
-const moleculesComponents: Component[] = []
+const moleculeComponents: Component[] = []
+const organismComponents: Component[] = []
 
 Object.entries(
   import.meta.glob('../../../content/docs/components/**/*.mdx', {
@@ -39,12 +40,17 @@ Object.entries(
     return
   }
 
-  moleculesComponents.push(component)
+  if (filePath.includes('molecule')) {
+    moleculeComponents.push(component)
+    return
+  }
+
+  organismComponents.push(component)
 })
 ---
 
 <!-- Template -->
-<div class='space-y-6'>
+<div class='space-y-8'>
   <div class='space-y-2'>
     <h3>UI (Shadcn components)</h3>
     <div class='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-10'>
@@ -62,8 +68,21 @@ Object.entries(
     <h3>Molecules (Components that has built on top of Shadcn components)</h3>
     <div class='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-10'>
       {
-        moleculesComponents.map((component) => (
+        moleculeComponents.map((component) => (
           <a href={`/components/molecules/${component.name}`} class='no-underline hover:underline'>
+            {component.title}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+    <div class='space-y-2'>
+    <h3>Organisms (Components that has built on top of Shadcn components and Molecule components)</h3>
+    <div class='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3 xl:gap-10'>
+      {
+        organismComponents.map((component) => (
+          <a href={`/components/organisms/${component.name}`} class='no-underline hover:underline'>
             {component.title}
           </a>
         ))
