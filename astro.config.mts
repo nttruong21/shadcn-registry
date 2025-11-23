@@ -3,7 +3,6 @@ import { loadEnv } from 'vite'
 import react from '@astrojs/react'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, envField } from 'astro/config'
-
 import starlight from '@astrojs/starlight'
 import starlightThemeBlack from 'starlight-theme-black'
 
@@ -101,7 +100,7 @@ export default defineConfig({
             }
           ],
           footerText:
-            'Built by [Nguyen The Truong](https://magnificent-kitsune-020c1b.netlify.app) for use with [Shadcn](https://ui.shadcn.com)'
+            'Built by [Nguyen The Truong](https://ntt-portfolio.vercel.app) for use with [Shadcn](https://ui.shadcn.com)'
         })
       ]
     }),

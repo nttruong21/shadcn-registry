@@ -54,7 +54,6 @@ const FileButton = memo(() => {
 
   // Form
   const fileForm = useForm({
-    // @ts-expect-error - type mismatch from zod
     resolver: zodResolver(FILE_FORM_SCHEMA),
     defaultValues: DEFAULT_FILE_FORM_VALUE
   })

@@ -35,7 +35,6 @@ const YoutubeButton = React.memo(() => {
 
   // Form
   const youtubeForm = useForm({
-    // @ts-expect-error - type mismatch from zod
     resolver: zodResolver(YOUTUBE_FORM_SCHEMA),
     defaultValues: DEFAULT_YOUTUBE_FORM_VALUE
   })

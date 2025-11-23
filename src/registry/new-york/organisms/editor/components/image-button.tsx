@@ -100,7 +100,6 @@ const ImageButton = React.memo(() => {
 
   // Form
   const imageForm = useForm({
-    // @ts-expect-error - type mismatch from zod
     resolver: zodResolver(IMAGE_FORM_SCHEMA),
     defaultValues: DEFAULT_IMAGE_FORM_VALUE
   })

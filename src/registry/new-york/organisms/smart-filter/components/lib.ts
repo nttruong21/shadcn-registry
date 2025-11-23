@@ -201,7 +201,6 @@ export type SmartFilterFormOutput = z.output<typeof SMART_FILTER_FORM_SCHEMA>
 
 export const useSmartFilterForm = ({ defaultFormValue }: { defaultFormValue?: SmartFilterFormInput } = {}) => {
   return useForm<SmartFilterFormInput, unknown, SmartFilterFormOutput>({
-    // @ts-expect-error - type mismatch from zod
     resolver: zodResolver(SMART_FILTER_FORM_SCHEMA),
     defaultValues: defaultFormValue ?? DEFAULT_SMART_FILTER_FORM_VALUE
   })

@@ -48,7 +48,6 @@ const LinkButton = React.memo(() => {
 
   // Form
   const linkForm = useForm({
-    // @ts-expect-error - type mismatch from zod
     resolver: zodResolver(LINK_FORM_SCHEMA),
     defaultValues: DEFAULT_LINK_FORM_VALUE
   })
