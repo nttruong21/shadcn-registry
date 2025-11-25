@@ -6,13 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": [
-      "src/**/*.astro",
-      "src/**/*.mdx",
-      "src/**/*.ts",
-      "src/**/*.tsx",
-      "src/**/*.css"
-    ]
+    "includes": ["src/**/*.astro", "src/**/*.mdx", "src/**/*.ts", "src/**/*.tsx", "src/**/*.css", "src/**/*.json"]
   },
   "formatter": {
     "enabled": true,
@@ -28,16 +22,8 @@
         "useSortedClasses": {
           "level": "info",
           "options": {
-            "attributes": [
-              "class",
-              "className"
-            ],
-            "functions": [
-              "clsx",
-              "cva",
-              "tw",
-              "tw.*"
-            ]
+            "attributes": ["class", "className"],
+            "functions": ["clsx", "cva", "tw", "tw.*"]
           }
         }
       }
@@ -67,10 +53,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "src/**/*.astro",
-        "src/**/*.d.ts"
-      ],
+      "includes": ["src/**/*.astro", "src/**/*.d.ts"],
       "linter": {
         "rules": {
           "style": {
