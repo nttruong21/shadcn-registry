@@ -90,7 +90,9 @@ export const FILE_UPLOADER_DROPZONE_OPTIONS: DropzoneOptions = {
 }
 
 // Component
-const ImageButton = React.memo(() => {
+const ImageButton = React.memo<{
+  id: string
+}>(({ id }) => {
   // Hooks
   const { editor } = useCurrentEditor()
   const { isUploadFilePending, uploadFile } = useFileUpload()
@@ -114,7 +116,7 @@ const ImageButton = React.memo(() => {
     imageForm.setValue('mode', value as FormMode)
   }
 
-  const submit = async (fieldValues: z.output<typeof IMAGE_FORM_SCHEMA>) => {
+  const insertImageNodes = async (fieldValues: z.output<typeof IMAGE_FORM_SCHEMA>) => {
     const { mode, url, files } = fieldValues
 
     // Add image node view
@@ -183,10 +185,10 @@ const ImageButton = React.memo(() => {
                   name='url'
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor='editor-image-button-image-form-url'>URL</FieldLabel>
+                      <FieldLabel htmlFor={`editor-${id}-image-button-image-form-url`}>URL</FieldLabel>
                       <Input
                         {...field}
-                        id='editor-image-button-image-form-url'
+                        id={`editor-${id}-image-button-image-form-url`}
                         placeholder={`Enter URL`}
                         aria-invalid={fieldState.invalid}
                       />
@@ -203,14 +205,17 @@ const ImageButton = React.memo(() => {
                   name='files'
                   render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor='editor-image-button-image-form-files'>Image files</FieldLabel>
+                      <FieldLabel htmlFor={`editor-${id}-image-button-image-form-files`}>Image files</FieldLabel>
                       <FileUpload
                         value={field.value}
                         dropzoneOptions={FILE_UPLOADER_DROPZONE_OPTIONS}
                         className='xl:grid-cols-1'
                         onValueChange={field.onChange}
                       >
-                        <FileUploadInput id='editor-image-button-image-form-files' aria-invalid={fieldState.invalid} />
+                        <FileUploadInput
+                          id={`editor-${id}-image-button-image-form-files`}
+                          aria-invalid={fieldState.invalid}
+                        />
 
                         <FileUploadContent>
                           {field.value.map((value, index) => (
@@ -239,7 +244,7 @@ const ImageButton = React.memo(() => {
                 size='icon'
                 variant='outline'
                 isLoading={isUploadFilePending}
-                onClick={imageForm.handleSubmit(submit)}
+                onClick={imageForm.handleSubmit(insertImageNodes)}
               >
                 <CheckCircle />
               </Button>

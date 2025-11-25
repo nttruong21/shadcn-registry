@@ -44,7 +44,9 @@ export const FILE_UPLOADER_DROPZONE_OPTIONS: DropzoneOptions = {
 }
 
 // Component
-const FileButton = memo(() => {
+const FileButton = memo<{
+  id: string
+}>(({ id }) => {
   // Hooks
   const { editor } = useCurrentEditor()
   const { isUploadFilePending, uploadFile } = useFileUpload()
@@ -59,15 +61,12 @@ const FileButton = memo(() => {
   })
 
   // Methods
-  // Handle submit
-  const handleSubmit = async (fieldValues: z.output<typeof FILE_FORM_SCHEMA>) => {
+  const insertFileNodes = async (fieldValues: z.output<typeof FILE_FORM_SCHEMA>) => {
     try {
       // Upload file
       const uploadedFiles = (await Promise.all(fieldValues.files.map(async (file) => await uploadFile(file)))).filter(
         Boolean
       ) as UploadedFile[]
-
-      console.log(uploadedFiles)
 
       // Add file node view
       uploadedFiles.forEach((uploadedFile) => {
@@ -123,14 +122,17 @@ const FileButton = memo(() => {
               name='files'
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor='editor-image-button-image-form-files'>Files</FieldLabel>
+                  <FieldLabel htmlFor={`editor-${id}-image-button-image-form-files`}>Files</FieldLabel>
                   <FileUpload
                     value={field.value}
                     dropzoneOptions={FILE_UPLOADER_DROPZONE_OPTIONS}
                     className='xl:grid-cols-1'
                     onValueChange={field.onChange}
                   >
-                    <FileUploadInput id='editor-image-button-image-form-files' aria-invalid={fieldState.invalid} />
+                    <FileUploadInput
+                      id={`editor-${id}-image-button-image-form-files`}
+                      aria-invalid={fieldState.invalid}
+                    />
 
                     <FileUploadContent>
                       {field.value.map((value, index) => (
@@ -157,7 +159,7 @@ const FileButton = memo(() => {
                 size='icon'
                 isLoading={isUploadFilePending}
                 variant='outline'
-                onClick={fileForm.handleSubmit(handleSubmit)}
+                onClick={fileForm.handleSubmit(insertFileNodes)}
               >
                 <CheckCircle />
               </Button>

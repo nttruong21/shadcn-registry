@@ -9,7 +9,8 @@ import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { isValidYoutubeUrl } from './custom-youtube-extension'
+import type { CallbackRef, SetExtensions } from './editor'
+import { isValidYoutubeUrl, MIN_WIDTH } from './lib'
 
 // [C] Youtube form schema
 const YOUTUBE_FORM_SCHEMA = z.object({
@@ -26,9 +27,17 @@ const DEFAULT_YOUTUBE_FORM_VALUE: z.input<typeof YOUTUBE_FORM_SCHEMA> = {
 }
 
 // Component
-const YoutubeButton = React.memo(() => {
+const YoutubeButton = React.memo<{
+  id: string
+  callbackRef: CallbackRef
+  setExtensions: SetExtensions
+}>(({ id, callbackRef, setExtensions }) => {
   // Hooks
   const { editor } = useCurrentEditor()
+  const [isPending, startTransition] = React.useTransition()
+
+  // Refs
+  const isExtensionLoadedRef = React.useRef(false)
 
   // States
   const [isOpenPopover, setIsOpenPopover] = React.useState(false)
@@ -40,16 +49,44 @@ const YoutubeButton = React.memo(() => {
   })
 
   // Methods
-  const save = (fieldValues: z.output<typeof YOUTUBE_FORM_SCHEMA>) => {
+  const insertYoutubeNode = (fieldValues: z.output<typeof YOUTUBE_FORM_SCHEMA>) => {
+    const callback: CallbackRef['current'] = (editor) => {
+      editor
+        ?.chain()
+        .focus()
+        .setYoutubeVideo({
+          src: fieldValues.url
+        })
+        .enter()
+        .run()
+    }
+
     // Add youtube node view
-    editor
-      ?.chain()
-      .focus()
-      .setYoutubeVideo({
-        src: fieldValues.url
-      })
-      .enter()
-      .run()
+    if (isExtensionLoadedRef.current) {
+      return callback(editor)
+    }
+
+    // Load extension
+    startTransition(async () => {
+      try {
+        const { default: CustomYoutubeExtension } = await import('./custom-youtube-extension')
+
+        callbackRef.current = callback
+
+        setExtensions((prev) => [
+          ...prev,
+          CustomYoutubeExtension.configure({
+            nocookie: true,
+            width: MIN_WIDTH,
+            height: 180
+          })
+        ])
+
+        isExtensionLoadedRef.current = true
+      } catch (error) {
+        console.error('An error occurred when load the CustomYoutube extension', error)
+      }
+    })
 
     // Close popover
     setIsOpenPopover(false)
@@ -61,7 +98,7 @@ const YoutubeButton = React.memo(() => {
       <Tooltip>
         <TooltipTrigger asChild>
           <PopoverTrigger asChild>
-            <Button size='icon' variant='ghost'>
+            <Button size='icon' variant='ghost' isLoading={isPending}>
               <TvMinimalPlay />
             </Button>
           </PopoverTrigger>
@@ -78,10 +115,10 @@ const YoutubeButton = React.memo(() => {
               name='url'
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor='editor-youtube-button-youtube-form-url'>URL</FieldLabel>
+                  <FieldLabel htmlFor={`editor-${id}-youtube-button-youtube-form-url`}>URL</FieldLabel>
                   <Input
                     {...field}
-                    id='editor-youtube-button-youtube-form-url'
+                    id={`editor-${id}-youtube-button-youtube-form-url`}
                     placeholder={`Enter URL`}
                     aria-invalid={fieldState.invalid}
                   />
@@ -93,7 +130,7 @@ const YoutubeButton = React.memo(() => {
             <div className='flex items-center justify-end gap-1'>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button size='icon' variant='outline' onClick={youtubeForm.handleSubmit(save)}>
+                  <Button size='icon' variant='outline' onClick={youtubeForm.handleSubmit(insertYoutubeNode)}>
                     <CheckCircle />
                   </Button>
                 </TooltipTrigger>

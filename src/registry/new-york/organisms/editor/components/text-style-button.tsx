@@ -1,5 +1,5 @@
 import type { Level } from '@tiptap/extension-heading'
-import { useCurrentEditor } from '@tiptap/react'
+import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { ChevronDown, Type } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
@@ -50,6 +50,22 @@ const TEXT_STYLES: Array<{
 const TextStyleButton = React.memo(() => {
   // Hooks
   const { editor } = useCurrentEditor()
+  const editorState = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      return {
+        isActive: {
+          null: editor?.isActive('paragraph'),
+          1: editor?.isActive('heading', { level: 1 }),
+          2: editor?.isActive('heading', { level: 2 }),
+          3: editor?.isActive('heading', { level: 3 }),
+          4: editor?.isActive('heading', { level: 4 }),
+          5: editor?.isActive('heading', { level: 5 }),
+          6: editor?.isActive('heading', { level: 6 })
+        }
+      }
+    }
+  })
 
   // Methods
   const changeTextStyle = (textStyle: (typeof TEXT_STYLES)[number]) => {
@@ -82,9 +98,7 @@ const TextStyleButton = React.memo(() => {
           <DropdownMenuItem
             key={textStyle.level}
             className={cn({
-              'bg-accent': textStyle.level
-                ? editor?.isActive('heading', { level: textStyle.level })
-                : editor?.isActive('paragraph')
+              'bg-accent text-accent-foreground': editorState?.isActive[`${textStyle.level}`]
             })}
             onClick={() => changeTextStyle(textStyle)}
           >

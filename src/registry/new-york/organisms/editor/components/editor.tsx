@@ -1,4 +1,10 @@
-import { type Content, EditorContext as TiptapEditorContext, type UseEditorOptions, useEditor } from '@tiptap/react'
+import {
+  type Content,
+  type Extensions,
+  EditorContext as TiptapEditorContext,
+  type UseEditorOptions,
+  useEditor
+} from '@tiptap/react'
 import throttle from 'lodash.throttle'
 import React from 'react'
 import { Spinner } from '@/components/ui/spinner'
@@ -30,39 +36,57 @@ export type EditorProps = UseEditorOptions & {
   onValueChange: (value: Content) => void
 }
 
+export type CallbackRef = React.RefObject<((editor: ReturnType<typeof useEditor> | null) => void) | null>
+
+export type SetExtensions = React.Dispatch<React.SetStateAction<Extensions>>
+
 export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
+  // Hooks
+  const id = React.useId()
+
   // Refs
-  const editorRef = React.useRef<HTMLDivElement>(null)
+  const callbackRef = React.useRef<CallbackRef['current']>(null)
+
+  // States
+  const [extensions, setExtensions] = React.useState<Extensions>(EXTENSIONS)
 
   // Hooks
-  const editor = useEditor({
-    extensions: EXTENSIONS,
-    editorProps: {
-      attributes: {
-        autocomplete: 'off',
-        autocorrect: 'off',
-        autocapitalize: 'off'
-      }
-    },
-    immediatelyRender: false,
-    onUpdate: React.useMemo(() => {
-      return throttle(
-        ({ editor }) => {
-          onValueChange(getEditorValue(editor, 'html'))
-        },
-        1000,
-        {
-          trailing: false
+  const editor = useEditor(
+    {
+      extensions,
+      editorProps: {
+        attributes: {
+          autocomplete: 'off',
+          autocorrect: 'off',
+          autocapitalize: 'off'
         }
-      )
-    }, [onValueChange]),
-    onCreate: ({ editor }) => {
-      if (value && editor.isEmpty) {
-        editor.commands.setContent(value)
-      }
+      },
+      immediatelyRender: false,
+      onUpdate: React.useMemo(() => {
+        return throttle(
+          ({ editor }) => {
+            onValueChange(getEditorValue(editor, 'html'))
+          },
+          1000,
+          {
+            trailing: false
+          }
+        )
+      }, [onValueChange]),
+      onCreate: ({ editor }) => {
+        if (value && editor.isEmpty) {
+          editor.commands.setContent(value)
+        }
+        callbackRef.current?.(editor)
+        callbackRef.current = null
+      },
+      onBlur: ({ editor }) => {
+        onValueChange(getEditorValue(editor, 'html'))
+      },
+      ...props
     },
-    ...props
-  })
+    [extensions]
+  )
 
   // Template
   if (!editor) {
@@ -72,7 +96,7 @@ export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
   return (
     <TiptapEditorContext value={{ editor }}>
       <div
-        ref={editorRef}
+        id={`editor-${id}`}
         className='w-full transition-all [&_.tiptap]:max-h-[500px] [&_.tiptap]:min-h-64 [&_.tiptap]:overflow-auto [&_.tiptap]:border-none [&_.tiptap]:p-6 [&_.tiptap]:outline-none'
       >
         <div className='text rounded-md border border-input text-foreground ring-offset-background transition-[color,box-shadow] placeholder:text-muted-foreground has-[.ProseMirror-focused]:border-ring has-[.ProseMirror-focused]:ring-[3px] has-[.ProseMirror-focused]:ring-ring/50 group-data-[invalid=true]/field:border-destructive group-data-[invalid=true]/field:ring-destructive/20 group-data-[invalid=true]/field:has-[.ProseMirror-focused]:border-destructive group-data-[invalid=true]/field:dark:ring-destructive/40'>
@@ -88,20 +112,20 @@ export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
             <ToolbarSeparator />
 
             <TextStyleButton />
-            <TextAlignButton />
+            <TextAlignButton callbackRef={callbackRef} setExtensions={setExtensions} />
             <TextColorButton />
             <HighlightButton />
             <ToolbarSeparator />
 
-            <LinkButton />
+            <LinkButton id={id} />
             <ListButton />
-            <TableButton />
-            <YoutubeButton />
-            <ImageButton />
-            <FileButton />
+            <TableButton callbackRef={callbackRef} setExtensions={setExtensions} />
+            <YoutubeButton id={id} callbackRef={callbackRef} setExtensions={setExtensions} />
+            <ImageButton id={id} />
+            <FileButton id={id} />
             <ToolbarSeparator />
 
-            <ZoomButton editorRef={editorRef} />
+            <ZoomButton id={id} />
             <PreviewButton value={value} />
           </div>
 

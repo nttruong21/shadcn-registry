@@ -1,4 +1,4 @@
-import { useCurrentEditor } from '@tiptap/react'
+import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { Underline } from 'lucide-react'
 import React from 'react'
 import TooltipButton from './tooltip-button'
@@ -7,6 +7,14 @@ import TooltipButton from './tooltip-button'
 const UnderlineButton = React.memo(() => {
   // Hooks
   const { editor } = useCurrentEditor()
+  const editorState = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      return {
+        isActive: editor?.isActive('underline')
+      }
+    }
+  })
 
   // Template
   return (
@@ -15,6 +23,7 @@ const UnderlineButton = React.memo(() => {
       Icon={Underline}
       label='Underline'
       kbd='Ctrl U'
+      isActive={editorState?.isActive}
       onClick={() => editor?.chain().focus().toggleUnderline().run()}
     />
   )

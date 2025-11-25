@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/utils/ui'
-import { ALIGNMENTS, type Alignment, CONTAINER_CLASS_NAME_PER_ALIGNMENT, MIN_WIDTH } from './lib'
+import { ALIGNMENTS, type Alignment, CONTAINER_CLASS_NAME_PER_ALIGNMENT, isValidYoutubeUrl, MIN_WIDTH } from './lib'
 
 // [T] youtube attributes
 type YoutubeAttributes = React.IframeHTMLAttributes<HTMLIFrameElement> & {
@@ -24,13 +24,6 @@ type YoutubeAttributes = React.IframeHTMLAttributes<HTMLIFrameElement> & {
 
 // [C] Width sizes
 const WIDTH_SIZES: string[] = ['25%', '50%', '75%', '100%']
-
-// [U] Is valid youtube url
-export const isValidYoutubeUrl = (url: string) => {
-  return url.match(
-    /^((?:https?:)?\/\/)?((?:www|m|music)\.)?((?:youtube\.com|youtu\.be|youtube-nocookie\.com))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/
-  )
-}
 
 // [U] Get youtube embed url
 export const getYoutubeEmbedUrl = (nocookie?: boolean, isPlaylist?: boolean) => {
@@ -350,7 +343,7 @@ const YoutubeComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
 }
 
 // Extension
-const CustomYoutubeExtension = Youtube.extend({
+export const CustomYoutubeExtension = Youtube.extend({
   renderHTML({ HTMLAttributes }) {
     const { alignment, containerStyle, ...youtubeAttributes } = HTMLAttributes as YoutubeAttributes
 

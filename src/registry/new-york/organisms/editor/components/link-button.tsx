@@ -36,7 +36,9 @@ const DEFAULT_LINK_FORM_VALUE: z.input<typeof LINK_FORM_SCHEMA> = {
 }
 
 // Component
-const LinkButton = React.memo(() => {
+const LinkButton = React.memo<{
+  id: string
+}>(({ id }) => {
   // Hooks
   const { editor } = useCurrentEditor()
 
@@ -160,10 +162,10 @@ const LinkButton = React.memo(() => {
               name='url'
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor='editor-link-button-link-form-url'>URL</FieldLabel>
+                  <FieldLabel htmlFor={`editor-${id}-link-button-link-form-url`}>URL</FieldLabel>
                   <Input
                     {...field}
-                    id='editor-link-button-link-form-url'
+                    id={`editor-${id}-link-button-link-form-url`}
                     placeholder={`Enter URL`}
                     aria-invalid={fieldState.invalid}
                   />
@@ -177,10 +179,10 @@ const LinkButton = React.memo(() => {
               name='displayText'
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor='editor-link-button-link-display-text'>Display text</FieldLabel>
+                  <FieldLabel htmlFor={`editor-${id}-link-button-link-display-text`}>Display text</FieldLabel>
                   <Input
                     {...field}
-                    id='editor-link-button-link-display-text'
+                    id={`editor-${id}-link-button-link-display-text`}
                     placeholder={`Enter URL`}
                     aria-invalid={fieldState.invalid}
                   />
@@ -195,11 +197,11 @@ const LinkButton = React.memo(() => {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid} orientation='horizontal'>
                   <Checkbox
-                    id='editor-link-button-link-is-open-in-new-tab'
+                    id={`editor-${id}-link-button-link-is-open-in-new-tab`}
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
-                  <FieldLabel htmlFor='editor-link-button-link-is-open-in-new-tab'>Open in new tab</FieldLabel>
+                  <FieldLabel htmlFor={`editor-${id}-link-button-link-is-open-in-new-tab`}>Open in new tab</FieldLabel>
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                 </Field>
               )}

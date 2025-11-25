@@ -1,4 +1,4 @@
-import type { Content } from '@tiptap/react'
+import { type Content, useCurrentEditor, useEditorState } from '@tiptap/react'
 import { Eye } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
@@ -8,13 +8,24 @@ import { EditorContent } from './editor-content'
 
 // Component
 const PreviewButton = React.memo<{ value: Content }>(({ value }) => {
+  // Hooks
+  const { editor } = useCurrentEditor()
+  const editorState = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      return {
+        isEmpty: editor?.isEmpty
+      }
+    }
+  })
+
   // Template
   return (
     <Dialog>
       <Tooltip>
         <TooltipTrigger asChild>
           <DialogTrigger asChild>
-            <Button size='icon' variant='ghost'>
+            <Button size='icon' variant='ghost' disabled={editorState?.isEmpty}>
               <Eye />
             </Button>
           </DialogTrigger>

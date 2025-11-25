@@ -7,15 +7,16 @@ const ZOOM_IN_CLASS_NAME =
 
 // Component
 const ZoomButton = React.memo<{
-  editorRef: React.RefObject<HTMLDivElement | null>
-}>(({ editorRef }) => {
+  id: string
+}>(({ id }) => {
   // States
   const [isZoomed, setIsZoomed] = React.useState(false)
 
   // Methods
   const toggleZoom = () => {
     const newIsZoomed = !isZoomed
-    editorRef.current?.classList[newIsZoomed ? 'add' : 'remove'](...ZOOM_IN_CLASS_NAME.split(' '))
+    const editorElement = document.querySelector(`#editor-${id}`)
+    editorElement?.classList[newIsZoomed ? 'add' : 'remove'](...ZOOM_IN_CLASS_NAME.split(' '))
     setIsZoomed(newIsZoomed)
   }
 

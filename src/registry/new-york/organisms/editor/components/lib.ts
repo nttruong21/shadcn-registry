@@ -2,8 +2,6 @@ import { Color } from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import Link from '@tiptap/extension-link'
 import { TaskItem, TaskList } from '@tiptap/extension-list'
-import { TableKit } from '@tiptap/extension-table'
-import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import { Placeholder } from '@tiptap/extensions'
 import type { Editor } from '@tiptap/react'
@@ -11,7 +9,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight, type LucideProps } from 'lucide-react'
 import type React from 'react'
 import CustomImageExtension from './custom-image-extension'
-import CustomYoutubeExtension from './custom-youtube-extension'
+// import CustomYoutubeExtension from './custom-youtube-extension'
 import FileExtension from './file-extension'
 
 // [T] Alignment
@@ -35,19 +33,8 @@ export const EXTENSIONS = [
   TaskItem.configure({
     nested: true
   }),
-  TableKit.configure({
-    table: { resizable: true, allowTableNodeSelection: true }
-  }),
   Placeholder.configure({
     placeholder: 'Enter content'
-  }),
-  TextAlign.configure({
-    types: ['heading', 'paragraph']
-  }),
-  CustomYoutubeExtension.configure({
-    nocookie: true,
-    width: MIN_WIDTH,
-    height: 180
   }),
   CustomImageExtension,
   FileExtension
@@ -152,4 +139,11 @@ export const getEditorValue = (editor: Editor, format: 'html' | 'json' | 'text')
     default:
       return editor.getText()
   }
+}
+
+// [U] Is valid youtube url
+export const isValidYoutubeUrl = (url: string) => {
+  return url.match(
+    /^((?:https?:)?\/\/)?((?:www|m|music)\.)?((?:youtube\.com|youtu\.be|youtube-nocookie\.com))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/
+  )
 }

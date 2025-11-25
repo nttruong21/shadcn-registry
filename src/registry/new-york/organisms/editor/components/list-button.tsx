@@ -1,4 +1,4 @@
-import { useCurrentEditor } from '@tiptap/react'
+import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { ChevronDown, List, ListOrdered, ListTodo } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
@@ -16,6 +16,16 @@ import { cn } from '@/utils/ui'
 const ListButton = React.memo(() => {
   // Hooks
   const { editor } = useCurrentEditor()
+  const editorState = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      return {
+        isBulletListActive: editor?.isActive('bulletList'),
+        isOrderedListActive: editor?.isActive('orderedList'),
+        isTaskListActive: editor?.isActive('taskList')
+      }
+    }
+  })
 
   // Template
   return (
@@ -37,7 +47,7 @@ const ListButton = React.memo(() => {
         {/* Bullet list */}
         <DropdownMenuItem
           className={cn({
-            'bg-accent': editor?.isActive('bulletList')
+            'bg-accent text-accent-foreground': editorState?.isBulletListActive
           })}
           onClick={() => editor?.chain().focus().toggleBulletList().run()}
         >
@@ -46,22 +56,22 @@ const ListButton = React.memo(() => {
           <DropdownMenuShortcut>Ctrl Shift 8</DropdownMenuShortcut>
         </DropdownMenuItem>
 
-        {/* Order list */}
+        {/* Ordered list */}
         <DropdownMenuItem
           className={cn({
-            'bg-accent': editor?.isActive('orderList')
+            'bg-accent text-accent-foreground': editorState?.isOrderedListActive
           })}
           onClick={() => editor?.chain().focus().toggleOrderedList().run()}
         >
           <ListOrdered />
-          <span>Order list</span>
+          <span>Ordered list</span>
           <DropdownMenuShortcut>Ctrl Shift 7</DropdownMenuShortcut>
         </DropdownMenuItem>
 
         {/* Task list */}
         <DropdownMenuItem
           className={cn({
-            'bg-accent': editor?.isActive('taskList')
+            'bg-accent text-accent-foreground': editorState?.isTaskListActive
           })}
           onClick={() => editor?.chain().focus().toggleTaskList().run()}
         >
