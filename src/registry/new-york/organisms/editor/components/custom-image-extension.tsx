@@ -133,7 +133,7 @@ const ImageComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
                 className={cn(
                   'peer pointer-events-none w-full object-contain opacity-0 outline-2 outline-transparent outline-offset-2 transition-all',
                   {
-                    'outline-[inherit]': isOpenPopover,
+                    'outline-inherit': isOpenPopover,
                     'pointer-events-auto opacity-100': isLoaded
                   }
                 )}

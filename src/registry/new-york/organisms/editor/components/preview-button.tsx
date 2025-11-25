@@ -1,16 +1,13 @@
+import type { Content } from '@tiptap/react'
 import { Eye } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { useEditorContext } from './editor'
 import { EditorContent } from './editor-content'
 
 // Component
-const PreviewButton = React.memo(() => {
-  // Hooks
-  const { value } = useEditorContext()
-
+const PreviewButton = React.memo<{ value: Content }>(({ value }) => {
   // Template
   return (
     <Dialog>
@@ -26,7 +23,7 @@ const PreviewButton = React.memo(() => {
         <TooltipContent>Preview</TooltipContent>
       </Tooltip>
 
-      <DialogContent aria-describedby={undefined} className='max-w-[calc(100dvw_-_3rem)]'>
+      <DialogContent aria-describedby={undefined} className='max-w-[calc(100dvw-3rem)]'>
         <DialogHeader>
           <DialogTitle>Preview the display content</DialogTitle>
         </DialogHeader>

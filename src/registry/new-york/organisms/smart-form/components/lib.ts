@@ -337,7 +337,7 @@ export const getFormSchema = (formData: SmartFormData, schemaOptions?: SchemaOpt
           let fieldSchema: ZodNumber = z.number()
 
           if (!validation) {
-            shape[code] = z.preprocess((value) => Number(value), fieldSchema)
+            shape[code] = z.preprocess((value) => (Number.isNaN(Number(value)) ? 0 : Number(value)), fieldSchema)
             break
           }
 
@@ -356,7 +356,7 @@ export const getFormSchema = (formData: SmartFormData, schemaOptions?: SchemaOpt
             fieldSchema = fieldSchema.lte(validation.max.value as number, validation.max.message)
           }
 
-          shape[code] = z.preprocess(Number, fieldSchema)
+          shape[code] = z.preprocess((value) => (Number.isNaN(Number(value)) ? 0 : Number(value)), fieldSchema)
           break
         }
 

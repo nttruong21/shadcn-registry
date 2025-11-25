@@ -1,16 +1,23 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.7/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["src/**/*.astro", "src/**/*.mdx", "src/**/*.ts", "src/**/*.tsx"]
+    "includes": [
+      "src/**/*.astro",
+      "src/**/*.mdx",
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.css"
+    ]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
+    "indentWidth": 2,
     "lineWidth": 120
   },
   "linter": {
@@ -21,8 +28,16 @@
         "useSortedClasses": {
           "level": "info",
           "options": {
-            "attributes": ["class", "className"],
-            "functions": ["clsx", "cva", "tw", "tw.*"]
+            "attributes": [
+              "class",
+              "className"
+            ],
+            "functions": [
+              "clsx",
+              "cva",
+              "tw",
+              "tw.*"
+            ]
           }
         }
       }
@@ -45,11 +60,23 @@
       }
     }
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "overrides": [
     {
-      "includes": ["src/**/*.astro", "src/**/*.d.ts"],
+      "includes": [
+        "src/**/*.astro",
+        "src/**/*.d.ts"
+      ],
       "linter": {
         "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          },
           "correctness": {
             "noUnusedImports": "off",
             "noUnusedVariables": "off"

@@ -1,53 +1,39 @@
-import {
-  type Content,
-  EditorContent,
-  EditorContext as TiptapEditorContext,
-  type UseEditorOptions,
-  useEditor
-} from '@tiptap/react'
+import { type Content, EditorContext as TiptapEditorContext, type UseEditorOptions, useEditor } from '@tiptap/react'
 import throttle from 'lodash.throttle'
 import React from 'react'
-import { cn } from '@/utils/ui'
-import FixedToolbar from './fixed-toolbar'
+import { Spinner } from '@/components/ui/spinner'
+import BlockquoteButton from './blockquote-button'
+import BoldButton from './bold-button'
+import FileButton from './file-button'
+import HighlightButton from './highlight-button'
+import HistoryButtons from './history-buttons'
+import ImageButton from './image-button'
+import InternalEditorContent from './internal-editor-content'
+import ItalicButton from './italic-button'
 import { EXTENSIONS, getEditorValue } from './lib'
-import TableDropdownMenu from './table-dropdown-menu'
+import LinkButton from './link-button'
+import ListButton from './list-button'
+import PreviewButton from './preview-button'
+import StrikeButton from './strike-button'
+import TableButton from './table-button'
+import TextAlignButton from './text-align-button'
+import TextColorButton from './text-color-button'
+import TextStyleButton from './text-style-button'
+import ToolbarSeparator from './toolbar-separator'
+import UnderlineButton from './underline-button'
+import YoutubeButton from './youtube-button'
+import ZoomButton from './zoom-button'
 
 // Editor
-interface TTableDropdownMenu {
-  open: boolean
-  x: number
-  y: number
-}
-
-interface EditorContext {
-  value: Content
-  containerClassName: string
-  tableDropdownMenu: TTableDropdownMenu
-  setContainerClassName: React.Dispatch<React.SetStateAction<string>>
-  setTableDropdownMenu: React.Dispatch<React.SetStateAction<TTableDropdownMenu>>
-}
-
-export const useEditorContext = () => {
-  const context = React.useContext(EDITOR_CONTEXT)
-  if (!context) {
-    throw new Error('useEditorContext must be used within the <Editor />')
-  }
-  return context
-}
-
-export const EDITOR_CONTEXT = React.createContext<EditorContext | null>(null)
-
-const EditorProvider = ({ children, ...props }: EditorContext & React.PropsWithChildren) => {
-  // Template
-  return <EDITOR_CONTEXT.Provider value={props}>{children}</EDITOR_CONTEXT.Provider>
-}
-
 export type EditorProps = UseEditorOptions & {
   value: Content
   onValueChange: (value: Content) => void
 }
 
 export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
+  // Refs
+  const editorRef = React.useRef<HTMLDivElement>(null)
+
   // Hooks
   const editor = useEditor({
     extensions: EXTENSIONS,
@@ -62,7 +48,6 @@ export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
     onUpdate: React.useMemo(() => {
       return throttle(
         ({ editor }) => {
-          console.log('go here ...')
           onValueChange(getEditorValue(editor, 'html'))
         },
         1000,
@@ -79,57 +64,50 @@ export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
     ...props
   })
 
-  // States
-  const [containerClassName, setContainerClassName] = React.useState('')
-  const [tableDropdownMenu, setTableDropdownMenu] = React.useState<TTableDropdownMenu>({ open: false, x: 0, y: 0 })
-
-  // Methods
-  const clickContextMenu = React.useCallback((e: React.MouseEvent) => {
-    const cell = (e.target as HTMLElement).closest('td, th')
-    if (cell) {
-      e.preventDefault()
-      setTableDropdownMenu({
-        open: true,
-        x: e.clientX,
-        y: e.clientY
-      })
-    } else {
-      setTableDropdownMenu((prev) => ({ ...prev, open: false }))
-    }
-  }, [])
-
   // Template
   if (!editor) {
-    return null
+    return <Spinner className='mx-auto size-6' />
   }
 
   return (
     <TiptapEditorContext value={{ editor }}>
-      <EditorProvider
-        value={value}
-        containerClassName={containerClassName}
-        tableDropdownMenu={tableDropdownMenu}
-        setContainerClassName={setContainerClassName}
-        setTableDropdownMenu={setTableDropdownMenu}
+      <div
+        ref={editorRef}
+        className='w-full transition-all [&_.tiptap]:max-h-[500px] [&_.tiptap]:min-h-64 [&_.tiptap]:overflow-auto [&_.tiptap]:border-none [&_.tiptap]:p-6 [&_.tiptap]:outline-none'
       >
-        <div
-          className={cn(
-            'w-full transition-all [&_.tiptap]:max-h-[500px] [&_.tiptap]:min-h-64 [&_.tiptap]:overflow-auto [&_.tiptap]:border-none [&_.tiptap]:p-6 [&_.tiptap]:outline-none',
-            containerClassName
-          )}
-        >
-          <div className='text rounded-md border border-input text-foreground ring-offset-background transition-[color,box-shadow] placeholder:text-muted-foreground has-[.ProseMirror-focused]:border-ring has-[.ProseMirror-focused]:ring-[3px] has-[.ProseMirror-focused]:ring-ring/50 group-data-[invalid=true]/field:border-destructive group-data-[invalid=true]/field:ring-destructive/20 group-data-[invalid=true]/field:has-[.ProseMirror-focused]:border-destructive group-data-[invalid=true]/field:dark:ring-destructive/40'>
-            <FixedToolbar />
-            <EditorContent
-              editor={editor}
-              role='presentation'
-              className='editor-content'
-              onContextMenu={clickContextMenu}
-            />
-            <TableDropdownMenu />
+        <div className='text rounded-md border border-input text-foreground ring-offset-background transition-[color,box-shadow] placeholder:text-muted-foreground has-[.ProseMirror-focused]:border-ring has-[.ProseMirror-focused]:ring-[3px] has-[.ProseMirror-focused]:ring-ring/50 group-data-[invalid=true]/field:border-destructive group-data-[invalid=true]/field:ring-destructive/20 group-data-[invalid=true]/field:has-[.ProseMirror-focused]:border-destructive group-data-[invalid=true]/field:dark:ring-destructive/40'>
+          <div className='flex flex-wrap items-center gap-1 border-input border-b p-4'>
+            <HistoryButtons />
+            <ToolbarSeparator />
+
+            <BoldButton />
+            <ItalicButton />
+            <UnderlineButton />
+            <StrikeButton />
+            <BlockquoteButton />
+            <ToolbarSeparator />
+
+            <TextStyleButton />
+            <TextAlignButton />
+            <TextColorButton />
+            <HighlightButton />
+            <ToolbarSeparator />
+
+            <LinkButton />
+            <ListButton />
+            <TableButton />
+            <YoutubeButton />
+            <ImageButton />
+            <FileButton />
+            <ToolbarSeparator />
+
+            <ZoomButton editorRef={editorRef} />
+            <PreviewButton value={value} />
           </div>
+
+          <InternalEditorContent />
         </div>
-      </EditorProvider>
+      </div>
     </TiptapEditorContext>
   )
 }

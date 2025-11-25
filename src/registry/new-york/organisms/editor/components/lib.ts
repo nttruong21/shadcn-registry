@@ -4,7 +4,6 @@ import Link from '@tiptap/extension-link'
 import { TaskItem, TaskList } from '@tiptap/extension-list'
 import { TableKit } from '@tiptap/extension-table'
 import TextAlign from '@tiptap/extension-text-align'
-import { TextStyle } from '@tiptap/extension-text-style'
 import Underline from '@tiptap/extension-underline'
 import { Placeholder } from '@tiptap/extensions'
 import type { Editor } from '@tiptap/react'
@@ -31,7 +30,6 @@ export const EXTENSIONS = [
   Underline,
   Highlight.configure({ multicolor: true }),
   Link.configure({ defaultProtocol: 'https', protocols: ['https'], openOnClick: false }),
-  TextStyle,
   Color,
   TaskList,
   TaskItem.configure({

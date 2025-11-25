@@ -1,37 +1,30 @@
-import { useCurrentEditor } from '@tiptap/react'
+import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { Quote } from 'lucide-react'
 import React from 'react'
-import { Button } from '@/components/ui/button'
-import { Kbd } from '@/components/ui/kbd'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/utils/ui'
+import TooltipButton from './tooltip-button'
 
 // Component
 const BlockquoteButton = React.memo(() => {
   // Hooks
   const { editor } = useCurrentEditor()
+  const editorState = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      return {
+        isActive: editor?.isActive('blockquote')
+      }
+    }
+  })
 
   // Template
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          size='icon'
-          variant='ghost'
-          className={cn({
-            'bg-accent text-accent-foreground': editor?.isActive('blockquote')
-          })}
-          onClick={() => editor?.chain().focus().toggleBlockquote().run()}
-        >
-          <Quote />
-        </Button>
-      </TooltipTrigger>
-
-      <TooltipContent>
-        <span>Blockquote</span>
-        <Kbd>Ctrl Shift B</Kbd>
-      </TooltipContent>
-    </Tooltip>
+    <TooltipButton
+      Icon={Quote}
+      label='Blockquote'
+      isActive={editorState?.isActive}
+      kbd='Ctrl Shift B'
+      onClick={() => editor?.chain().focus().toggleBlockquote().run()}
+    />
   )
 })
 

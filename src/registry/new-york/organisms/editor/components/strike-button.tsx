@@ -1,37 +1,30 @@
-import { useCurrentEditor } from '@tiptap/react'
+import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { Strikethrough } from 'lucide-react'
 import React from 'react'
-import { Button } from '@/components/ui/button'
-import { Kbd } from '@/components/ui/kbd'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { cn } from '@/utils/ui'
+import TooltipButton from './tooltip-button'
 
 // Component
 const StrikeButton = React.memo(() => {
   // Hooks
   const { editor } = useCurrentEditor()
+  const editorState = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      return {
+        isActive: editor?.isActive('strike')
+      }
+    }
+  })
 
   // Template
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          size='icon'
-          variant='ghost'
-          className={cn({
-            'bg-accent text-accent-foreground': editor?.isActive('strike')
-          })}
-          onClick={() => editor?.chain().focus().toggleStrike().run()}
-        >
-          <Strikethrough />
-        </Button>
-      </TooltipTrigger>
-
-      <TooltipContent>
-        <span>Strike</span>
-        <Kbd>Ctrl Shift S</Kbd>
-      </TooltipContent>
-    </Tooltip>
+    <TooltipButton
+      Icon={Strikethrough}
+      label='Strike'
+      isActive={editorState?.isActive}
+      kbd='Ctrl Shift S'
+      onClick={() => editor?.chain().focus().toggleStrike().run()}
+    />
   )
 })
 
