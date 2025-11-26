@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightThemeBlack from "starlight-theme-black";
-import { visualizer } from 'rollup-plugin-visualizer'
+import { visualizer } from "rollup-plugin-visualizer";
 
 if (!process.env.NODE_ENV) {
   throw new Error("NODE_ENV is not set.");
@@ -60,7 +60,7 @@ export default defineConfig({
           tag: "link",
           attrs: {
             rel: "icon",
-            href: "/favicon-512x512.png",
+            href: "/favicon-32x32.png",
             media: "(prefers-color-scheme: dark)",
             type: "image/png",
           },
@@ -70,15 +70,15 @@ export default defineConfig({
           tag: "link",
           attrs: {
             rel: "icon",
-            href: "/favicon-512x512.png",
+            href: "/favicon-32x32.png",
             media: "(prefers-color-scheme: light)",
             type: "image/png",
           },
         },
       ],
       logo: {
-        dark: "./src/assets/images/logo.png",
-        light: "./src/assets/images/logo.png",
+        dark: "./src/assets/images/logo-dark.svg",
+        light: "./src/assets/images/logo-light.svg",
         replacesTitle: true,
       },
       social: [
@@ -132,10 +132,14 @@ export default defineConfig({
     react(),
   ],
   vite: {
-    // @ts-expect-error: Astro still Vite v6 while tailwindcss will pull in Vite v7 => types mismatch
-    plugins: [tailwindcss(), visualizer({
-      filename: 'dist/stats.html', gzipSize: true
-    })],
+    plugins: [
+      // @ts-expect-error: Astro still Vite v6 while tailwindcss will pull in Vite v7 => types mismatch
+      tailwindcss(),
+      visualizer({
+        filename: "dist/stats.html",
+        gzipSize: true,
+      }),
+    ],
     // build: {
     //   rollupOptions: {
     //     output: {
