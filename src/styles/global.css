@@ -1,10 +1,10 @@
 @layer base, starlight, black, theme, components, utilities;
 
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import '@astrojs/starlight-tailwind';
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@astrojs/starlight-tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 
 @custom-variant dark (&:where([data-theme="dark"] *));
 
@@ -85,7 +85,8 @@
   --code: oklch(0.98 0 0);
 }
 
-[data-theme='dark'] {
+.dark,
+[data-theme="dark"] {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -196,11 +197,11 @@
     @apply border-gray-200;
 
     h1 {
-     @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+      @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
     }
 
     h2 {
-       @apply scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0;
+      @apply scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0;
     }
 
     h3 {
@@ -208,7 +209,7 @@
     }
 
     h4 {
-       @apply scroll-m-20 text-xl font-semibold tracking-tight;
+      @apply scroll-m-20 text-xl font-semibold tracking-tight;
     }
 
     mark {
@@ -238,7 +239,7 @@
       @apply list-decimal;
     }
 
-    ul[data-type='taskList'] {
+    ul[data-type="taskList"] {
       @apply ml-0 list-none p-0;
 
       li {
@@ -256,18 +257,18 @@
           @apply m-0;
         }
 
-        &[data-checked='true'] {
+        &[data-checked="true"] {
           p {
             @apply line-through opacity-40;
           }
         }
       }
 
-      input[type='checkbox'] {
+      input[type="checkbox"] {
         @apply cursor-pointer;
       }
 
-      ul[data-type='taskList'] {
+      ul[data-type="taskList"] {
         @apply m-0;
       }
     }

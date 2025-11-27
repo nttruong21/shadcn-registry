@@ -1,0 +1,30 @@
+---
+title: Theme toggle button
+description: A button to toggle the theme.
+---
+
+import CodePreview from '@/components/molecules/code-preview/index.astro'
+import InstallationCard from '@/components/molecules/installation-card/index.astro'
+import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.astro'
+
+<CodePreview path='molecules/theme-toggle-button/demo' />
+
+## Installation
+
+<InstallationCard registryName='theme-toggle-button' />
+
+## Usage
+
+```tsx
+import { observeTheme, ThemeToggleButton } from '@/components/molecules/theme-toggle-button'
+```
+
+```tsx
+  // Effects
+  React.useEffect(() => {
+    useLayoutEffect()
+  }, [])
+
+// Template
+<ThemeToggleButton />
+```
