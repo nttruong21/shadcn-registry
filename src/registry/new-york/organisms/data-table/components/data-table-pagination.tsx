@@ -39,7 +39,7 @@ const DataTablePagination = <TData extends RowData>({
   return (
     <div
       className={cn(
-        'flex w-full flex-col items-center justify-between gap-4 border-t bg-muted/40 p-4 text-sm xl:flex-row',
+        'flex w-full flex-col items-center justify-between gap-4 border-t bg-muted/50 p-4 text-sm xl:flex-row',
         className
       )}
     >

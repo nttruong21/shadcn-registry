@@ -5,6 +5,16 @@ import {
   DataTableCheckboxHeader,
   useDataTable
 } from '@/components/organisms/data-table'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogScrollableContent,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 
 interface Row {
   id: string
@@ -74,5 +84,22 @@ export const DataTableSelection = () => {
   })
 
   // Template
-  return <DataTable table={table} />
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+
+      <DialogContent className='w-7xl'>
+        <DialogHeader>
+          <DialogTitle>Data table demo</DialogTitle>
+          <DialogDescription>Selection</DialogDescription>
+        </DialogHeader>
+
+        <DialogScrollableContent>
+          <DataTable table={table} />
+        </DialogScrollableContent>
+      </DialogContent>
+    </Dialog>
+  )
 }

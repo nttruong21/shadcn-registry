@@ -2,6 +2,7 @@ import type { RowData } from '@tanstack/react-table'
 import { ListChecks } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { cn } from '@/utils/ui'
 import type { DataTableProps } from './data-table'
 
 // Component
@@ -24,7 +25,11 @@ const DataTableRowSelection = <TData extends RowData>({ table }: Pick<DataTableP
   }
 
   return (
-    <div className='fade-in slide-in-from-bottom-40 fixed inset-x-0 bottom-6 z-50 mx-auto flex w-fit animate-in flex-wrap items-center justify-center gap-4 rounded-md border bg-background p-4 text-foreground shadow'>
+    <div
+      className={cn('w-full animate-in bg-muted/50 p-4 text-sm', {
+        'fade-in slide-in-from-top-60': rowSelectionLength > 0
+      })}
+    >
       <span>
         {isSelectAllRows ? `All ${rowCount} rows selected` : `${rowSelectionLength}/${pageRowCount} rows selected`}
       </span>

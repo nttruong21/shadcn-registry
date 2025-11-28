@@ -43,10 +43,11 @@ export const DataTable = <TData extends RowData>({
 }: DataTableProps<TData>) => {
   return (
     // Template
-    <div id={id} className={cn('relative overflow-hidden rounded-md border', className?.container)}>
-      {/* Row selection */}
-      <DataTableRowSelection table={table} />
-
+    <div
+      id={id}
+      // **:data-[slot=table-container]:max-h-96
+      className={cn('w-full overflow-hidden rounded-md border', className?.container)}
+    >
       <Table className={className?.table}>
         {/* Table header */}
         <DataTableHeader table={table} className={className?.tableHeader} />
@@ -65,6 +66,9 @@ export const DataTable = <TData extends RowData>({
 
       {/* Additional info */}
       <DataTableAdditionalInfo table={table} isError={isError} isLoading={isLoading} />
+
+      {/* Row selection */}
+      <DataTableRowSelection table={table} />
 
       {/* Pagination */}
       {isDisplayPagination && <DataTablePagination table={table} className={className?.tablePagination} />}

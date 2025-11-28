@@ -112,12 +112,12 @@ export const Pagination = ({
       {/* Previous */}
       <Button
         variant='ghost'
+        size='icon'
         className='hidden xl:inline-flex'
         disabled={!(isHasPreviousPage || page > 1)}
         onClick={handleGoToPreviousPage}
       >
         <ChevronLeft />
-        <span className='hidden xl:inline-block'>Previous</span>
       </Button>
 
       {displayedPages.map((displayedPage) => {
@@ -164,7 +164,7 @@ export const Pagination = ({
           <Button
             key={displayedPage}
             variant={isActive ? 'default' : 'ghost'}
-            className={cn('relative w-fit min-w-10', isActive && 'cursor-default')}
+            size={displayedPage > 9999 ? 'default' : 'icon'}
             onClick={() => onChangePage(displayedPage)}
           >
             <span className={cn('z-10 tabular-nums', isActive && 'text-primary-foreground')}>{displayedPage}</span>
@@ -175,11 +175,11 @@ export const Pagination = ({
       {/* Next */}
       <Button
         variant='ghost'
+        size='icon'
         className='hidden xl:inline-flex'
         disabled={!(isHasNextPage || page < pageCount)}
         onClick={handleGoToNextPage}
       >
-        <span className='hidden xl:inline-block'>Next</span>
         <ChevronRight />
       </Button>
     </div>

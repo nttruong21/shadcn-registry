@@ -1,6 +1,16 @@
 import { type ColumnDef, getPaginationRowModel } from '@tanstack/react-table'
 import { FilePenLine, Search, Trash } from 'lucide-react'
 import { DataTable, DataTableActionCell, useDataTable } from '@/components/organisms/data-table'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogScrollableContent,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 
 interface Row {
   id: string
@@ -84,5 +94,22 @@ export const DataTableActionCellDemo = () => {
   })
 
   // Template
-  return <DataTable table={table} />
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+
+      <DialogContent className='w-7xl'>
+        <DialogHeader>
+          <DialogTitle>Data table</DialogTitle>
+          <DialogDescription>Action column</DialogDescription>
+        </DialogHeader>
+
+        <DialogScrollableContent>
+          <DataTable table={table} />
+        </DialogScrollableContent>
+      </DialogContent>
+    </Dialog>
+  )
 }

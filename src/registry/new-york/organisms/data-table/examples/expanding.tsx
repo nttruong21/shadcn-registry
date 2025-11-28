@@ -2,6 +2,15 @@ import { type ColumnDef, getExpandedRowModel, getPaginationRowModel } from '@tan
 import { ChevronRight } from 'lucide-react'
 import { DataTable, useDataTable } from '@/components/organisms/data-table'
 import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogScrollableContent,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 import { cn } from '@/utils/ui'
 
 type Row = {
@@ -26,6 +35,7 @@ const COLUMNS: ColumnDef<Row>[] = [
         return (
           <Button
             variant='ghost'
+            size='icon'
             className={cn('gap-1 p-0 [&>svg]:transition-transform', {
               '[&>svg]:rotate-90': row.getIsExpanded()
             })}
@@ -150,5 +160,22 @@ export const DataTableExpanding = () => {
   })
 
   // Template
-  return <DataTable table={table} />
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+
+      <DialogContent className='w-7xl'>
+        <DialogHeader>
+          <DialogTitle>Data table</DialogTitle>
+          <DialogDescription>Expanding</DialogDescription>
+        </DialogHeader>
+
+        <DialogScrollableContent>
+          <DataTable table={table} />
+        </DialogScrollableContent>
+      </DialogContent>
+    </Dialog>
+  )
 }

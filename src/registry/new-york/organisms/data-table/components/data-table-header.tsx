@@ -37,7 +37,7 @@ const DataTableHeader = <TData extends RowData>({
                 key={header.id}
                 colSpan={header.colSpan}
                 rowSpan={rowSpan}
-                className={cn('relative space-y-1 bg-background py-2', header.column.columnDef.meta?.className, {
+                className={cn('space-y-1 bg-background', header.column.columnDef.meta?.className, {
                   'border-l': isGroupColumn,
                   'first:border-l-0': headerGroupIndex === 0 && headerIndex === 0
                 })}
