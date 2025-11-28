@@ -1,0 +1,30 @@
+---
+title: Gradient path background
+description: A set of SVG paths that animate as if being drawn. Great for tech hero backgrounds.
+---
+
+import CodePreview from "@/components/molecules/code-preview/index.astro";
+import InstallationCard from "@/components/molecules/installation-card/index.astro";
+import ShadcnLinkButton from "@/components/molecules/shadcn-link-button/index.astro";
+import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight } from "lucide-react";
+import DocLinkButton from "@/components/molecules/doc-link-button/index.astro";
+
+<DocLinkButton link="https://www.scrollxui.dev/docs/components/background-paths" />
+
+<CodePreview path="molecules/gradient-path-background/demo" />
+
+## Installation
+
+<InstallationCard registryName="gradient-path-background" />
+
+## Usage
+
+```tsx
+import { GradientPathBackground } from '@/components/molecules/gradient-path-background'
+```
+
+```tsx
+// Template
+<GradientPathBackground className='w-full h-96 max-h-full' />
+```

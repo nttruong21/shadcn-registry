@@ -1,0 +1,30 @@
+---
+title: Tilt card
+description: Smooth tilt card that responds naturally to your cursor, giving the card a more polished, modern look.
+---
+
+import CodePreview from "@/components/molecules/code-preview/index.astro";
+import InstallationCard from "@/components/molecules/installation-card/index.astro";
+import ShadcnLinkButton from "@/components/molecules/shadcn-link-button/index.astro";
+import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight } from "lucide-react";
+import DocLinkButton from "@/components/molecules/doc-link-button/index.astro";
+
+<DocLinkButton link="https://www.scrollxui.dev/docs/components/card-tilt" />
+
+<CodePreview path="molecules/tilt-card/demo" />
+
+## Installation
+
+<InstallationCard registryName="tilt-card" />
+
+## Usage
+
+```tsx
+import { GradientPathBackground } from '@/components/molecules/tilt-card'
+```
+
+```tsx
+// Template
+<GradientPathBackground className='w-full h-96 max-h-full' />
+```

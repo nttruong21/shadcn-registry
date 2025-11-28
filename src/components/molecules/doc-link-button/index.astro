@@ -1,0 +1,14 @@
+---
+import DocLinkButton from './_module'
+
+// Props
+interface Props {
+  link: string
+  className?: string
+}
+
+const { link, className } = Astro.props
+---
+
+<!-- Template -->
+<DocLinkButton link={link} className={className} />
