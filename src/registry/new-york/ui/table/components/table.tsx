@@ -5,8 +5,12 @@ import { cn } from '@/utils/ui'
 export const Table = ({ className, ...props }: React.ComponentProps<'table'>) => {
   // Template
   return (
-    <div data-slot='table-container' className='relative w-full overflow-x-auto'>
-      <table data-slot='table' className={cn('w-full caption-bottom text-sm', className)} {...props} />
+    <div data-slot='table-container' className='size-full max-h-full grow overflow-auto'>
+      <table
+        data-slot='table'
+        className={cn('w-full table-fixed caption-bottom border-separate border-spacing-0 text-sm', className)}
+        {...props}
+      />
     </div>
   )
 }
@@ -20,7 +24,13 @@ export const TableHeader = ({ className, ...props }: React.ComponentProps<'thead
 // Table body
 export const TableBody = ({ className, ...props }: React.ComponentProps<'tbody'>) => {
   // Template
-  return <tbody data-slot='table-body' className={cn('[&_tr:last-child]:border-0', className)} {...props} />
+  return (
+    <tbody
+      data-slot='table-body'
+      className={cn('[&_tr:last-child]:border-0 [&_tr]:hover:bg-muted/50', className)}
+      {...props}
+    />
+  )
 }
 
 // Table footer
@@ -40,7 +50,7 @@ export const TableRow = ({ className, ...props }: React.ComponentProps<'tr'>) =>
   return (
     <tr
       data-slot='table-row'
-      className={cn('border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted', className)}
+      className={cn('border-b transition-colors data-[state=selected]:bg-muted', className)}
       {...props}
     />
   )

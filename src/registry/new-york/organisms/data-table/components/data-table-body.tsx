@@ -29,10 +29,10 @@ const DataTableBody = <TData extends RowData>({
           <React.Fragment key={row.id}>
             <TableRow
               data-state={row.getIsSelected() && 'selected'}
-              className={cn('bg-background', isExpanded && 'border-b-0', rowClassName)}
+              className={cn('[&:not(:last-child)_td]:border-b', isExpanded && 'border-b-0', rowClassName)}
             >
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id} className='bg-background' style={{ ...getCommonPinningStyles(cell.column) }}>
+                <TableCell key={cell.id} style={{ ...getCommonPinningStyles(cell.column) }}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}

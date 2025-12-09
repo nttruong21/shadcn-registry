@@ -45,8 +45,10 @@ export const DataTable = <TData extends RowData>({
     // Template
     <div
       id={id}
-      // **:data-[slot=table-container]:max-h-96
-      className={cn('w-full overflow-hidden rounded-md border', className?.container)}
+      className={cn(
+        'flex max-h-[calc(100dvh-2rem)] w-full flex-col overflow-hidden rounded-md border',
+        className?.container
+      )}
     >
       <Table className={className?.table}>
         {/* Table header */}

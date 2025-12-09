@@ -87,7 +87,7 @@ export default defineConfig({
           label: "GitHub",
           href: PUBLIC_GITHUB_REPO_URL,
         },
-      ],
+      ],  
       sidebar: [
         {
           label: "Getting Started",

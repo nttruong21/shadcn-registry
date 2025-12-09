@@ -16,15 +16,17 @@ import ShadcnLinkButton from '@/components/molecules/shadcn-link-button/index.as
 ## Usage
 
 ```tsx
+import React from 'react'
 import { observeTheme, ThemeToggleButton } from '@/components/molecules/theme-toggle-button'
 ```
 
 ```tsx
-  // Effects
-  React.useEffect(() => {
-    useLayoutEffect()
-  }, [])
+// Effects
+React.useLayoutEffect(() => {
+  const observer = observeTheme('starlight-theme')
+  return () => observer.disconnect()
+}, [])
 
 // Template
-<ThemeToggleButton />
+<ThemeToggleButton themeLocalStorageKey='starlight-theme' />
 ```

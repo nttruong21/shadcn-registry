@@ -11,12 +11,12 @@ const DataTableHeader = <TData extends RowData>({
   table,
   className
 }: Pick<DataTableProps<TData>, 'table'> & { className?: string }) => {
-  const isGroupColumn = table.getAllColumns().length < table.getAllFlatColumns().length
+  // const isGroupColumn = table.getAllColumns().length < table.getAllFlatColumns().length
 
   // Template
   return (
     <TableHeader className={cn('sticky top-0 z-20 bg-background', className)}>
-      {table.getHeaderGroups().map((headerGroup, headerGroupIndex) => (
+      {table.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header, headerIndex) => {
             const pinningPosition = header.column.getIsPinned()
@@ -37,9 +37,8 @@ const DataTableHeader = <TData extends RowData>({
                 key={header.id}
                 colSpan={header.colSpan}
                 rowSpan={rowSpan}
-                className={cn('space-y-1 bg-background', header.column.columnDef.meta?.className, {
-                  'border-l': isGroupColumn,
-                  'first:border-l-0': headerGroupIndex === 0 && headerIndex === 0
+                className={cn('space-y-1 border-b border-l', header.column.columnDef.meta?.className, {
+                  'first:border-l-0': headerIndex === 0
                 })}
                 style={{
                   ...getCommonPinningStyles(header.column)
