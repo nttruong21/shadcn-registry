@@ -1,7 +1,7 @@
 import { Trash } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { Combobox, type ComboboxProps, type Option } from '@/components/ui/combobox'
+import { Combobox, type ComboboxProps } from '@/components/ui/combobox'
 import {
   Dialog,
   DialogClose,
@@ -12,9 +12,10 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
+import type { Option } from '@/types/base'
 
 // Constants
-const OPTIONS: Option[] = [
+const options: Option[] = [
   {
     value: 'next.js',
     label: 'Next.js'
@@ -47,7 +48,7 @@ export function ComboboxCommandInputAction() {
     <div className='w-full max-w-xs'>
       <Combobox
         value={value}
-        options={OPTIONS}
+        options={options}
         placeholder='Select framework'
         commandItemPrefix={(option) => (
           <Dialog>

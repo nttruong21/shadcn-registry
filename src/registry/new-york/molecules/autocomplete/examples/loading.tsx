@@ -1,8 +1,9 @@
 import React from 'react'
-import { Autocomplete, type AutocompleteProps, type Option } from '@/components/molecules/autocomplete'
+import { Autocomplete, type AutocompleteProps } from '@/components/molecules/autocomplete'
 import { Button } from '@/components/ui/button'
+import type { Option } from '@/types/base'
 
-const OPTIONS: Option[] = [
+const allOptions: Option[] = [
   {
     value: 'next.js',
     label: 'Next.js'
@@ -37,7 +38,7 @@ export const AutocompleteDemo = () => {
   React.useEffect(() => {
     setOptions([])
     const timer = setTimeout(() => {
-      setOptions(OPTIONS)
+      setOptions(allOptions)
     }, 2000)
     return () => clearTimeout(timer)
   }, [key])

@@ -1,7 +1,8 @@
 import React from 'react'
-import { MultiSelect, type MultiSelectProps, type Option } from '@/components/molecules/multi-select'
+import { MultiSelect, type MultiSelectProps } from '@/components/molecules/multi-select'
+import type { Option } from '@/types/base'
 
-const OPTIONS: Option[] = [
+const options: Option[] = [
   {
     value: 'next.js',
     label: 'Next.js'
@@ -34,7 +35,7 @@ export const ComboboxLoading = () => {
     <div className='w-full max-w-xs'>
       <MultiSelect
         value={value}
-        options={OPTIONS}
+        options={options}
         placeholder='Select framework'
         buttonTriggerProps={{
           isLoading: true

@@ -1,8 +1,9 @@
 import React from 'react'
-import { Combobox, type ComboboxProps, type Option } from '@/components/ui/combobox'
+import { Combobox, type ComboboxProps } from '@/components/ui/combobox'
+import type { Option } from '@/types/base'
 
 // Constants
-const OPTIONS: Option[] = [
+const options: Option[] = [
   {
     value: 'next.js',
     label: 'Next.js'
@@ -35,7 +36,7 @@ export function ComboboxLoading() {
     <div className='w-full max-w-xs'>
       <Combobox
         value={value}
-        options={OPTIONS}
+        options={options}
         placeholder='Select framework'
         buttonTriggerProps={{ isLoading: true }}
         onValueChange={setValue}

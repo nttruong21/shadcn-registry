@@ -1,7 +1,8 @@
 import React from 'react'
-import { Autocomplete, type AutocompleteProps, type Option } from '@/components/molecules/autocomplete'
+import { Autocomplete, type AutocompleteProps } from '@/components/molecules/autocomplete'
+import type { Option } from '@/types/base'
 
-const OPTIONS: Option[] = [
+const options: Option[] = [
   {
     value: 'next.js',
     label: 'Next.js'
@@ -38,7 +39,7 @@ export const AutocompleteDemo = () => {
           placeholder: 'Select framework'
         }}
         onValueChange={setValue}
-        options={OPTIONS}
+        options={options}
       />
     </div>
   )

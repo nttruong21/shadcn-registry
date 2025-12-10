@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { Combobox, type ComboboxProps, type Option } from '@/components/ui/combobox'
+import { Combobox, type ComboboxProps } from '@/components/ui/combobox'
+import type { Option } from '@/types/base'
 
 // Constants
-const OPTIONS: Option[] = [
+const options: Option[] = [
   {
     value: 'next.js',
     label: 'Next.js'
@@ -33,7 +34,7 @@ export const ComboboxDemo = () => {
   // Template
   return (
     <div className='w-full max-w-xs'>
-      <Combobox value={value} options={OPTIONS} placeholder='Select framework' onValueChange={setValue} />
+      <Combobox value={value} options={options} placeholder='Select framework' onValueChange={setValue} />
     </div>
   )
 }
