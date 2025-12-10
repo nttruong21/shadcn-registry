@@ -13,14 +13,10 @@ import type { InputProps } from '@/components/ui/input'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Spinner } from '@/components/ui/spinner'
+import type { Option } from '@/types/base'
 import { cn } from '@/utils/ui'
 
 // Autocomplete
-export interface Option {
-  value: string
-  label: string
-}
-
 export interface AutocompleteProps {
   value: string
   options: Option[]

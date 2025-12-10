@@ -1,33 +1,34 @@
 import { Color } from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
-import Link from '@tiptap/extension-link'
 import { TaskItem, TaskList } from '@tiptap/extension-list'
-import Underline from '@tiptap/extension-underline'
 import { Placeholder } from '@tiptap/extensions'
 import type { Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight, type LucideProps } from 'lucide-react'
 import type React from 'react'
 import CustomImageExtension from './custom-image-extension'
-// import CustomYoutubeExtension from './custom-youtube-extension'
 import FileExtension from './file-extension'
 
 // [T] Alignment
 export type Alignment = 'left' | 'center' | 'right' | 'justify'
 
 // [C] Min width
-export const MIN_WIDTH = 320
+export const minWidth = 320
 
-// [C] Extensions
-export const EXTENSIONS = [
+// [C] Default extensions
+export const defaultExtensions = [
   StarterKit.configure({
     heading: {
       levels: [1, 2, 3, 4]
+    },
+    link: {
+      defaultProtocol: 'https',
+      protocols: ['https'],
+      openOnClick: false,
+      autolink: true
     }
   }),
-  Underline,
   Highlight.configure({ multicolor: true }),
-  Link.configure({ defaultProtocol: 'https', protocols: ['https'], openOnClick: false }),
   Color,
   TaskList,
   TaskItem.configure({
@@ -89,7 +90,7 @@ export const EXTENSIONS = [
 ]
 
 // [C] Container class name per alignment
-export const CONTAINER_CLASS_NAME_PER_ALIGNMENT: Record<Alignment, string> = {
+export const containerClassNamePerAlignment: Record<Alignment, string> = {
   left: 'justify-start',
   center: 'justify-center',
   right: 'justify-end',
@@ -97,7 +98,7 @@ export const CONTAINER_CLASS_NAME_PER_ALIGNMENT: Record<Alignment, string> = {
 }
 
 // [C] Alignments
-export const ALIGNMENTS: Array<{
+export const alignments: Array<{
   value: Alignment
   icon: React.ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>>
   label: string

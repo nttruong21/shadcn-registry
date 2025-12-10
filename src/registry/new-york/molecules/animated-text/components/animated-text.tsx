@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import React from 'react'
-import { Button } from '@/components/ui/button'
 import { cn } from '@/utils/ui'
 
 // Animated text
@@ -12,7 +11,7 @@ interface AnimatedTextProps {
   highlightWords?: string[]
   highlightClassName?: string
   linkWords?: string[]
-  linkHrefs?: string[]
+  linkUrls?: string[]
   linkClassNames?: string[]
 }
 
@@ -22,9 +21,9 @@ export const AnimatedText = ({
   blurEffect = true,
   speed = 0.5,
   highlightWords = [],
-  highlightClassName = 'text-primary',
+  highlightClassName,
   linkWords = [],
-  linkHrefs = [],
+  linkUrls = [],
   linkClassNames = []
 }: AnimatedTextProps) => {
   // States
@@ -73,23 +72,32 @@ export const AnimatedText = ({
                   duration: speed * 0.3,
                   ease: 'easeOut'
                 }}
-                className={cn(isHighlight && highlightClassName)}
+                className={cn(isHighlight && `font-semibold text-primary ${highlightClassName}`)}
               >
                 {' '}
                 {word}
               </motion.span>
             )
 
-            if (isLink && linkHrefs[linkIndex]) {
+            if (isLink && linkUrls[linkIndex]) {
               return (
-                <Button
+                <a
                   // biome-ignore lint/suspicious/noArrayIndexKey: ignore
                   key={`link-${index}`}
-                  variant='link'
-                  className={cn('h-fit p-0 text-base md:text-lg xl:text-xl', linkClassNames[linkIndex])}
+                  href={linkUrls[linkIndex]}
+                  className={cn('underline', linkClassNames[linkIndex])}
                 >
-                  <a href={linkHrefs[linkIndex]}> {wordElement}</a>
-                </Button>
+                  {' '}
+                  {wordElement}
+                </a>
+                // <Button
+                //   key={`link-${index}`}
+                //   variant='link'
+                //   className={cn('h-fit p-0 text-base md:text-lg xl:text-xl', linkClassNames[linkIndex])}
+                // >
+                //   {' '}
+
+                // </Button>
               )
             }
             return wordElement

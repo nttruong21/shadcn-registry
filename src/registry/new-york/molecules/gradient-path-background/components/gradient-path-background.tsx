@@ -20,7 +20,7 @@ export const GradientPathBackground = ({ children, className, svgOptions }: Grad
   )
 }
 
-const CIRCUITS = [
+const circuits = [
   'M 50 100 L 200 100 L 200 200 L 350 200 L 350 300 L 500 300',
   'M 500 50 L 500 150 L 650 150 L 650 250 L 800 250 L 800 350',
   'M 100 400 L 250 400 L 250 500 L 400 500 L 400 600 L 550 600',
@@ -31,7 +31,7 @@ const CIRCUITS = [
   'M 550 150 L 700 150 L 700 300 L 850 300'
 ]
 
-const NODES = [
+const nodes = [
   { x: 200, y: 100 },
   { x: 350, y: 200 },
   { x: 500, y: 300 },
@@ -87,7 +87,7 @@ const PathSVG = ({ opacityOnAnimate = 1, duration }: GradientPathBackgroundProps
         </filter>
       </defs>
 
-      {CIRCUITS.map((path, index) => (
+      {circuits.map((path, index) => (
         <motion.path
           // biome-ignore lint/suspicious/noArrayIndexKey: ignore
           key={`circuit-${index}`}
@@ -112,7 +112,7 @@ const PathSVG = ({ opacityOnAnimate = 1, duration }: GradientPathBackgroundProps
         />
       ))}
 
-      {NODES.map((node, index) => (
+      {nodes.map((node, index) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: ignore
         <motion.g key={`node-${index}`}>
           <motion.circle

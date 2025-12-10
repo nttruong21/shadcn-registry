@@ -25,14 +25,10 @@ import {
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
 import { Spinner } from '@/components/ui/spinner'
+import type { Option } from '@/types/base'
 import { cn } from '@/utils/ui'
 
 // Multi select
-export interface Option {
-  value: string
-  label: string
-}
-
 export interface MultiSelectProps {
   value: Array<Option['value']>
   options: Option[]

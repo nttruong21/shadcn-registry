@@ -2,8 +2,8 @@ import React from 'react'
 import { type ControllerRenderProps, useFormContext } from 'react-hook-form'
 import { Combobox, type ComboboxProps } from '@/components/ui/combobox'
 import {
-  DEFAULT_VALUE_PER_OPERATION,
-  OPERATIONS_PER_TYPE,
+  defaultValuePerOperation,
+  operationsPerType,
   type SmartFilterFormInput,
   type SmartFilterFormOutput
 } from './lib'
@@ -30,10 +30,10 @@ const AdvancedFilterNameField = ({
     const selectedFilter = filters.find((filter) => filter.name === value)
     if (!selectedFilter) return
 
-    const operation = OPERATIONS_PER_TYPE[selectedFilter.type][0]
+    const operation = operationsPerType[selectedFilter.type][0]
     form.setValue(`filters.${index}.type`, selectedFilter.type)
     form.setValue(`filters.${index}.operation`, operation)
-    form.setValue(`filters.${index}.value`, DEFAULT_VALUE_PER_OPERATION[operation])
+    form.setValue(`filters.${index}.value`, defaultValuePerOperation[operation])
 
     field.onChange(value)
   }

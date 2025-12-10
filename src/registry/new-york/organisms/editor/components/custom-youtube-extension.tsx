@@ -6,7 +6,7 @@ import {
   ReactNodeViewRenderer,
   useCurrentEditor
 } from '@tiptap/react'
-import { ChevronDown, Trash } from 'lucide-react'
+import { AlignLeft, ChevronDown, MoveHorizontal, Trash } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/utils/ui'
-import { ALIGNMENTS, type Alignment, CONTAINER_CLASS_NAME_PER_ALIGNMENT, isValidYoutubeUrl, MIN_WIDTH } from './lib'
+import { type Alignment, alignments, containerClassNamePerAlignment, isValidYoutubeUrl, minWidth } from './lib'
 
 // [T] youtube attributes
 type YoutubeAttributes = React.IframeHTMLAttributes<HTMLIFrameElement> & {
@@ -253,7 +253,7 @@ const YoutubeComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
   // Template
   return (
     <NodeViewWrapper data-drag-handle>
-      <div ref={containerRef} className={cn('flex', CONTAINER_CLASS_NAME_PER_ALIGNMENT[alignment])}>
+      <div ref={containerRef} className={cn('flex', containerClassNamePerAlignment[alignment])}>
         <Popover open={isOpenPopover} onOpenChange={setIsOpenPopover}>
           <PopoverTrigger
             className={cn('group relative aspect-video rounded-md border p-6 transition-all', {
@@ -281,13 +281,13 @@ const YoutubeComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant='outline'>
-                    <span>Align</span>
+                    <AlignLeft />
                     <ChevronDown />
                   </Button>
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent>
-                  {ALIGNMENTS.map((alignmentOption) => (
+                  {alignments.map((alignmentOption) => (
                     <DropdownMenuItem
                       key={alignmentOption.value}
                       className={cn({
@@ -308,7 +308,7 @@ const YoutubeComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant='outline'>
-                    <span>Width size</span>
+                    <MoveHorizontal />
                     <ChevronDown />
                   </Button>
                 </DropdownMenuTrigger>
@@ -331,7 +331,7 @@ const YoutubeComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
               <Separator orientation='vertical' className='h-10' />
 
               {/* Trash */}
-              <Button variant='ghost' size='icon' onClick={handleDeleteVideo}>
+              <Button variant='outline' size='icon' onClick={handleDeleteVideo}>
                 <Trash />
               </Button>
             </div>
@@ -376,7 +376,7 @@ export const CustomYoutubeExtension = Youtube.extend({
     return [
       'div',
       {
-        class: cn('flex', CONTAINER_CLASS_NAME_PER_ALIGNMENT[alignment])
+        class: cn('flex', containerClassNamePerAlignment[alignment])
       },
       [
         'div',
@@ -426,7 +426,7 @@ export const CustomYoutubeExtension = Youtube.extend({
       },
       containerStyle: {
         default: {
-          width: `${MIN_WIDTH}px`
+          width: `${minWidth}px`
         }
       }
     }

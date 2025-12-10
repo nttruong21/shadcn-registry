@@ -21,14 +21,10 @@ import {
   PopoverTrigger,
   type PopoverTriggerProps
 } from '@/components/ui/popover'
+import type { Option } from '@/types/base'
 import { cn } from '@/utils/ui'
 
 // Combobox
-export interface Option {
-  value: string
-  label: string
-}
-
 export interface ComboboxProps {
   value: Option['value'] | null | undefined
   options: Option[]

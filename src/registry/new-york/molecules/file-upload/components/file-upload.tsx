@@ -19,17 +19,17 @@ export type FileUploadProps = {
   onValueChange: (value: FileUploadProps['value']) => void
 } & React.HTMLAttributes<HTMLDivElement>
 
-export type FileUploadContext = Pick<FileUploadProps, 'value' | 'onValueChange'> & {
+export type FileUploadContextValue = Pick<FileUploadProps, 'value' | 'onValueChange'> & {
   dropzoneState: DropzoneState
   isDisabled: boolean
 }
 
-const FILE_UPLOAD_CONTEXT = React.createContext<FileUploadContext | null>(null)
+const FileUploadContext = React.createContext<FileUploadContextValue | null>(null)
 
 export const useFileUploadContext = () => {
-  const context = React.useContext(FILE_UPLOAD_CONTEXT)
+  const context = React.useContext(FileUploadContext)
   if (!context) {
-    throw new Error('useFileUploadContext must be used within the <FileUpload />')
+    throw new Error('useFileUploadContext must be used within the FileUpload')
   }
   return context
 }
@@ -117,7 +117,7 @@ export const FileUpload = ({
 
   // Template
   return (
-    <FILE_UPLOAD_CONTEXT.Provider
+    <FileUploadContext.Provider
       value={{
         value,
         dropzoneState,
@@ -128,7 +128,7 @@ export const FileUpload = ({
       <div className={cn('w-full space-y-2', className)} dir={dir} {...props}>
         {children}
       </div>
-    </FILE_UPLOAD_CONTEXT.Provider>
+    </FileUploadContext.Provider>
   )
 }
 

@@ -17,7 +17,7 @@ const TabsContext = React.createContext<TabsContextValue | null>(null)
 const useTabsContext = () => {
   const context = React.useContext(TabsContext)
   if (!context) {
-    throw new Error('useTabsContext must be used within Tabs')
+    throw new Error('useTabsContext must be used within the Tabs')
   }
   return context
 }

@@ -16,7 +16,7 @@ import HistoryButtons from './history-buttons'
 import ImageButton from './image-button'
 import InternalEditorContent from './internal-editor-content'
 import ItalicButton from './italic-button'
-import { EXTENSIONS, getEditorValue } from './lib'
+import { defaultExtensions, getEditorValue } from './lib'
 import LinkButton from './link-button'
 import ListButton from './list-button'
 import PreviewButton from './preview-button'
@@ -48,7 +48,7 @@ export const Editor = ({ value, onValueChange, ...props }: EditorProps) => {
   const callbackRef = React.useRef<CallbackRef['current']>(null)
 
   // States
-  const [extensions, setExtensions] = React.useState<Extensions>(EXTENSIONS)
+  const [extensions, setExtensions] = React.useState<Extensions>(defaultExtensions)
 
   // Hooks
   const editor = useEditor(

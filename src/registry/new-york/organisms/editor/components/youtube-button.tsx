@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import type { CallbackRef, SetExtensions } from './editor'
-import { isValidYoutubeUrl, MIN_WIDTH } from './lib'
+import { isValidYoutubeUrl, minWidth } from './lib'
 
 // [C] Youtube form schema
 const YOUTUBE_FORM_SCHEMA = z.object({
@@ -77,7 +77,7 @@ const YoutubeButton = React.memo<{
           ...prev,
           CustomYoutubeExtension.configure({
             nocookie: true,
-            width: MIN_WIDTH,
+            width: minWidth,
             height: 180
           })
         ])

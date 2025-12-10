@@ -4,20 +4,16 @@ import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/utils/ui'
 
-// Types
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
 type CarouselPlugin = UseCarouselParameters[1]
 
-// Hooks
 const useCarousel = () => {
   const context = React.useContext(CarouselContext)
-
   if (!context) {
-    throw new Error('useCarousel must be used within a <Carousel />')
+    throw new Error('useCarousel must be used within the Carousel')
   }
-
   return context
 }
 
@@ -29,7 +25,7 @@ type CarouselProps = {
   setApi?: (api: CarouselApi) => void
 }
 
-type CarouselContextProps = {
+type CarouselContextValue = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0]
   api: ReturnType<typeof useEmblaCarousel>[1]
   scrollPrev: () => void
@@ -38,7 +34,7 @@ type CarouselContextProps = {
   canScrollNext: boolean
 } & CarouselProps
 
-const CarouselContext = React.createContext<CarouselContextProps | null>(null)
+const CarouselContext = React.createContext<CarouselContextValue | null>(null)
 
 export const Carousel = ({
   orientation = 'horizontal',

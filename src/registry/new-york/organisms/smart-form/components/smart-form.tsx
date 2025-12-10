@@ -35,7 +35,7 @@ import SelectWithOptionsField from './select-with-options-field'
 import SelectWithQueryField from './select-with-query-field'
 import TextareaField from './textarea-field'
 
-const FIELD_COMPONENTS: Record<SmartFormFieldType, React.FC<FieldProps>> = {
+const fieldComponents: Record<SmartFormFieldType, React.FC<FieldProps>> = {
   input: InputField,
   textarea: TextareaField,
   number: NumberField,
@@ -107,40 +107,42 @@ export const SmartForm = ({
       {/* Form */}
       <form className='space-y-6' onSubmit={form.handleSubmit(startValidation)}>
         {formData.templates.map((template) => (
-          <FieldSet key={template.code} className={cn('grid grid-cols-12 gap-x-4 gap-y-6', template.className)}>
+          <FieldSet key={template.code}>
             {/* Form template label */}
             <FieldLegend>{template.label}</FieldLegend>
             {template.description && <FieldDescription>{template.description}</FieldDescription>}
 
             {/* Form template fields */}
-            {template.fields.map((fieldData) => {
-              // Hidden
-              if (hiddenFields?.[fieldData.code]) {
-                return null
-              }
+            <div className={cn('grid grid-cols-12 gap-x-4 gap-y-6', template.className)}>
+              {template.fields.map((fieldData) => {
+                // Hidden
+                if (hiddenFields?.[fieldData.code]) {
+                  return null
+                }
 
-              // Label
-              if (fieldData.type === 'label') {
-                return (
-                  <div key={fieldData.code} className={cn('col-span-full', fieldData.className)}>
-                    <span className='font-bold text-base text-muted-foreground'>{fieldData.label}</span>
-                  </div>
-                )
-              }
+                // Label
+                if (fieldData.type === 'label') {
+                  return (
+                    <div key={fieldData.code} className={cn('col-span-full', fieldData.className)}>
+                      <span className='font-bold text-base text-muted-foreground'>{fieldData.label}</span>
+                    </div>
+                  )
+                }
 
-              // Slot
-              if (fieldData.type === 'slot') {
-                return (
-                  <div key={fieldData.code} className={cn('col-span-full', fieldData.className)}>
-                    {slots?.[fieldData.code]}
-                  </div>
-                )
-              }
+                // Slot
+                if (fieldData.type === 'slot') {
+                  return (
+                    <div key={fieldData.code} className={cn('col-span-full', fieldData.className)}>
+                      {slots?.[fieldData.code]}
+                    </div>
+                  )
+                }
 
-              // Others
-              const FieldComponent = FIELD_COMPONENTS[fieldData.type]
-              return <FieldComponent key={fieldData.code} fieldData={fieldData} disabledFields={disabledFields} />
-            })}
+                // Others
+                const FieldComponent = fieldComponents[fieldData.type]
+                return <FieldComponent key={fieldData.code} fieldData={fieldData} disabledFields={disabledFields} />
+              })}
+            </div>
           </FieldSet>
         ))}
 

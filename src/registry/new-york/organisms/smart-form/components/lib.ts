@@ -131,8 +131,8 @@ export interface SmartFormProps {
   submit?: (fieldValues: FieldValues) => void | Promise<void>
 }
 
-// [C] Default value per field type
-export const DEFAULT_VALUE_PER_FIELD_TYPE: Record<SmartFormFieldType, string | number | boolean | null | string[]> = {
+// [C] Default field values
+export const defaultFieldValues: Record<SmartFormFieldType, string | number | boolean | null | string[]> = {
   input: '', // string
   textarea: '', // string
   'phone-number': '', // string
@@ -155,7 +155,7 @@ export const DEFAULT_VALUE_PER_FIELD_TYPE: Record<SmartFormFieldType, string | n
   editor: '', // string
   label: null,
   slot: null
-}
+} as const
 
 // [U] Get default form value
 export const getDefaultFormValue = (formData: SmartFormData, slots?: FieldValues) => {
@@ -168,7 +168,7 @@ export const getDefaultFormValue = (formData: SmartFormData, slots?: FieldValues
       }
 
       // Other fields
-      defaultValues[field.code] = slots?.[field.code] ?? DEFAULT_VALUE_PER_FIELD_TYPE[field.type]
+      defaultValues[field.code] = slots?.[field.code] ?? defaultFieldValues[field.type]
     })
   })
   return defaultValues

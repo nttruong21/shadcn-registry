@@ -68,7 +68,7 @@ export const ButtonGroupSeparator = ({
     <Separator
       data-slot='button-group-separator'
       orientation={orientation}
-      className={cn('!m-0 relative self-stretch bg-input data-[orientation=vertical]:h-auto', className)}
+      className={cn('relative m-0! self-stretch bg-input data-[orientation=vertical]:h-auto', className)}
       {...props}
     />
   )

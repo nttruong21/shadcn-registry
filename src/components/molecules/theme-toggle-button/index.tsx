@@ -1,1 +1,1 @@
-export * from '@/registry/new-york/molecules/theme-toggle-button/components/theme-toggle-button'
+export * from '@/registry/new-york/molecules/theme-toggle-button/components'

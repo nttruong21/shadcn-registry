@@ -35,16 +35,13 @@ const TableButton = React.memo<{
         startTransition(async () => {
           try {
             const { TableKit } = await import('@tiptap/extension-table')
-
             callbackRef.current = callback
-
             setExtensions((prev) => [
               ...prev,
               TableKit.configure({
                 table: { resizable: true, allowTableNodeSelection: true }
               })
             ])
-
             isExtensionLoadedRef.current = true
           } catch (error) {
             console.error('An error occurred when load the TableKit extension', error)

@@ -5,7 +5,7 @@ import { Button, type ButtonProps } from '@/components/ui/button'
 import { cn } from '@/utils/ui'
 
 // Theme toggle button
-const THEME_SCHEMA = z.object({
+const themeSchema = z.object({
   theme: z.union([z.literal('light'), z.literal('dark')])
 })
 
@@ -31,7 +31,7 @@ export const ThemeToggleButton = ({
   ...props
 }: ThemeToggleButtonProps) => {
   // States
-  const [theme, setTheme] = React.useState<z.output<typeof THEME_SCHEMA>['theme']>()
+  const [theme, setTheme] = React.useState<z.output<typeof themeSchema>['theme']>()
 
   // Methods
   const toggleTheme = () => {
@@ -190,7 +190,7 @@ export const ThemeToggleButton = ({
     <Button
       ref={() => {
         const themeReference = localStorage.getItem(themeLocalStorageKey)
-        const { success, data } = THEME_SCHEMA.safeParse({
+        const { success, data } = themeSchema.safeParse({
           theme: themeReference
         })
 
@@ -212,31 +212,4 @@ export const ThemeToggleButton = ({
       {showLabel && <span>{theme === 'light' ? 'Light' : 'Dark'}</span>}
     </Button>
   )
-}
-
-// [U] Observe theme (only use this util on client)
-export const observeTheme = (key = 'theme') => {
-  const getTheme = () => {
-    const themeReference = localStorage.getItem(key)
-    return themeReference ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-  }
-
-  const isDark = getTheme() === 'dark'
-  document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
-  document.documentElement.style.colorScheme = isDark ? 'dark' : 'light'
-  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
-
-  const observer = new MutationObserver(() => {
-    const isDark =
-      document.documentElement.classList.contains('dark') ||
-      document.documentElement.getAttribute('data-theme') === 'dark'
-    localStorage.setItem(key, isDark ? 'dark' : 'light')
-  })
-
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['class', 'data-theme']
-  })
-
-  return observer
 }

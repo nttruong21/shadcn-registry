@@ -40,6 +40,7 @@ export const useFileUpload = (args?: { isThrowError?: boolean }) => {
       try {
         console.log(file)
         // Mutate
+
         // Extract response and return value
         return null
       } catch {

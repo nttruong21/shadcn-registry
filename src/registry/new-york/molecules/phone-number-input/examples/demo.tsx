@@ -7,5 +7,5 @@ export const PhoneNUmberInput = () => {
   const [value, setValue] = React.useState('')
 
   // Template
-  return <PhoneNumberInput value={value} onValueChange={setValue} />
+  return <PhoneNumberInput value={value} placeholder='Enter phone number' onValueChange={setValue} />
 }

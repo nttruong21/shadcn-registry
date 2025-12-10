@@ -6,7 +6,7 @@ import {
   ReactNodeViewRenderer,
   useCurrentEditor
 } from '@tiptap/react'
-import { ChevronDown, Trash } from 'lucide-react'
+import { AlignLeft, ChevronDown, Trash } from 'lucide-react'
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/utils/ui'
-import { ALIGNMENTS, type Alignment, CONTAINER_CLASS_NAME_PER_ALIGNMENT, MIN_WIDTH } from './lib'
+import { type Alignment, alignments, containerClassNamePerAlignment, minWidth } from './lib'
 
 // [T] Image attributes
 type ImageAttributes = Pick<React.ImgHTMLAttributes<HTMLImageElement>, 'alt' | 'height' | 'src' | 'title' | 'width'> & {
@@ -86,7 +86,7 @@ const ImageComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
           ? pointerDownEvent.clientX - pointerMoveEvent.clientX
           : pointerMoveEvent.clientX - pointerDownEvent.clientX) * 2
       const newWidth = Math.round(
-        Math.max(MIN_WIDTH, Math.min(containerWidth, (imageAttributes.width as number) + deltaX))
+        Math.max(minWidth, Math.min(containerWidth, (imageAttributes.width as number) + deltaX))
       )
 
       updateAttributes({
@@ -121,7 +121,7 @@ const ImageComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
   // Template
   return (
     <NodeViewWrapper data-drag-handle>
-      <div ref={containerRef} className={cn('flex', CONTAINER_CLASS_NAME_PER_ALIGNMENT[alignment])}>
+      <div ref={containerRef} className={cn('flex', containerClassNamePerAlignment[alignment])}>
         <div className='group relative transition-all' style={containerStyle}>
           {!isLoaded && <Skeleton className='absolute inset-0 rounded-md' />}
 
@@ -147,13 +147,13 @@ const ImageComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant='outline'>
-                      <span>Align</span>
+                      <AlignLeft />
                       <ChevronDown />
                     </Button>
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent>
-                    {ALIGNMENTS.map((alignmentOption) => (
+                    {alignments.map((alignmentOption) => (
                       <DropdownMenuItem
                         key={alignmentOption.value}
                         className={cn({
@@ -171,7 +171,7 @@ const ImageComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
                 <Separator orientation='vertical' className='h-10' />
 
                 {/* Trash */}
-                <Button variant='ghost' size='icon' onClick={deleteImage}>
+                <Button variant='outline' size='icon' onClick={deleteImage}>
                   <Trash />
                 </Button>
               </div>
@@ -200,7 +200,7 @@ const CustomImageExtension = Image.extend({
     return [
       'div',
       {
-        class: cn('flex', CONTAINER_CLASS_NAME_PER_ALIGNMENT[alignment])
+        class: cn('flex', containerClassNamePerAlignment[alignment])
       },
       [
         'div',
@@ -223,14 +223,14 @@ const CustomImageExtension = Image.extend({
     return {
       ...this.parent?.(),
       width: {
-        default: MIN_WIDTH
+        default: minWidth
       },
       alignment: {
         default: 'center'
       },
       containerStyle: {
         default: {
-          width: `${MIN_WIDTH}px`
+          width: `${minWidth}px`
         }
       }
     }

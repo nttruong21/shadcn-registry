@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useCurrentEditor } from '@tiptap/react'
+import { useCurrentEditor, useEditorState } from '@tiptap/react'
 import { CheckCircle, Copy, ExternalLink, Link, Trash, Unlink } from 'lucide-react'
 import React from 'react'
 import { Controller, FormProvider, useForm, useWatch } from 'react-hook-form'
@@ -10,9 +10,10 @@ import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { cn } from '@/utils/ui'
 
 // [C] Link form schema
-const LINK_FORM_SCHEMA = z.object({
+const linkFormSchema = z.object({
   url: z
     .string()
     .trim()
@@ -29,11 +30,11 @@ const LINK_FORM_SCHEMA = z.object({
 })
 
 // [C] Default link form value
-const DEFAULT_LINK_FORM_VALUE: z.input<typeof LINK_FORM_SCHEMA> = {
+const defaultLinkFormValue: z.input<typeof linkFormSchema> = {
   url: '',
   displayText: '',
   isOpenInNewTab: false
-}
+} as const
 
 // Component
 const LinkButton = React.memo<{
@@ -41,6 +42,12 @@ const LinkButton = React.memo<{
 }>(({ id }) => {
   // Hooks
   const { editor } = useCurrentEditor()
+  const editorState = useEditorState({
+    editor,
+    selector: ({ editor }) => {
+      return { isActive: editor?.isActive('link') }
+    }
+  })
 
   // Refs
   const isUpdateModeRef = React.useRef(false)
@@ -50,8 +57,8 @@ const LinkButton = React.memo<{
 
   // Form
   const linkForm = useForm({
-    resolver: zodResolver(LINK_FORM_SCHEMA),
-    defaultValues: DEFAULT_LINK_FORM_VALUE
+    resolver: zodResolver(linkFormSchema),
+    defaultValues: defaultLinkFormValue
   })
 
   const linkFormUrl = useWatch({
@@ -75,7 +82,7 @@ const LinkButton = React.memo<{
     navigator.clipboard.writeText(linkFormUrl)
   }
 
-  const saveLink = (linkFormValue: z.output<typeof LINK_FORM_SCHEMA>) => {
+  const saveLink = (linkFormValue: z.output<typeof linkFormSchema>) => {
     const { url, displayText, isOpenInNewTab } = linkFormValue
 
     // Add link node view
@@ -115,37 +122,19 @@ const LinkButton = React.memo<{
     editor?.chain().focus().extendMarkRange('link').deleteSelection().run()
   }
 
-  // Effects
-  // Add editor event handler
-  React.useEffect(() => {
-    const updateLinkState = () => {
-      const isLinkActive = editor?.isActive('link')
-      const { href, target } = editor?.getAttributes('link') ?? {}
-
-      if (isLinkActive && href) {
-        linkForm.setValue('url', href, {
-          shouldValidate: true
-        })
-        linkForm.setValue('displayText', editor?.view.domAtPos(editor?.state.selection.from).node.textContent ?? '')
-        linkForm.setValue('isOpenInNewTab', target === '_blank')
-        isUpdateModeRef.current = true
-        setIsOpenPopover(true)
-      }
-    }
-
-    editor?.on('selectionUpdate', updateLinkState)
-    return () => {
-      editor?.off('selectionUpdate', updateLinkState)
-    }
-  }, [editor, linkForm])
-
   // Template
   return (
     <Popover open={isOpenPopover} onOpenChange={setIsOpenPopover}>
       <Tooltip>
         <TooltipTrigger asChild>
           <PopoverTrigger asChild>
-            <Button size='icon' variant='ghost'>
+            <Button
+              size='icon'
+              variant='ghost'
+              className={cn({
+                'bg-accent text-accent-foreground': editorState?.isActive
+              })}
+            >
               <Link />
             </Button>
           </PopoverTrigger>
@@ -154,7 +143,24 @@ const LinkButton = React.memo<{
         <TooltipContent>Link</TooltipContent>
       </Tooltip>
 
-      <PopoverContent className='space-y-4' onCloseAutoFocus={() => linkForm.reset()}>
+      <PopoverContent
+        className='space-y-4'
+        onOpenAutoFocus={() => {
+          const isLinkActive = editor?.isActive('link')
+          const { href, target } = editor?.getAttributes('link') ?? {}
+
+          if (isLinkActive && href) {
+            linkForm.setValue('url', href, {
+              shouldValidate: true
+            })
+            linkForm.setValue('displayText', editor?.view.domAtPos(editor?.state.selection.from).node.textContent ?? '')
+            linkForm.setValue('isOpenInNewTab', target === '_blank')
+            isUpdateModeRef.current = true
+            setIsOpenPopover(true)
+          }
+        }}
+        onCloseAutoFocus={() => linkForm.reset()}
+      >
         <FormProvider {...linkForm}>
           <form className='w-xs space-y-6'>
             <Controller

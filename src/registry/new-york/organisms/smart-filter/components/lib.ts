@@ -48,7 +48,7 @@ export enum SmartFilterApiOperation {
   EqualArray = '[]'
 }
 
-export const OPERATIONS_PER_TYPE: Record<SmartFilterType, SmartFilterOperation[]> = {
+export const operationsPerType: Record<SmartFilterType, SmartFilterOperation[]> = {
   [SmartFilterType.Text]: [
     SmartFilterOperation.EqualsTo,
     SmartFilterOperation.DoesNotEqualTo,
@@ -82,41 +82,39 @@ export const OPERATIONS_PER_TYPE: Record<SmartFilterType, SmartFilterOperation[]
     SmartFilterOperation.HasAnyOf
   ],
   [SmartFilterType.MultiSelect]: [SmartFilterOperation.HasAnyOf, SmartFilterOperation.HasAllOf]
-}
+} as const
 
-export const DEFAULT_STRING_VALUE = {
+export const defaultStringValue = {
   default: '',
   additional: {
     from: '',
     to: ''
   }
-}
+} as const
 
-export const DEFAULT_STRING_ARRAY_VALUE = {
+export const defaultStringArrayValue = {
   default: '',
   additional: {
     from: '',
     to: ''
   }
-}
+} as const
 
-export const DEFAULT_VALUE_PER_OPERATION: Record<
-  SmartFilterOperation,
-  SmartFilterFormOutput['filters'][number]['value']
-> = {
-  [SmartFilterOperation.EqualsTo]: DEFAULT_STRING_VALUE,
-  [SmartFilterOperation.DoesNotEqualTo]: DEFAULT_STRING_VALUE,
-  [SmartFilterOperation.IsLessThan]: DEFAULT_STRING_VALUE,
-  [SmartFilterOperation.IsLessThanOrEqualTo]: DEFAULT_STRING_VALUE,
-  [SmartFilterOperation.IsGreaterThan]: DEFAULT_STRING_VALUE,
-  [SmartFilterOperation.IsGreaterThanOrEqualTo]: DEFAULT_STRING_VALUE,
-  [SmartFilterOperation.Contains]: DEFAULT_STRING_VALUE,
-  [SmartFilterOperation.IsBetween]: DEFAULT_STRING_VALUE,
-  [SmartFilterOperation.HasAnyOf]: DEFAULT_STRING_ARRAY_VALUE,
-  [SmartFilterOperation.HasAllOf]: DEFAULT_STRING_ARRAY_VALUE
-}
+export const defaultValuePerOperation: Record<SmartFilterOperation, SmartFilterFormOutput['filters'][number]['value']> =
+  {
+    [SmartFilterOperation.EqualsTo]: defaultStringValue,
+    [SmartFilterOperation.DoesNotEqualTo]: defaultStringValue,
+    [SmartFilterOperation.IsLessThan]: defaultStringValue,
+    [SmartFilterOperation.IsLessThanOrEqualTo]: defaultStringValue,
+    [SmartFilterOperation.IsGreaterThan]: defaultStringValue,
+    [SmartFilterOperation.IsGreaterThanOrEqualTo]: defaultStringValue,
+    [SmartFilterOperation.Contains]: defaultStringValue,
+    [SmartFilterOperation.IsBetween]: defaultStringValue,
+    [SmartFilterOperation.HasAnyOf]: defaultStringArrayValue,
+    [SmartFilterOperation.HasAllOf]: defaultStringArrayValue
+  } as const
 
-export const API_OPERATION_PER_OPERATION: Partial<Record<SmartFilterOperation, SmartFilterApiOperation>> = {
+export const apiOperationPerOperation: Partial<Record<SmartFilterOperation, SmartFilterApiOperation>> = {
   [SmartFilterOperation.EqualsTo]: SmartFilterApiOperation.Equal,
   [SmartFilterOperation.DoesNotEqualTo]: SmartFilterApiOperation.NotEqual,
   [SmartFilterOperation.IsLessThan]: SmartFilterApiOperation.LessThan,
@@ -124,9 +122,9 @@ export const API_OPERATION_PER_OPERATION: Partial<Record<SmartFilterOperation, S
   [SmartFilterOperation.IsGreaterThan]: SmartFilterApiOperation.GreaterThan,
   [SmartFilterOperation.IsGreaterThanOrEqualTo]: SmartFilterApiOperation.GreaterThanOrEqual,
   [SmartFilterOperation.Contains]: SmartFilterApiOperation.Contain
-}
+} as const
 
-export const SMART_FILTER_FORM_SCHEMA = z.object({
+export const smartFilterFormSchema = z.object({
   search: z.string().trim(),
   filters: z.array(
     z
@@ -178,10 +176,10 @@ export const SMART_FILTER_FORM_SCHEMA = z.object({
   )
 })
 
-export const DEFAULT_SMART_FILTER_FORM_VALUE: SmartFilterFormInput = {
+export const DefaultSmartFilterFormValue: SmartFilterFormInput = {
   search: '',
   filters: []
-}
+} as const
 
 export interface Filter {
   label: string
@@ -195,13 +193,13 @@ export interface Filter {
   datePickerFormat?: 'date' | 'month' | 'year'
 }
 
-export type SmartFilterFormInput = z.input<typeof SMART_FILTER_FORM_SCHEMA>
+export type SmartFilterFormInput = z.input<typeof smartFilterFormSchema>
 
-export type SmartFilterFormOutput = z.output<typeof SMART_FILTER_FORM_SCHEMA>
+export type SmartFilterFormOutput = z.output<typeof smartFilterFormSchema>
 
 export const useSmartFilterForm = ({ defaultFormValue }: { defaultFormValue?: SmartFilterFormInput } = {}) => {
   return useForm<SmartFilterFormInput, unknown, SmartFilterFormOutput>({
-    resolver: zodResolver(SMART_FILTER_FORM_SCHEMA),
-    defaultValues: defaultFormValue ?? DEFAULT_SMART_FILTER_FORM_VALUE
+    resolver: zodResolver(smartFilterFormSchema),
+    defaultValues: defaultFormValue ?? DefaultSmartFilterFormValue
   })
 }

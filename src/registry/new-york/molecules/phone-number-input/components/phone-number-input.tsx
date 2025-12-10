@@ -2,8 +2,9 @@ import { ChevronDown, Globe } from 'lucide-react'
 import React from 'react'
 import RPNInput, { type Country, type FlagProps, getCountryCallingCode, type Props } from 'react-phone-number-input'
 import flags from 'react-phone-number-input/flags'
-import { Combobox, type Option } from '@/components/ui/combobox'
+import { Combobox } from '@/components/ui/combobox'
 import { Input, type InputProps } from '@/components/ui/input'
+import type { Option } from '@/types/base'
 import { cn } from '@/utils/ui'
 
 // Phone number input
@@ -12,7 +13,7 @@ const FlagComponent = ({ country, countryName }: FlagProps) => {
 
   // Template
   return (
-    <div className='[&_svg]:!size-full flex h-4 w-6 overflow-hidden rounded-sm'>
+    <div className='flex h-4 w-6 overflow-hidden rounded-sm [&_svg]:size-full!'>
       {Flag && <Flag title={countryName} />}
     </div>
   )

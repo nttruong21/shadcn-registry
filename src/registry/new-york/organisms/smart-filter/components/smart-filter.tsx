@@ -5,9 +5,9 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import AdvancedFilter from './advanced-filter'
 import BasicSearch from './basic-search'
 import {
-  DEFAULT_VALUE_PER_OPERATION,
+  defaultValuePerOperation,
   type Filter,
-  OPERATIONS_PER_TYPE,
+  operationsPerType,
   type SmartFilterFormInput,
   type SmartFilterFormOutput
 } from './lib'
@@ -18,12 +18,16 @@ enum Mode {
   AdvancedFilter = 'advanced-filter'
 }
 
-const SMART_FILTER_CONTEXT = React.createContext<SmartFilterContext | null>(null)
+export interface SmartFilterContextValue {
+  filters: NonNullable<SmartFilterProps['filters']>
+}
+
+const SmartFilterContext = React.createContext<SmartFilterContextValue | null>(null)
 
 export const useSmartFilterContext = () => {
-  const context = React.useContext(SMART_FILTER_CONTEXT)
+  const context = React.useContext(SmartFilterContext)
   if (!context) {
-    throw new Error('useFiltersContext should be used within <SmartFilter />')
+    throw new Error('useFiltersContext should be used within the SmartFilter')
   }
   return context
 }
@@ -33,10 +37,6 @@ export interface SmartFilterProps {
   filters?: Filter[]
   isHideSearchMode?: boolean
   setFilters: SubmitHandler<SmartFilterFormOutput>
-}
-
-export interface SmartFilterContext {
-  filters: NonNullable<SmartFilterProps['filters']>
 }
 
 const DEFAULT_FILTERS: Filter[] = []
@@ -61,12 +61,12 @@ export const SmartFilter = ({
   // Methods
   const addFilter = (filter: Filter) => {
     const { name, type } = filter
-    const operation = OPERATIONS_PER_TYPE[type][0]
+    const operation = operationsPerType[type][0]
     formFilters.append({
       name,
       type,
       operation,
-      value: DEFAULT_VALUE_PER_OPERATION[operation]
+      value: defaultValuePerOperation[operation]
     })
   }
 
@@ -92,7 +92,7 @@ export const SmartFilter = ({
   }
 
   return (
-    <SMART_FILTER_CONTEXT.Provider
+    <SmartFilterContext.Provider
       value={{
         filters
       }}
@@ -131,6 +131,6 @@ export const SmartFilter = ({
           )}
         </form>
       </FormProvider>
-    </SMART_FILTER_CONTEXT.Provider>
+    </SmartFilterContext.Provider>
   )
 }

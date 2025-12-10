@@ -8,12 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import AdvancedFilterNameField from './advanced-filter-name-field'
 import AdvancedFilterOperationField from './advanced-filter-operation-field'
 import AdvancedFilterValueField from './advanced-filter-value-field'
-import {
-  DEFAULT_SMART_FILTER_FORM_VALUE,
-  type Filter,
-  type SmartFilterFormInput,
-  type SmartFilterFormOutput
-} from './lib'
+import { DefaultSmartFilterFormValue, type Filter, type SmartFilterFormInput, type SmartFilterFormOutput } from './lib'
 import { type SmartFilterProps, useSmartFilterContext } from './smart-filter'
 
 // Component
@@ -55,7 +50,7 @@ const AdvancedFilter = ({
   const resetFilter = () => {
     formFilters.remove()
     setTotalFilterApplied(0)
-    setFilters(DEFAULT_SMART_FILTER_FORM_VALUE)
+    setFilters(DefaultSmartFilterFormValue)
     if (filters.length > 0) {
       addFilter(filters[0])
     }

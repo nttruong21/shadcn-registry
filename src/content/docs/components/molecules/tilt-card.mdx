@@ -21,10 +21,16 @@ import DocLinkButton from "@/components/molecules/doc-link-button/index.astro";
 ## Usage
 
 ```tsx
-import { GradientPathBackground } from '@/components/molecules/tilt-card'
+import { TiltCard, TiltCardContent } from '@/components/molecules/tilt-card'
 ```
 
 ```tsx
 // Template
-<GradientPathBackground className='w-full h-96 max-h-full' />
+<TiltCard className='w-80'>
+  <TiltCardContent className='p-6'>
+    <div className='mb-4 aspect-video rounded-xl bg-muted'></div>
+    <div className='mb-2'>Interactive Tilt</div>
+    <div>Move your cursor over this card to see the 3D tilt effect.</div>
+  </TiltCardContent>
+</TiltCard>
 ```

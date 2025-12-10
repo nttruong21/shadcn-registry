@@ -12,13 +12,11 @@ import {
   PopoverTrigger,
   type PopoverTriggerProps
 } from '@/components/ui/popover'
+import type { Option } from '@/types/base'
 import { cn } from '@/utils/ui'
 
-export const MONTH_OPTIONS: Array<{
-  value: number
-  label: string
-}> = Array.from({ length: 12 }).map((_, index) => ({
-  value: index + 1,
+export const options: Option[] = Array.from({ length: 12 }).map((_, index) => ({
+  value: index.toString(),
   label: `${index + 1 < 10 ? '0' : ''}${index + 1}`
 }))
 
@@ -55,11 +53,9 @@ export const MonthPicker = ({
     if (minDate && isBefore(date, minDate)) {
       return onValueChange(minDate)
     }
-
     if (maxDate && isAfter(date, maxDate)) {
       return onValueChange(maxDate)
     }
-
     onValueChange(date)
   }
 
@@ -128,15 +124,15 @@ export const MonthPicker = ({
           />
 
           <div className='grid grid-cols-4 gap-y-2'>
-            {MONTH_OPTIONS.map((option) => (
+            {options.map((option) => (
               <Button
                 key={option.value}
-                variant={value && value?.getMonth() + 1 === option.value ? 'default' : 'ghost'}
+                variant={value && value?.getMonth().toString() === option.value ? 'default' : 'ghost'}
                 onClick={() => {
                   changeValue(
                     set(TODAY, {
                       date: 1,
-                      month: +option.value - 1,
+                      month: +option.value,
                       year: value ? value.getFullYear() : TODAY.getFullYear()
                     })
                   )
@@ -292,14 +288,16 @@ export const MonthRangePicker = ({
                 />
 
                 <div className='grid grid-cols-4 gap-y-2'>
-                  {MONTH_OPTIONS.map((option) => (
+                  {options.map((option) => (
                     <Button
                       key={option.value}
-                      variant={value?.start && value.start?.getMonth() + 1 === option.value ? 'default' : 'ghost'}
+                      variant={
+                        value?.start && value.start?.getMonth().toString() === option.value ? 'default' : 'ghost'
+                      }
                       onClick={() => {
                         const date = set(TODAY, {
                           date: 1,
-                          month: +option.value - 1,
+                          month: +option.value,
                           year: value?.start ? value.start.getFullYear() : TODAY.getFullYear()
                         })
                         changeStartValue(value?.end ? min([date, value.end]) : date)
@@ -333,14 +331,14 @@ export const MonthRangePicker = ({
                 />
 
                 <div className='grid grid-cols-4 gap-y-2'>
-                  {MONTH_OPTIONS.map((option) => (
+                  {options.map((option) => (
                     <Button
                       key={option.value}
-                      variant={value?.end && value.end?.getMonth() + 1 === option.value ? 'default' : 'ghost'}
+                      variant={value?.end && value.end?.getMonth().toString() === option.value ? 'default' : 'ghost'}
                       onClick={() => {
                         const date = set(TODAY, {
                           date: 1,
-                          month: +option.value - 1,
+                          month: +option.value,
                           year: value?.end ? value.end.getFullYear() : TODAY.getFullYear()
                         })
                         changeEndValue(value?.start ? max([value.start, date]) : date)
@@ -353,8 +351,8 @@ export const MonthRangePicker = ({
               </div>
             </CarouselItem>
           </CarouselContent>
-          <CarouselPrevious className='top-8 left-4' />
-          <CarouselNext className='top-8 right-4' />
+          <CarouselPrevious className='top-8 left-4 rounded-md' />
+          <CarouselNext className='top-8 right-4 rounded-md' />
         </Carousel>
       </PopoverContent>
     </Popover>

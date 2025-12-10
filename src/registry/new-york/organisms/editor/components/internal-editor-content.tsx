@@ -32,8 +32,6 @@ const InternalEditorContent = React.memo(() => {
         x: e.clientX,
         y: e.clientY
       })
-    } else {
-      setTableDropdownMenu((prev) => ({ ...prev, open: false }))
     }
   }, [])
 

@@ -12,7 +12,7 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/utils/ui'
 import type { CallbackRef, SetExtensions } from './editor'
-import { ALIGNMENTS } from './lib'
+import { alignments } from './lib'
 
 // Component
 const TextAlignButton = React.memo<{
@@ -56,7 +56,7 @@ const TextAlignButton = React.memo<{
       </Tooltip>
 
       <DropdownMenuContent>
-        {ALIGNMENTS.map((alignment) => (
+        {alignments.map((alignment) => (
           <DropdownMenuItem
             key={alignment.value}
             className={cn({

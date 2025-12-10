@@ -42,7 +42,7 @@ const FieldContainer = <
           <Field
             data-invalid={fieldState.invalid}
             className={cn(
-              'group/field',
+              'group/field col-span-full',
               {
                 'flex-row-reverse': fieldData.type === 'checkbox'
               },

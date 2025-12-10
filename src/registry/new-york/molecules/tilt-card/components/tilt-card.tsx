@@ -3,7 +3,7 @@ import * as React from 'react'
 import { cn } from '@/utils/ui'
 
 // Tilt card
-const TILT_CARD_CONTEXT = React.createContext<{
+const TiltCardContext = React.createContext<{
   rotateX: MotionValue<number>
   rotateY: MotionValue<number>
   scale: MotionValue<number>
@@ -69,7 +69,7 @@ export const TiltCard = React.forwardRef<HTMLDivElement, TiltCardProps>(
 
     // Template
     return (
-      <TILT_CARD_CONTEXT.Provider value={{ rotateX, rotateY, scale: scaleValue }}>
+      <TiltCardContext.Provider value={{ rotateX, rotateY, scale: scaleValue }}>
         {/** biome-ignore lint/a11y/noStaticElementInteractions: ignore */}
         <div
           ref={containerRef}
@@ -82,7 +82,7 @@ export const TiltCard = React.forwardRef<HTMLDivElement, TiltCardProps>(
           <div className='absolute inset-0 rounded-xl border' />
           {children}
         </div>
-      </TILT_CARD_CONTEXT.Provider>
+      </TiltCardContext.Provider>
     )
   }
 )
@@ -96,7 +96,7 @@ interface TiltCardContentProps {
 export const TiltCardContent = React.forwardRef<HTMLDivElement, TiltCardContentProps>(
   ({ children, className, ...props }, ref) => {
     // Hooks
-    const context = React.useContext(TILT_CARD_CONTEXT)
+    const context = React.useContext(TiltCardContext)
 
     if (!context) {
       throw new Error('TiltCardContent must be used within TiltCard')

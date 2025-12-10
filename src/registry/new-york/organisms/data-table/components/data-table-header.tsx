@@ -1,5 +1,5 @@
 import { flexRender, type RowData } from '@tanstack/react-table'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, PinOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { cn } from '@/utils/ui'
@@ -70,7 +70,7 @@ const DataTableHeader = <TData extends RowData>({
                           header.column.pin(false)
                         }}
                       >
-                        <X />
+                        <PinOff />
                       </Button>
                     )}
 
