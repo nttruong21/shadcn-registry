@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "phone-number-input",
+  "type": "registry:component",
+  "title": "Phone Number Input",
+  "description": "A component to select the country and input the phone number.",
+  "dependencies": [
+    "lucide-react",
+    "react-phone-number-input",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "cmdk",
+    "@radix-ui/react-dialog",
+    "@radix-ui/react-popover"
+  ],
+  "registryDependencies": [
+    "https://ntt-shadcn-registry.vercel.app/r/combobox.json",
+    "https://ntt-shadcn-registry.vercel.app/r/input.json",
+    "https://ntt-shadcn-registry.vercel.app/r/button.json",
+    "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+    "https://ntt-shadcn-registry.vercel.app/r/command.json",
+    "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+    "https://ntt-shadcn-registry.vercel.app/r/dialog.json"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/molecules/phone-number-input/components/phone-number-input.tsx",
+      "content": "import { ChevronDown, Globe } from 'lucide-react'\nimport React from 'react'\nimport RPNInput, { type Country, type FlagProps, getCountryCallingCode, type Props } from 'react-phone-number-input'\nimport flags from 'react-phone-number-input/flags'\nimport { Combobox } from '@/components/ui/combobox'\nimport { Input, type InputProps } from '@/components/ui/input'\nimport type { Option } from '@/types/base'\nimport { cn } from '@/utils/ui'\n\n// Phone number input\nconst FlagComponent = ({ country, countryName }: FlagProps) => {\n  const Flag = flags[country]\n\n  // Template\n  return (\n    <div className='flex h-4 w-6 overflow-hidden rounded-sm [&_svg]:size-full!'>\n      {Flag && <Flag title={countryName} />}\n    </div>\n  )\n}\n\nconst CountrySelectionComponent = ({\n  disabled,\n  value,\n  options,\n  onChange,\n  ...props\n}: {\n  disabled?: boolean\n  value: Country | undefined\n  options: Option[]\n  onChange: (value: Country | undefined) => void\n}) => {\n  // Template\n  return (\n    <Combobox\n      value={value}\n      options={options}\n      isCanRemoveValue={false}\n      buttonTriggerProps={{\n        disabled,\n        className: 'rounded-e-none w-fit border-r-0',\n        children: (\n          <React.Fragment>\n            {value ? <FlagComponent country={value} countryName={value} /> : <Globe />}\n            <ChevronDown className='ml-auto size-4 shrink-0 text-muted-foreground' />\n          </React.Fragment>\n        )\n      }}\n      commandItemProps={{\n        children: (option) => {\n          return option.value ? (\n            <React.Fragment>\n              <FlagComponent country={option.value as Country} countryName={option.label as string} />\n              <span className='flex-1 text-sm'>{option.label as string}</span>\n              <span className='text-muted-foreground text-sm'>{`+${getCountryCallingCode(option.value as Country)}`}</span>\n            </React.Fragment>\n          ) : null\n        }\n      }}\n      onValueChange={(value) => onChange(value as Country | undefined)}\n      {...props}\n    />\n  )\n}\n\nconst InputComponent = ({ className, ...props }: InputProps) => {\n  // Template\n  return <Input className={cn('z-10 rounded-s-none', className)} {...props} />\n}\n\nexport type PhoneNumberInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> &\n  Omit<Props<typeof RPNInput>, 'onChange'> & {\n    onValueChange: (value: string) => void\n  }\n\nexport const PhoneNumberInput = ({ className, onValueChange, ...props }: PhoneNumberInputProps) => {\n  // Template\n  return (\n    <RPNInput\n      international\n      className={cn('flex', className)}\n      flagComponent={FlagComponent}\n      countrySelectComponent={CountrySelectionComponent}\n      inputComponent={InputComponent}\n      smartCaret={false}\n      {...props}\n      onChange={(value) => {\n        onValueChange(value ?? '')\n      }}\n    />\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/molecules/phone-number-input/index.tsx"
+    },
+    {
+      "path": "src/types/base.ts",
+      "content": "export interface Option {\n  value: string\n  label: string\n}\n",
+      "type": "registry:file",
+      "target": "src/types/base.ts"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { type MotionValue, motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { type MotionValue, motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 import * as React from 'react'
 import { cn } from '@/utils/ui'
 

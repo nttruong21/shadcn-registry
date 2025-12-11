@@ -4,7 +4,6 @@ import { type DropzoneOptions, type DropzoneState, type FileRejection, useDropzo
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import type { ScrollAreaProps } from '@/components/ui/scroll-area'
 import { cn } from '@/utils/ui'
 import { getSizeText, type UploadedFile } from './lib'
 
@@ -164,11 +163,11 @@ export const FileUploadInput = ({ id, className, children, ...restProps }: FileU
 }
 
 // File upload content
-export type FileUploadContentProps = ScrollAreaProps
-export const FileUploadContent = ({ className, children, ...props }: FileUploadContentProps) => {
+export type FileUploadContentProps = React.PropsWithChildren & { className?: string }
+export const FileUploadContent = ({ className, children }: FileUploadContentProps) => {
   // Template
   return (
-    <div className={cn('max-h-80 overflow-auto', className)} {...props}>
+    <div className={cn('max-h-80 overflow-auto', className)}>
       <div className='space-y-2'>{children}</div>
     </div>
   )

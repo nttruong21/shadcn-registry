@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "autocomplete",
+  "type": "registry:component",
+  "title": "Autocomplete",
+  "description": "An input that provides real-time suggestions as users type into an input field, helping them quickly find and select from a list of matching options.",
+  "dependencies": [
+    "cmdk",
+    "lucide-react",
+    "@radix-ui/react-dialog",
+    "class-variance-authority",
+    "@radix-ui/react-slot",
+    "@radix-ui/react-popover"
+  ],
+  "registryDependencies": [
+    "https://ntt-shadcn-registry.vercel.app/r/command.json",
+    "https://ntt-shadcn-registry.vercel.app/r/input.json",
+    "https://ntt-shadcn-registry.vercel.app/r/input-group.json",
+    "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+    "https://ntt-shadcn-registry.vercel.app/r/dialog.json",
+    "https://ntt-shadcn-registry.vercel.app/r/button.json",
+    "https://ntt-shadcn-registry.vercel.app/r/textarea.json"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/molecules/autocomplete/components/autocomplete.tsx",
+      "content": "import { Command as CommandPrimitive } from 'cmdk'\nimport { Check, ChevronDown } from 'lucide-react'\nimport * as React from 'react'\nimport {\n  Command,\n  CommandGroup,\n  CommandItem,\n  CommandList,\n  type CommandListProps,\n  type CommandProps\n} from '@/components/ui/command'\nimport type { InputProps } from '@/components/ui/input'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'\nimport { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@/components/ui/popover'\nimport { Spinner } from '@/components/ui/spinner'\nimport type { Option } from '@/types/base'\nimport { cn } from '@/utils/ui'\n\n// Autocomplete\nexport interface AutocompleteProps {\n  value: string\n  options: Option[]\n  placeholder?: string\n  isValueAsLabel?: boolean\n  isLoading?: boolean\n  commandProps?: CommandProps\n  inputProps?: InputProps\n  commandListProps?: CommandListProps\n  commandGroupSlot?: React.ReactNode\n  onValueChange: (value: string) => void\n}\n\nexport const Autocomplete = ({\n  value,\n  options,\n  placeholder,\n  isValueAsLabel = true,\n  isLoading = false,\n  commandProps,\n  inputProps,\n  commandGroupSlot,\n  commandListProps,\n  onValueChange\n}: AutocompleteProps) => {\n  // States\n  const [isOpenPopover, setIsOpenPopover] = React.useState(false)\n\n  // Methods\n  const downKey = React.useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {\n    if (e.key === 'Escape') {\n      close()\n    }\n  }, [])\n\n  const openAuto = React.useCallback((e: Event) => {\n    e.preventDefault()\n  }, [])\n\n  const interactOutside = React.useCallback((e: Event) => {\n    if (e.target instanceof Element && e.target.hasAttribute('cmdk-input')) {\n      e.preventDefault()\n    }\n  }, [])\n\n  // Template\n  return (\n    <div>\n      <Popover open={isOpenPopover} modal onOpenChange={setIsOpenPopover}>\n        <Command {...commandProps} className={cn('overflow-visible', commandProps?.className)}>\n          <PopoverAnchor>\n            <div>\n              <PopoverTrigger asChild onClick={() => setIsOpenPopover(true)}>\n                <CommandPrimitive.Input asChild value={value} onKeyDown={downKey} onValueChange={onValueChange}>\n                  <InputGroup>\n                    <InputGroupInput\n                      value={value}\n                      placeholder={placeholder}\n                      onChange={({ target: { value } }) => onValueChange(value)}\n                      {...inputProps}\n                    />\n                    <InputGroupAddon align='inline-end'>{isLoading ? <Spinner /> : <ChevronDown />}</InputGroupAddon>\n                  </InputGroup>\n                </CommandPrimitive.Input>\n              </PopoverTrigger>\n            </div>\n          </PopoverAnchor>\n\n          <PopoverContent\n            align='start'\n            className={cn(\n              'min-w-(--radix-popover-trigger-width) border-0 p-0 has-[[cmdk-group-items]:not(:empty)]:border'\n            )}\n            onOpenAutoFocus={openAuto}\n            onInteractOutside={interactOutside}\n          >\n            {isOpenPopover ? (\n              isLoading ? (\n                <div className='p-4'>\n                  <Spinner className='mx-auto' />\n                </div>\n              ) : (\n                <CommandList {...commandListProps}>\n                  <CommandGroup>\n                    {options.map((option) => {\n                      const optionValue = isValueAsLabel ? option.label : option.value\n                      const isSelected = optionValue === value\n\n                      return (\n                        <CommandItem\n                          key={option.value}\n                          value={option.label}\n                          className='group/selected'\n                          onSelect={() => onValueChange(optionValue)}\n                        >\n                          {option.label}\n                          <Check className={cn('ml-auto size-4', isSelected ? 'visible' : 'invisible')} />\n                        </CommandItem>\n                      )\n                    })}\n\n                    {commandGroupSlot && commandGroupSlot}\n                  </CommandGroup>\n                </CommandList>\n              )\n            ) : null}\n          </PopoverContent>\n        </Command>\n      </Popover>\n    </div>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/molecules/autocomplete/index.tsx"
+    },
+    {
+      "path": "src/types/base.ts",
+      "content": "export interface Option {\n  value: string\n  label: string\n}\n",
+      "type": "registry:file",
+      "target": "src/types/base.ts"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "number-input",
+  "type": "registry:component",
+  "title": "Number Input",
+  "description": "An input to type number.",
+  "dependencies": [
+    "lucide-react",
+    "react-number-format",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "@radix-ui/react-separator"
+  ],
+  "registryDependencies": [
+    "https://ntt-shadcn-registry.vercel.app/r/button.json",
+    "https://ntt-shadcn-registry.vercel.app/r/button-group.json",
+    "https://ntt-shadcn-registry.vercel.app/r/input.json",
+    "https://ntt-shadcn-registry.vercel.app/r/input-group.json",
+    "https://ntt-shadcn-registry.vercel.app/r/separator.json",
+    "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/molecules/number-input/components/number-input.tsx",
+      "content": "import { ChevronDown, ChevronUp } from 'lucide-react'\nimport { NumericFormat, type NumericFormatProps } from 'react-number-format'\nimport { Button } from '@/components/ui/button'\nimport { ButtonGroup } from '@/components/ui/button-group'\nimport { Input, type InputProps } from '@/components/ui/input'\nimport { InputGroup } from '@/components/ui/input-group'\nimport { cn } from '@/utils/ui'\n\n// Number input\nexport type NumberInputProps = NumericFormatProps<InputProps> & {\n  isDisplayStepper?: boolean\n  prefixNode?: React.ReactNode\n  suffixNode?: React.ReactNode\n  // biome-ignore lint/suspicious/noExplicitAny: ignore\n  onFieldChange?: (...event: any[]) => void\n}\n\nexport const NumberInput = ({\n  value,\n  min = -Infinity,\n  max = Infinity,\n  step = 1,\n  decimalScale = 3,\n  allowNegative = true,\n  thousandSeparator = '.',\n  decimalSeparator = ',',\n  valueIsNumericString = true,\n  className,\n  isDisplayStepper = true,\n  disabled,\n  prefixNode,\n  suffixNode,\n  onFieldChange,\n  ...props\n}: NumberInputProps) => {\n  // Methods\n  const increment = () => {\n    // Using == for checking both null or undefined\n    if (value == null) {\n      return\n    }\n    onFieldChange?.(+value + +step)\n  }\n\n  const decrement = () => {\n    // Using == for checking both null or undefined\n    if (value == null) {\n      return\n    }\n    onFieldChange?.(+value - +step)\n  }\n\n  const blur = (e: React.FocusEvent<HTMLInputElement, Element>) => {\n    props.onBlur?.(e)\n\n    // Using == for checking both null or undefined\n    if (value == null) return\n    if (value < min) {\n      return onFieldChange?.(min)\n    }\n    if (value > max) {\n      return onFieldChange?.(max)\n    }\n  }\n\n  // Template\n  return (\n    <ButtonGroup\n      className={cn(\n        'w-full aria-invalid:border-destructive! aria-invalid:ring-destructive/20! dark:aria-invalid:ring-destructive/40',\n        className\n      )}\n    >\n      {isDisplayStepper && (\n        <Button\n          aria-invalid={props['aria-invalid']}\n          aria-label='Decrease value'\n          variant='outline'\n          size='icon'\n          onClick={decrement}\n          disabled={disabled || (value != null && +value <= +min)}\n        >\n          <ChevronDown />\n        </Button>\n      )}\n\n      <InputGroup>\n        <NumericFormat\n          value={value}\n          thousandSeparator={thousandSeparator}\n          decimalSeparator={decimalSeparator}\n          valueIsNumericString={valueIsNumericString}\n          decimalScale={decimalScale}\n          customInput={Input}\n          allowNegative={allowNegative}\n          step={step}\n          min={min}\n          max={max}\n          className={cn(isDisplayStepper && 'rounded-none')}\n          disabled={disabled}\n          {...props}\n          onBlur={blur}\n        />\n      </InputGroup>\n\n      {isDisplayStepper && (\n        <Button\n          aria-label='Increase value'\n          size='icon'\n          variant='outline'\n          aria-invalid={props['aria-invalid']}\n          onClick={increment}\n          disabled={disabled || (value != null && +value >= +max)}\n        >\n          <ChevronUp />\n        </Button>\n      )}\n    </ButtonGroup>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/molecules/number-input/index.tsx"
+    }
+  ]
+}

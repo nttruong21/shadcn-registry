@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "loading-overlay",
+  "type": "registry:component",
+  "title": "Loading Overlay",
+  "description": "A component to display loading state of the overlay area.",
+  "registryDependencies": [
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/molecules/loading-overlay/components/loading-overlay.tsx",
+      "content": "import type { PropsWithChildren } from 'react'\nimport { Spinner } from '@/components/ui/spinner'\nimport { cn } from '@/utils/ui'\n\n// Loading overlay\nexport const LoadingOverlay = ({\n  className,\n  isLoading,\n  children\n}: PropsWithChildren & {\n  className?: string\n  isLoading?: boolean\n}) => {\n  // Template\n  return (\n    <div className={cn('relative overflow-hidden', className)}>\n      {children}\n      <div\n        className={cn(\n          `absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-muted/60 transition-[visibility]`,\n          isLoading ? 'visible' : 'invisible'\n        )}\n      >\n        <Spinner className='size-6' />\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/molecules/loading-overlay/index.tsx"
+    }
+  ]
+}

@@ -886,6 +886,436 @@
       "dependencies": [
         "@radix-ui/react-tooltip"
       ]
+    },
+    {
+      "name": "animated-text",
+      "type": "registry:component",
+      "title": "Animated text",
+      "description": "Generates animated text word-by-word with blur, highlights, links, and smooth effects.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/animated-text/components/animated-text.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/animated-text/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "autocomplete",
+      "type": "registry:component",
+      "title": "Autocomplete",
+      "description": "An input that provides real-time suggestions as users type into an input field, helping them quickly find and select from a list of matching options.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/autocomplete/components/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/autocomplete/index.tsx"
+        },
+        {
+          "path": "src/types/base.ts",
+          "type": "registry:file",
+          "target": "src/types/base.ts"
+        }
+      ],
+      "dependencies": [
+        "cmdk",
+        "lucide-react",
+        "@radix-ui/react-dialog",
+        "class-variance-authority",
+        "@radix-ui/react-slot",
+        "@radix-ui/react-popover"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/command.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dialog.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/textarea.json"
+      ]
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:component",
+      "title": "Color Picker",
+      "description": "A component to pick the color.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/color-picker/components/color-picker.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/color-picker/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-slider",
+        "color",
+        "lucide-react",
+        "class-variance-authority",
+        "@radix-ui/react-select"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/select.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:component",
+      "title": "File Upload",
+      "description": "A file upload component with drag and drop or upload files.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/file-upload/components/file-upload.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/file-upload/file-upload.tsx"
+        },
+        {
+          "path": "src/registry/new-york/molecules/file-upload/components/lib.ts",
+          "type": "registry:file",
+          "target": "src/components/molecules/file-upload/lib.ts"
+        },
+        {
+          "path": "src/registry/new-york/molecules/file-upload/components/index.ts",
+          "type": "registry:file",
+          "target": "src/components/molecules/file-upload/index.ts"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "react-dropzone",
+        "sonner",
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
+    },
+    {
+      "name": "gradient-path-background",
+      "type": "registry:component",
+      "title": "Gradient Path Background",
+      "description": "A set of SVG paths that animate as if being drawn. Great for tech hero backgrounds.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/gradient-path-background/components/gradient-path-background.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/gradient-path-background/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "highlighted-text",
+      "type": "registry:component",
+      "title": "Highlighted Text",
+      "description": "Highlighted text with solid background and decorative markers for emphasis.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/highlighted-text/components/highlighted-text.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/highlighted-text/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "loading-overlay",
+      "type": "registry:component",
+      "title": "Loading Overlay",
+      "description": "A component to display loading state of the overlay area.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/loading-overlay/components/loading-overlay.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/loading-overlay/index.tsx"
+        }
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
+    },
+    {
+      "name": "month-picker",
+      "type": "registry:component",
+      "title": "Month Picker",
+      "description": "A combobox to select a month.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/month-picker/components/month-picker.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/month-picker/index.tsx"
+        },
+        {
+          "path": "src/types/base.ts",
+          "type": "registry:file",
+          "target": "src/types/base.ts"
+        }
+      ],
+      "dependencies": [
+        "date-fns",
+        "lucide-react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "embla-carousel-react",
+        "@radix-ui/react-popover"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/year-picker.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/carousel.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:component",
+      "title": "Multi Select",
+      "description": "A combobox to select multiple options.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/multi-select/components/multi-select.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/multi-select/index.tsx"
+        },
+        {
+          "path": "src/types/base.ts",
+          "type": "registry:file",
+          "target": "src/types/base.ts"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "embla-carousel-react",
+        "@radix-ui/react-popover",
+        "@radix-ui/react-checkbox",
+        "cmdk",
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-separator"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/badge.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/checkbox.json",
+        "https://ntt-shadcn-registry.vercel.app/r/command.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dialog.json"
+      ]
+    },
+    {
+      "name": "number-input",
+      "type": "registry:component",
+      "title": "Number Input",
+      "description": "An input to type number.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/number-input/components/number-input.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/number-input/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "react-number-format",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@radix-ui/react-separator"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json",
+        "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:component",
+      "title": "Pagination",
+      "description": "Pagination with page navigation.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/pagination/components/pagination.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/pagination/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@radix-ui/react-tooltip"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/tooltip.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
+    },
+    {
+      "name": "password-input",
+      "type": "registry:component",
+      "title": "Password Input",
+      "description": "An input that can toggle visibility of the password text.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/password-input/components/password-input.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/password-input/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
+    },
+    {
+      "name": "phone-number-input",
+      "type": "registry:component",
+      "title": "Phone Number Input",
+      "description": "A component to select the country and input the phone number.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/phone-number-input/components/phone-number-input.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/phone-number-input/index.tsx"
+        },
+        {
+          "path": "src/types/base.ts",
+          "type": "registry:file",
+          "target": "src/types/base.ts"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "react-phone-number-input",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "cmdk",
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-popover"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/combobox.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+        "https://ntt-shadcn-registry.vercel.app/r/command.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dialog.json"
+      ]
+    },
+    {
+      "name": "theme-toggle-button",
+      "type": "registry:component",
+      "title": "Theme Toggle Button",
+      "description": "A button to toggle the theme.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/theme-toggle-button/components/theme-toggle-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/theme-toggle-button/index.tsx"
+        },
+        {
+          "path": "src/registry/new-york/molecules/theme-toggle-button/components/lib.ts",
+          "type": "registry:file",
+          "target": "src/components/molecules/theme-toggle-button/lib.ts"
+        },
+        {
+          "path": "src/registry/new-york/molecules/theme-toggle-button/components/index.ts",
+          "type": "registry:file",
+          "target": "src/components/molecules/theme-toggle-button/index.ts"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "zod",
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:component",
+      "title": "Tilt Card",
+      "description": "Smooth tilt card that responds naturally to your cursor, giving the card a more polished, modern look.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/tilt-card/components/tilt-card.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/tilt-card/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "motion"
+      ]
+    },
+    {
+      "name": "year-picker",
+      "type": "registry:component",
+      "title": "Year Picker",
+      "description": "A combobox to select a year.",
+      "files": [
+        {
+          "path": "src/registry/new-york/molecules/year-picker/components/year-picker.tsx",
+          "type": "registry:ui",
+          "target": "src/components/molecules/year-picker/index.tsx"
+        }
+      ],
+      "dependencies": [
+        "date-fns",
+        "lucide-react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "cmdk",
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-popover",
+        "@radix-ui/react-label",
+        "@radix-ui/react-popover"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/combobox.json",
+        "https://ntt-shadcn-registry.vercel.app/r/label.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+        "https://ntt-shadcn-registry.vercel.app/r/command.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dialog.json"
+      ]
     }
   ]
 }
