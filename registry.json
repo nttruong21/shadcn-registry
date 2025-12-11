@@ -66,7 +66,7 @@
         {
           "path": "src/registry/new-york/ui/badge/components/badge.tsx",
           "type": "registry:ui",
-          "target": "src/components/ui"
+          "target": "src/components/ui/badge.tsx"
         }
       ],
       "dependencies": [
