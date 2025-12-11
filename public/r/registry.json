@@ -15,8 +15,11 @@
           "target": "src/components/ui/accordion.tsx"
         }
       ],
-      "dependencies": ["@radix-ui/react-accordion", "lucide-react"],
-      "registryDependencies": [""]
+      "dependencies": [
+        "@radix-ui/react-accordion",
+        "lucide-react"
+      ],
+      "author": "nttruong21"
     },
     {
       "name": "alert-dialog",
@@ -30,8 +33,13 @@
           "target": "src/components/ui/alert-dialog.tsx"
         }
       ],
-      "dependencies": ["@radix-ui/react-alert-dialog"],
-      "registryDependencies": ["https://ntt-shadcn-registry.vercel.app/r/button"]
+      "dependencies": [
+        "@radix-ui/react-alert-dialog"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
     },
     {
       "name": "avatar",
@@ -45,7 +53,9 @@
           "target": "src/components/ui/avatar.tsx"
         }
       ],
-      "dependencies": ["@radix-ui/react-avatar"]
+      "dependencies": [
+        "@radix-ui/react-avatar"
+      ]
     },
     {
       "name": "badge",
@@ -59,7 +69,10 @@
           "target": "src/components/ui"
         }
       ],
-      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"]
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ]
     },
     {
       "name": "breadcrumb",
@@ -73,7 +86,10 @@
           "target": "src/components/ui/breadcrumb.tsx"
         }
       ],
-      "dependencies": ["@radix-ui/react-slot", "lucide-react"]
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "lucide-react"
+      ]
     },
     {
       "name": "button",
@@ -87,7 +103,15 @@
           "target": "src/components/ui/button.tsx"
         }
       ],
-      "dependencies": ["@radix-ui/react-slot", "lucide-react", "class-variance-authority"]
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
+      ]
     },
     {
       "name": "button-group",
@@ -101,8 +125,105 @@
           "target": "src/components/ui/button-group.tsx"
         }
       ],
-      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
-      "registryDependencies": ["https://ntt-shadcn-registry.vercel.app/r/separator"]
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json"
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "A date field component that allows users to enter and edit date.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/calendar/components/calendar.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/calendar.tsx"
+        }
+      ],
+      "dependencies": [
+        "date-fns",
+        "lucide-react",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json"
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Displays a card with header, content, and footer.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/card/components/card.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "A carousel with motion and swipe built using Embla.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/carousel/components/carousel.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/carousel.tsx"
+        }
+      ],
+      "dependencies": [
+        "embla-carousel-react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "A control that allows the user to toggle between checked and not checked.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/checkbox/components/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/checkbox.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-checkbox",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Autocomplete input and command palette with a list of suggestions.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/combobox/components/combobox.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/combobox.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/command.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json"
+      ]
     },
     {
       "name": "command",
@@ -116,8 +237,53 @@
           "target": "src/components/ui/command.tsx"
         }
       ],
-      "dependencies": ["lucide-react", "cmdk"],
-      "registryDependencies": ["https://ntt-shadcn-registry.vercel.app/r/dialog"]
+      "dependencies": [
+        "cmdk",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/dialog.json"
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/context-menu/components/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/context-menu.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-context-menu",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "A date picker component with range and presets.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/date-picker/components/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/date-picker.tsx"
+        }
+      ],
+      "dependencies": [
+        "date-fns",
+        "lucide-react",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/calendar.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json"
+      ]
     },
     {
       "name": "dialog",
@@ -131,7 +297,26 @@
           "target": "src/components/ui/dialog.tsx"
         }
       ],
-      "dependencies": ["lucide-react", "@radix-ui/react-dialog"]
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "A drawer component for React.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/drawer/components/drawer.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/drawer.tsx"
+        }
+      ],
+      "dependencies": [
+        "vaul"
+      ]
     },
     {
       "name": "dropdown-menu",
@@ -145,7 +330,62 @@
           "target": "src/components/ui/dropdown-menu.tsx"
         }
       ],
-      "dependencies": ["lucide-react", "@radix-ui/react-dropdown-menu"]
+      "dependencies": [
+        "@radix-ui/react-dropdown-menu",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Use the Empty component to display a empty state.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/empty/components/empty.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/empty.tsx"
+        }
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ]
+    },
+    {
+      "name": "Field",
+      "type": "registry:ui",
+      "title": "field",
+      "description": "Combine labels, controls, and help text to compose accessible form fields and grouped inputs.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/field/components/field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/field.tsx"
+        }
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/label.json",
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json"
+      ]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "For sighted users to preview content available behind a link.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/hover-card/components/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/hover-card.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-hover-card"
+      ]
     },
     {
       "name": "input",
@@ -161,6 +401,77 @@
       ]
     },
     {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Display additional information or actions to an input or textarea.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/input-group/components/input-group.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/input-group.tsx"
+        }
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/textarea.json"
+      ]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "Accessible one-time password component with copy paste functionality.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/input-otp/components/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/input-otp.tsx"
+        }
+      ],
+      "dependencies": [
+        "input-otp",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "item",
+      "type": "registry:ui",
+      "title": "Item",
+      "description": "A versatile component that you can use to display any content.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/item/components/item.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/item.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json"
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Used to display textual user input from keyboard.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/kbd/components/kbd.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/kbd.tsx"
+        }
+      ]
+    },
+    {
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
@@ -172,7 +483,26 @@
           "target": "src/components/ui/label.tsx"
         }
       ],
-      "dependencies": ["@radix-ui/react-label"]
+      "dependencies": [
+        "@radix-ui/react-label"
+      ]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/menubar/components/menubar.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/menubar.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-menubar",
+        "lucide-react"
+      ]
     },
     {
       "name": "separator",
@@ -186,7 +516,359 @@
           "target": "src/components/ui/separator.tsx"
         }
       ],
-      "dependencies": ["@radix-ui/react-separator"]
+      "dependencies": [
+        "@radix-ui/react-separator"
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "A collection of links for navigating websites.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/navigation-menu/components/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/navigation-menu.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-navigation-menu",
+        "class-variance-authority",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Displays rich content in a portal, triggered by a button.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/popover/components/popover.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/popover.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover"
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/progress/components/progress.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/progress.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-progress"
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/radio-group/components/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/radio-group.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-radio-group",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Accessible resizable panel groups and layouts with keyboard support.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/resizable/components/resizable.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/resizable.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "react-resizable-panels"
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Augments native scroll functionality for custom, cross-browser styling.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/scroll-area/components/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/scroll-area.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-scroll-area"
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Displays a list of options for the user to pick from—triggered by a button.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/select/components/select.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/select.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-select",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Visually or semantically separates content.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/separator/components/separator.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/separator.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-separator"
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Extends the Dialog component to display content that complements the main content of the screen.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/sheet/components/sheet.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/sheet.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "A composable, themeable and customizable sidebar component.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/sidebar/components/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/sidebar.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json",
+        "https://ntt-shadcn-registry.vercel.app/r/sheet.json",
+        "https://ntt-shadcn-registry.vercel.app/r/skeleton.json",
+        "https://ntt-shadcn-registry.vercel.app/r/tooltip.json"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Use to show a placeholder while content is loading.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/skeleton/components/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "An input where the user selects a value from within a given range.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/slider/components/slider.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/slider.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-slider"
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "An opinionated toast component for React.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/sonner/components/sonner.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/sonner.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "sonner"
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "An indicator that can be used to show a loading state.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/spinner/components/spinner.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/spinner.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "A control that allows the user to toggle between checked and not checked.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/switch/components/switch.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/switch.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-switch"
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "A responsive table component.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/table/components/table.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/tabs/components/tabs.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/tabs.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-tabs",
+        "motion"
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Displays a form textarea or a component that looks like a textarea.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/textarea/components/textarea.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "A two-state button that can be either on or off.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/toggle/components/toggle.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/toggle.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-toggle",
+        "class-variance-authority"
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "A set of two-state buttons that can be toggled on or off.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/toggle-group/components/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/toggle-group.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-toggle-group",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/toggle.json"
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "files": [
+        {
+          "path": "src/registry/new-york/ui/tooltip/components/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/tooltip.tsx"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-tooltip"
+      ]
     }
   ]
 }

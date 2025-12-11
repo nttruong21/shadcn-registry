@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "type": "registry:ui",
+  "title": "Popover",
+  "description": "Displays rich content in a portal, triggered by a button.",
+  "dependencies": [
+    "@radix-ui/react-popover"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/ui/popover/components/popover.tsx",
+      "content": "import * as PopoverPrimitive from '@radix-ui/react-popover'\nimport { cn } from '@/utils/ui'\n\n// Popover\nexport type PopoverProps = PopoverPrimitive.PopoverProps\nexport const Popover = ({ ...props }: PopoverProps) => {\n  // Template\n  return <PopoverPrimitive.Root data-slot='popover' {...props} />\n}\n\n// Popover trigger\nexport type PopoverTriggerProps = PopoverPrimitive.PopoverTriggerProps\nexport const PopoverTrigger = ({ ...props }: PopoverTriggerProps) => {\n  // Template\n  return <PopoverPrimitive.Trigger data-slot='popover-trigger' {...props} />\n}\n\n// Popover content\nexport type PopoverContentProps = PopoverPrimitive.PopoverContentProps\nexport const PopoverContent = ({ className, align = 'center', sideOffset = 4, ...props }: PopoverContentProps) => {\n  // Template\n  return (\n    <PopoverPrimitive.Portal>\n      <PopoverPrimitive.Content\n        data-slot='popover-content'\n        align={align}\n        sideOffset={sideOffset}\n        className={cn(\n          'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-hidden data-[state=closed]:animate-out data-[state=open]:animate-in',\n          className\n        )}\n        {...props}\n      />\n    </PopoverPrimitive.Portal>\n  )\n}\n\n// Popover anchor\nexport const PopoverAnchor = ({ ...props }: PopoverPrimitive.PopoverAnchorProps) => {\n  // Template\n  return <PopoverPrimitive.Anchor data-slot='popover-anchor' {...props} />\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/ui/popover.tsx"
+    }
+  ]
+}

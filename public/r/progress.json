@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+  "dependencies": [
+    "@radix-ui/react-progress"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/ui/progress/components/progress.tsx",
+      "content": "import * as ProgressPrimitive from '@radix-ui/react-progress'\nimport type * as React from 'react'\nimport { cn } from '@/utils/ui'\n\n// Progress\nexport const Progress = ({ className, value, ...props }: React.ComponentProps<typeof ProgressPrimitive.Root>) => {\n  // Template\n  return (\n    <ProgressPrimitive.Root\n      data-slot='progress'\n      className={cn('relative h-2 w-full overflow-hidden rounded-full bg-primary/20', className)}\n      {...props}\n    >\n      <ProgressPrimitive.Indicator\n        data-slot='progress-indicator'\n        className='h-full w-full flex-1 bg-primary transition-all'\n        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}\n      />\n    </ProgressPrimitive.Root>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/ui/progress.tsx"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "title": "Textarea",
+  "description": "Displays a form textarea or a component that looks like a textarea.",
+  "files": [
+    {
+      "path": "src/registry/new-york/ui/textarea/components/textarea.tsx",
+      "content": "import type * as React from 'react'\nimport { cn } from '@/utils/ui'\n\n// Component\nexport const Textarea = ({ className, ...props }: React.ComponentProps<'textarea'>) => {\n  // Template\n  return (\n    <textarea\n      data-slot='textarea'\n      className={cn(\n        'field-sizing-content flex min-h-16 w-full resize-none rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none transition-[color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:ring-destructive/40',\n        className\n      )}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/ui/textarea.tsx"
+    }
+  ]
+}

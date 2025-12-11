@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "type": "registry:ui",
+  "title": "Kbd",
+  "description": "Used to display textual user input from keyboard.",
+  "files": [
+    {
+      "path": "src/registry/new-york/ui/kbd/components/kbd.tsx",
+      "content": "import { cn } from '@/utils/ui'\n\n// Kbd\nexport const Kbd = ({ className, ...props }: React.ComponentProps<'kbd'>) => {\n  // Template\n  return (\n    <kbd\n      data-slot='kbd'\n      className={cn(\n        'pointer-events-none inline-flex h-5 w-fit min-w-5 select-none items-center justify-center gap-1 rounded-sm bg-muted px-1 font-medium font-sans text-muted-foreground text-xs',\n        \"[&_svg:not([class*='size-'])]:size-3\",\n        'in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background dark:in-data-[slot=tooltip-content]:bg-background/10',\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n// Kbd group\nexport const KbdGroup = ({ className, ...props }: React.ComponentProps<'div'>) => {\n  // Template\n  return <kbd data-slot='kbd-group' className={cn('inline-flex items-center gap-1', className)} {...props} />\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/ui/kbd.tsx"
+    }
+  ]
+}

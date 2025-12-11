@@ -3,13 +3,11 @@
   "name": "accordion",
   "type": "registry:ui",
   "title": "Accordion",
+  "author": "nttruong21",
   "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
   "dependencies": [
     "@radix-ui/react-accordion",
     "lucide-react"
-  ],
-  "registryDependencies": [
-    ""
   ],
   "files": [
     {

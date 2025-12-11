@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table",
+  "type": "registry:ui",
+  "title": "Table",
+  "description": "A responsive table component.",
+  "files": [
+    {
+      "path": "src/registry/new-york/ui/table/components/table.tsx",
+      "content": "import type * as React from 'react'\nimport { cn } from '@/utils/ui'\n\n// Table\nexport const Table = ({ className, ...props }: React.ComponentProps<'table'>) => {\n  // Template\n  return (\n    <div data-slot='table-container' className='size-full max-h-full grow overflow-auto'>\n      <table\n        data-slot='table'\n        className={cn('w-full table-fixed caption-bottom border-separate border-spacing-0 text-sm', className)}\n        {...props}\n      />\n    </div>\n  )\n}\n\n// Table header\nexport const TableHeader = ({ className, ...props }: React.ComponentProps<'thead'>) => {\n  // Template\n  return <thead data-slot='table-header' className={cn('[&_tr]:border-b', className)} {...props} />\n}\n\n// Table body\nexport const TableBody = ({ className, ...props }: React.ComponentProps<'tbody'>) => {\n  // Template\n  return (\n    <tbody\n      data-slot='table-body'\n      className={cn('[&_tr:last-child]:border-0 [&_tr]:hover:bg-muted/50', className)}\n      {...props}\n    />\n  )\n}\n\n// Table footer\nexport const TableFooter = ({ className, ...props }: React.ComponentProps<'tfoot'>) => {\n  return (\n    <tfoot\n      data-slot='table-footer'\n      className={cn('border-t bg-muted/50 font-medium [&>tr]:last:border-b-0', className)}\n      {...props}\n    />\n  )\n}\n\n// Table row\nexport const TableRow = ({ className, ...props }: React.ComponentProps<'tr'>) => {\n  // Template\n  return (\n    <tr\n      data-slot='table-row'\n      className={cn('border-b transition-colors data-[state=selected]:bg-muted', className)}\n      {...props}\n    />\n  )\n}\n\n// Table head\nexport const TableHead = ({ className, ...props }: React.ComponentProps<'th'>) => {\n  // Template\n  return (\n    <th\n      data-slot='table-head'\n      className={cn(\n        'whitespace-nowrap px-4 py-3 text-left align-middle font-semibold text-foreground [&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-0.5',\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n// Table cell\nexport const TableCell = ({ className, ...props }: React.ComponentProps<'td'>) => {\n  // Template\n  return (\n    <td\n      data-slot='table-cell'\n      className={cn(\n        'whitespace-nowrap px-4 py-3 align-middle [&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-0.5',\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\n// Table caption\nexport const TableCaption = ({ className, ...props }: React.ComponentProps<'caption'>) => {\n  // Template\n  return (\n    <caption data-slot='table-caption' className={cn('mt-4 text-muted-foreground text-sm', className)} {...props} />\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/ui/table.tsx"
+    }
+  ]
+}

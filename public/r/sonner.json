@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonner",
+  "type": "registry:ui",
+  "title": "Sonner",
+  "description": "An opinionated toast component for React.",
+  "dependencies": [
+    "lucide-react",
+    "sonner"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/ui/sonner/components/sonner.tsx",
+      "content": "import { CircleCheckIcon, InfoIcon, Loader2Icon, OctagonXIcon, TriangleAlertIcon } from 'lucide-react'\nimport { Toaster as Sonner, type ToasterProps } from 'sonner'\n\n// Toaster\nexport const Toaster = ({ theme = 'system', ...props }: ToasterProps) => {\n  // Template\n  return (\n    <Sonner\n      theme={theme}\n      className='toaster group'\n      icons={{\n        success: <CircleCheckIcon className='size-4' />,\n        info: <InfoIcon className='size-4' />,\n        warning: <TriangleAlertIcon className='size-4' />,\n        error: <OctagonXIcon className='size-4' />,\n        loading: <Loader2Icon className='size-4 animate-spin' />\n      }}\n      toastOptions={{\n        duration: 100000,\n        classNames: {\n          closeButton: '!cursor-default'\n        }\n      }}\n      style={\n        {\n          '--normal-bg': 'var(--popover)',\n          '--normal-text': 'var(--popover-foreground)',\n          '--normal-border': 'var(--border)',\n          '--border-radius': 'var(--radius)',\n          '--toast-close-button-start': 'auto',\n          '--toast-close-button-end': '0',\n          '--toast-close-button-transform': 'translate(35%, -35%)'\n        } as React.CSSProperties\n      }\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/ui/sonner.tsx"
+    }
+  ]
+}

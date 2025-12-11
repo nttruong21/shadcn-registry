@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "type": "registry:ui",
+  "title": "Tooltip",
+  "description": "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+  "dependencies": [
+    "@radix-ui/react-tooltip"
+  ],
+  "files": [
+    {
+      "path": "src/registry/new-york/ui/tooltip/components/tooltip.tsx",
+      "content": "import * as TooltipPrimitive from '@radix-ui/react-tooltip'\nimport type * as React from 'react'\nimport { cn } from '@/utils/ui'\n\n// Tooltip provider\nexport const TooltipProvider = ({\n  delayDuration = 300,\n  ...props\n}: React.ComponentProps<typeof TooltipPrimitive.Provider>) => {\n  // Template\n  return <TooltipPrimitive.Provider data-slot='tooltip-provider' delayDuration={delayDuration} {...props} />\n}\n\n// Tooltip\nexport const Tooltip = ({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Root>) => {\n  // Template\n  return (\n    <TooltipProvider>\n      <TooltipPrimitive.Root data-slot='tooltip' {...props} />\n    </TooltipProvider>\n  )\n}\n\n// Tooltip trigger\nexport const TooltipTrigger = ({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) => {\n  // Template\n  return <TooltipPrimitive.Trigger data-slot='tooltip-trigger' {...props} />\n}\n\n// Tooltip content\nexport const TooltipContent = ({\n  className,\n  sideOffset = 0,\n  children,\n  ...props\n}: React.ComponentProps<typeof TooltipPrimitive.Content>) => {\n  // Template\n  return (\n    <TooltipPrimitive.Portal>\n      <TooltipPrimitive.Content\n        data-slot='tooltip-content'\n        sideOffset={sideOffset}\n        className={cn(\n          'fade-in-0 zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) animate-in text-balance rounded-md bg-foreground px-3 py-1.5 text-background text-xs data-[state=closed]:animate-out',\n          className\n        )}\n        {...props}\n      >\n        {children}\n        <TooltipPrimitive.Arrow className='z-50 size-2.5 translate-y-[calc(-50%-2px)] rotate-45 rounded-xs bg-foreground fill-foreground' />\n      </TooltipPrimitive.Content>\n    </TooltipPrimitive.Portal>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/components/ui/tooltip.tsx"
+    }
+  ]
+}
