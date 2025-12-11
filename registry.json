@@ -216,6 +216,11 @@
           "path": "src/registry/new-york/ui/combobox/components/combobox.tsx",
           "type": "registry:ui",
           "target": "src/components/ui/combobox.tsx"
+        },
+        {
+          "path": "src/types/base.ts",
+          "type": "registry:file",
+          "target": "src/types/base.ts"
         }
       ],
       "dependencies": [
