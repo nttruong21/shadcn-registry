@@ -528,22 +528,6 @@
       ]
     },
     {
-      "name": "separator",
-      "type": "registry:ui",
-      "title": "Separator",
-      "description": "Visually or semantically separates content.",
-      "files": [
-        {
-          "path": "src/registry/new-york/ui/separator/components/separator.tsx",
-          "type": "registry:ui",
-          "target": "src/components/ui/separator.tsx"
-        }
-      ],
-      "dependencies": [
-        "@radix-ui/react-separator"
-      ]
-    },
-    {
       "name": "navigation-menu",
       "type": "registry:ui",
       "title": "Navigation Menu",
@@ -686,6 +670,11 @@
           "path": "src/registry/new-york/ui/sheet/components/sheet.tsx",
           "type": "registry:ui",
           "target": "src/components/ui/sheet.tsx"
+        },
+        {
+          "path": "src/hooks/use-device.ts",
+          "type": "registry:hook",
+          "target": "src/hooks/use-device.ts"
         }
       ],
       "dependencies": [
