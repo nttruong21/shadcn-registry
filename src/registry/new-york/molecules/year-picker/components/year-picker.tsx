@@ -19,9 +19,9 @@ export const generateOptions = (startYear: number, endYear: number): ComboboxPro
   })
 }
 
-export const TODAY = new Date()
-export const YEAR_OFFSET = 100
-export const YEAR_OPTIONS = generateOptions(TODAY.getFullYear() - YEAR_OFFSET, TODAY.getFullYear() + YEAR_OFFSET)
+export const today = new Date()
+export const yearOffset = 100
+export const defaultOptions = generateOptions(today.getFullYear() - yearOffset, today.getFullYear() + yearOffset)
 
 // Year picker
 export type YearPickerProps = Omit<ComboboxProps, 'options'> & {
@@ -34,7 +34,7 @@ export const YearPicker = ({ minDate, maxDate, ...props }: YearPickerProps) => {
   const options = React.useMemo<ComboboxProps['options']>(() => {
     // Has not both min date and max date
     if (!minDate && !maxDate) {
-      return YEAR_OPTIONS
+      return defaultOptions
     }
 
     // Has both min date and max date
@@ -46,8 +46,8 @@ export const YearPicker = ({ minDate, maxDate, ...props }: YearPickerProps) => {
     if (minDate) {
       return generateOptions(
         minDate.getFullYear(),
-        add(max([minDate, TODAY]), {
-          years: YEAR_OFFSET
+        add(max([minDate, today]), {
+          years: yearOffset
         }).getFullYear()
       )
     }
@@ -55,8 +55,8 @@ export const YearPicker = ({ minDate, maxDate, ...props }: YearPickerProps) => {
     // Only has max date
     if (maxDate) {
       return generateOptions(
-        sub(min([TODAY, maxDate]), {
-          years: YEAR_OFFSET
+        sub(min([today, maxDate]), {
+          years: yearOffset
         }).getFullYear(),
         maxDate.getFullYear()
       )
@@ -91,7 +91,7 @@ export const YearRangePicker = ({
   const options = React.useMemo<ComboboxProps['options']>(() => {
     // Has not both min date and max date
     if (!minDate && !maxDate) {
-      return YEAR_OPTIONS
+      return defaultOptions
     }
 
     // Has both min date and max date
@@ -103,8 +103,8 @@ export const YearRangePicker = ({
     if (minDate) {
       return generateOptions(
         minDate.getFullYear(),
-        add(max([minDate, TODAY]), {
-          years: YEAR_OFFSET
+        add(max([minDate, today]), {
+          years: yearOffset
         }).getFullYear()
       )
     }
@@ -112,8 +112,8 @@ export const YearRangePicker = ({
     // Only has max date
     if (maxDate) {
       return generateOptions(
-        sub(min([TODAY, maxDate]), {
-          years: YEAR_OFFSET
+        sub(min([today, maxDate]), {
+          years: yearOffset
         }).getFullYear(),
         maxDate.getFullYear()
       )
@@ -182,7 +182,7 @@ export const YearRangePicker = ({
               onValueChange={(yearValue) => {
                 if (!yearValue) return
 
-                const date = set(TODAY, {
+                const date = set(today, {
                   date: 1,
                   month: value?.start ? value.start.getMonth() : 0,
                   year: +yearValue
@@ -223,7 +223,7 @@ export const YearRangePicker = ({
               onValueChange={(yearValue) => {
                 if (!yearValue) return
 
-                const date = set(TODAY, {
+                const date = set(today, {
                   date: 1,
                   month: value?.end ? value.end.getMonth() : 0,
                   year: +yearValue

@@ -20,7 +20,7 @@ export const options: Option[] = Array.from({ length: 12 }).map((_, index) => ({
   label: `${index + 1 < 10 ? '0' : ''}${index + 1}`
 }))
 
-export const TODAY = new Date()
+export const today = new Date()
 
 // Month picker
 export type MonthPickerProps = {
@@ -114,7 +114,7 @@ export const MonthPicker = ({
             onValueChange={(yearValue) => {
               if (!yearValue) return
               changeValue(
-                set(TODAY, {
+                set(today, {
                   date: 1,
                   month: value ? value.getMonth() : 0,
                   year: +yearValue
@@ -130,10 +130,10 @@ export const MonthPicker = ({
                 variant={value && value?.getMonth().toString() === option.value ? 'default' : 'ghost'}
                 onClick={() => {
                   changeValue(
-                    set(TODAY, {
+                    set(today, {
                       date: 1,
                       month: +option.value,
-                      year: value ? value.getFullYear() : TODAY.getFullYear()
+                      year: value ? value.getFullYear() : today.getFullYear()
                     })
                   )
                 }}
@@ -278,7 +278,7 @@ export const MonthRangePicker = ({
                   isCanRemoveValue={false}
                   onValueChange={(yearValue) => {
                     if (!yearValue) return
-                    const date = set(TODAY, {
+                    const date = set(today, {
                       date: 1,
                       month: value?.start ? value.start.getMonth() : 0,
                       year: +yearValue
@@ -295,10 +295,10 @@ export const MonthRangePicker = ({
                         value?.start && value.start?.getMonth().toString() === option.value ? 'default' : 'ghost'
                       }
                       onClick={() => {
-                        const date = set(TODAY, {
+                        const date = set(today, {
                           date: 1,
                           month: +option.value,
-                          year: value?.start ? value.start.getFullYear() : TODAY.getFullYear()
+                          year: value?.start ? value.start.getFullYear() : today.getFullYear()
                         })
                         changeStartValue(value?.end ? min([date, value.end]) : date)
                       }}
@@ -321,7 +321,7 @@ export const MonthRangePicker = ({
                   isCanRemoveValue={false}
                   onValueChange={(yearValue) => {
                     if (!yearValue) return
-                    const date = set(TODAY, {
+                    const date = set(today, {
                       date: 1,
                       month: value?.end ? value.end.getMonth() : 0,
                       year: +yearValue
@@ -336,10 +336,10 @@ export const MonthRangePicker = ({
                       key={option.value}
                       variant={value?.end && value.end?.getMonth().toString() === option.value ? 'default' : 'ghost'}
                       onClick={() => {
-                        const date = set(TODAY, {
+                        const date = set(today, {
                           date: 1,
                           month: +option.value,
-                          year: value?.end ? value.end.getFullYear() : TODAY.getFullYear()
+                          year: value?.end ? value.end.getFullYear() : today.getFullYear()
                         })
                         changeEndValue(value?.start ? max([value.start, date]) : date)
                       }}

@@ -1244,7 +1244,7 @@
         {
           "path": "src/registry/new-york/molecules/theme-toggle-button/components/theme-toggle-button.tsx",
           "type": "registry:ui",
-          "target": "src/components/molecules/theme-toggle-button/index.tsx"
+          "target": "src/components/molecules/theme-toggle-button/theme-toggle-button.tsx"
         },
         {
           "path": "src/registry/new-york/molecules/theme-toggle-button/components/lib.ts",
