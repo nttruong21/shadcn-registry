@@ -6,7 +6,8 @@
   "description": "A container that groups related buttons together with consistent styling.",
   "dependencies": [
     "@radix-ui/react-slot",
-    "class-variance-authority"
+    "class-variance-authority",
+    "@radix-ui/react-separator"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/separator.json"

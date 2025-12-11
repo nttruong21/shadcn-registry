@@ -7,8 +7,7 @@
   "dependencies": [
     "@radix-ui/react-slot",
     "class-variance-authority",
-    "lucide-react",
-    "class-variance-authority"
+    "lucide-react"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/spinner.json"

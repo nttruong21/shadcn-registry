@@ -9,7 +9,8 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "https://ntt-shadcn-registry.vercel.app/r/button.json"
+    "https://ntt-shadcn-registry.vercel.app/r/button.json",
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
   ],
   "files": [
     {

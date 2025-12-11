@@ -5,7 +5,9 @@
   "title": "field",
   "description": "Combine labels, controls, and help text to compose accessible form fields and grouped inputs.",
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority",
+    "@radix-ui/react-label",
+    "@radix-ui/react-separator"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/label.json",

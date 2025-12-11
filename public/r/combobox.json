@@ -5,12 +5,16 @@
   "title": "Combobox",
   "description": "Autocomplete input and command palette with a list of suggestions.",
   "dependencies": [
-    "lucide-react"
+    "lucide-react",
+    "cmdk",
+    "@radix-ui/react-dialog",
+    "@radix-ui/react-popover"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/button.json",
     "https://ntt-shadcn-registry.vercel.app/r/command.json",
-    "https://ntt-shadcn-registry.vercel.app/r/popover.json"
+    "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
   ],
   "files": [
     {

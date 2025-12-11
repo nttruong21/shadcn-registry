@@ -6,7 +6,8 @@
   "description": "Fast, composable, unstyled command menu for React.",
   "dependencies": [
     "cmdk",
-    "lucide-react"
+    "lucide-react",
+    "@radix-ui/react-dialog"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/dialog.json"

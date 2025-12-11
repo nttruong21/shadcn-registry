@@ -7,12 +7,17 @@
   "dependencies": [
     "date-fns",
     "lucide-react",
-    "react-day-picker"
+    "react-day-picker",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "react-day-picker",
+    "@radix-ui/react-popover"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/button.json",
     "https://ntt-shadcn-registry.vercel.app/r/calendar.json",
-    "https://ntt-shadcn-registry.vercel.app/r/popover.json"
+    "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
   ],
   "files": [
     {

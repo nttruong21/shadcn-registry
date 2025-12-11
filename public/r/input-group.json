@@ -5,12 +5,15 @@
   "title": "Input Group",
   "description": "Display additional information or actions to an input or textarea.",
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority",
+    "@radix-ui/react-slot",
+    "lucide-react"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/button.json",
     "https://ntt-shadcn-registry.vercel.app/r/input.json",
-    "https://ntt-shadcn-registry.vercel.app/r/textarea.json"
+    "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
   ],
   "files": [
     {

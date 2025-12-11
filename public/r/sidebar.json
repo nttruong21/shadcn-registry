@@ -7,7 +7,10 @@
   "dependencies": [
     "@radix-ui/react-slot",
     "class-variance-authority",
-    "lucide-react"
+    "lucide-react",
+    "@radix-ui/react-separator",
+    "@radix-ui/react-dialog",
+    "@radix-ui/react-tooltip"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/button.json",
@@ -15,7 +18,8 @@
     "https://ntt-shadcn-registry.vercel.app/r/separator.json",
     "https://ntt-shadcn-registry.vercel.app/r/sheet.json",
     "https://ntt-shadcn-registry.vercel.app/r/skeleton.json",
-    "https://ntt-shadcn-registry.vercel.app/r/tooltip.json"
+    "https://ntt-shadcn-registry.vercel.app/r/tooltip.json",
+    "https://ntt-shadcn-registry.vercel.app/r/spinner.json"
   ],
   "files": [
     {

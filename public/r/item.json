@@ -6,7 +6,8 @@
   "description": "A versatile component that you can use to display any content.",
   "dependencies": [
     "@radix-ui/react-slot",
-    "class-variance-authority"
+    "class-variance-authority",
+    "@radix-ui/react-separator"
   ],
   "registryDependencies": [
     "https://ntt-shadcn-registry.vercel.app/r/separator.json"
