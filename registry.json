@@ -670,11 +670,6 @@
           "path": "src/registry/new-york/ui/sheet/components/sheet.tsx",
           "type": "registry:ui",
           "target": "src/components/ui/sheet.tsx"
-        },
-        {
-          "path": "src/hooks/use-device.ts",
-          "type": "registry:hook",
-          "target": "src/hooks/use-device.ts"
         }
       ],
       "dependencies": [
@@ -692,6 +687,11 @@
           "path": "src/registry/new-york/ui/sidebar/components/sidebar.tsx",
           "type": "registry:ui",
           "target": "src/components/ui/sidebar.tsx"
+        },
+        {
+          "path": "src/hooks/use-device.ts",
+          "type": "registry:hook",
+          "target": "src/hooks/use-device.ts"
         }
       ],
       "dependencies": [
