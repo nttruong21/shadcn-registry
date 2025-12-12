@@ -23,7 +23,7 @@ type YoutubeAttributes = React.IframeHTMLAttributes<HTMLIFrameElement> & {
 }
 
 // [C] Width sizes
-const WIDTH_SIZES: string[] = ['25%', '50%', '75%', '100%']
+const widthSizes: string[] = ['25%', '50%', '75%', '100%']
 
 // [U] Get youtube embed url
 export const getYoutubeEmbedUrl = (nocookie?: boolean, isPlaylist?: boolean) => {
@@ -314,7 +314,7 @@ const YoutubeComponent = (props: ReactNodeViewProps<HTMLImageElement>) => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent>
-                  {WIDTH_SIZES.map((size) => (
+                  {widthSizes.map((size) => (
                     <DropdownMenuItem
                       key={size}
                       className={cn({

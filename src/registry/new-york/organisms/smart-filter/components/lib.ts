@@ -176,7 +176,7 @@ export const smartFilterFormSchema = z.object({
   )
 })
 
-export const DefaultSmartFilterFormValue: SmartFilterFormInput = {
+export const defaultSmartFilterFormValue: SmartFilterFormInput = {
   search: '',
   filters: []
 } as const
@@ -200,6 +200,6 @@ export type SmartFilterFormOutput = z.output<typeof smartFilterFormSchema>
 export const useSmartFilterForm = ({ defaultFormValue }: { defaultFormValue?: SmartFilterFormInput } = {}) => {
   return useForm<SmartFilterFormInput, unknown, SmartFilterFormOutput>({
     resolver: zodResolver(smartFilterFormSchema),
-    defaultValues: defaultFormValue ?? DefaultSmartFilterFormValue
+    defaultValues: defaultFormValue ?? defaultSmartFilterFormValue
   })
 }

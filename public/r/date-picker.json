@@ -7,7 +7,6 @@
   "dependencies": [
     "date-fns",
     "lucide-react",
-    "react-day-picker",
     "@radix-ui/react-slot",
     "class-variance-authority",
     "react-day-picker",

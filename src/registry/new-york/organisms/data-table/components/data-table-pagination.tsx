@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { cn } from '@/utils/ui'
 import type { DataTableProps } from './data-table'
 
-const DEFAULT_PAGE_SIZE_OPTIONS = [10, 20, 30, 50, 100]
+const pageSizeOptions = [10, 20, 30, 50, 100]
 
 // Component
 const DataTablePagination = <TData extends RowData>({
@@ -72,7 +72,7 @@ const DataTablePagination = <TData extends RowData>({
               <SelectValue />
             </SelectTrigger>
             <SelectContent side='top'>
-              {DEFAULT_PAGE_SIZE_OPTIONS.map((pageSize) => (
+              {pageSizeOptions.map((pageSize) => (
                 <SelectItem key={pageSize} value={`${pageSize}`}>
                   {pageSize}
                 </SelectItem>

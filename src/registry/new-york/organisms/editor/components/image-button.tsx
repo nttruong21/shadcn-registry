@@ -17,7 +17,6 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
@@ -28,7 +27,7 @@ export enum FormMode {
 }
 
 // [C] Image form schema
-export const IMAGE_FORM_SCHEMA = z
+export const imageFormSchema = z
   .object({
     mode: z.enum(FormMode),
     url: z.string().trim(),
@@ -71,14 +70,14 @@ export const IMAGE_FORM_SCHEMA = z
   })
 
 // [C] Default image form value
-export const DEFAULT_IMAGE_FORM_VALUE: z.input<typeof IMAGE_FORM_SCHEMA> = {
+export const defaultImageFormValue: z.input<typeof imageFormSchema> = {
   mode: FormMode.Url,
   url: '',
   files: []
 }
 
 // [C] File uploader dropzone options
-export const FILE_UPLOADER_DROPZONE_OPTIONS: DropzoneOptions = {
+export const fileUploaderDropzoneOptions: DropzoneOptions = {
   maxFiles: 10,
   multiple: true,
   accept: {
@@ -102,8 +101,8 @@ const ImageButton = React.memo<{
 
   // Form
   const imageForm = useForm({
-    resolver: zodResolver(IMAGE_FORM_SCHEMA),
-    defaultValues: DEFAULT_IMAGE_FORM_VALUE
+    resolver: zodResolver(imageFormSchema),
+    defaultValues: defaultImageFormValue
   })
 
   const formMode = useWatch({
@@ -116,7 +115,7 @@ const ImageButton = React.memo<{
     imageForm.setValue('mode', value as FormMode)
   }
 
-  const insertImageNodes = async (fieldValues: z.output<typeof IMAGE_FORM_SCHEMA>) => {
+  const insertImageNodes = async (fieldValues: z.output<typeof imageFormSchema>) => {
     const { mode, url, files } = fieldValues
 
     // Add image node view
@@ -169,13 +168,10 @@ const ImageButton = React.memo<{
           <form>
             <Tabs value={formMode} onValueChange={changeTab}>
               {/* Tabs list */}
-              <ScrollArea>
-                <TabsList loop className='w-full [&_button]:flex-1'>
-                  <TabsTrigger value={FormMode.Url}>URL</TabsTrigger>
-                  <TabsTrigger value={FormMode.Files}>File</TabsTrigger>
-                </TabsList>
-                <ScrollBar orientation='horizontal' />
-              </ScrollArea>
+              <TabsList loop className='w-full [&_button]:flex-1'>
+                <TabsTrigger value={FormMode.Url}>URL</TabsTrigger>
+                <TabsTrigger value={FormMode.Files}>File</TabsTrigger>
+              </TabsList>
 
               {/* Tabs content */}
               {/* Url tab */}
@@ -208,7 +204,7 @@ const ImageButton = React.memo<{
                       <FieldLabel htmlFor={`editor-${id}-image-button-image-form-files`}>Image files</FieldLabel>
                       <FileUpload
                         value={field.value}
-                        dropzoneOptions={FILE_UPLOADER_DROPZONE_OPTIONS}
+                        dropzoneOptions={fileUploaderDropzoneOptions}
                         className='xl:grid-cols-1'
                         onValueChange={field.onChange}
                       >

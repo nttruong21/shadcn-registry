@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "field",
   "type": "registry:ui",
-  "title": "field",
+  "title": "Field",
   "description": "Combine labels, controls, and help text to compose accessible form fields and grouped inputs.",
   "dependencies": [
     "class-variance-authority",

@@ -21,17 +21,17 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 // [C] File form schema
-export const FILE_FORM_SCHEMA = z.object({
+export const fileFormSchema = z.object({
   files: z.array(z.custom<File>()).min(1, 'Please select the file')
 })
 
 // [C]  Default file form value
-export const DEFAULT_FILE_FORM_VALUE: z.input<typeof FILE_FORM_SCHEMA> = {
+export const defaultFileFormValue: z.input<typeof fileFormSchema> = {
   files: []
 }
 
 // [C]  File uploader dropzone options
-export const FILE_UPLOADER_DROPZONE_OPTIONS: DropzoneOptions = {
+export const fileUploaderDropzoneOptions: DropzoneOptions = {
   maxFiles: 10,
   multiple: true,
   accept: {
@@ -56,12 +56,12 @@ const FileButton = memo<{
 
   // Form
   const fileForm = useForm({
-    resolver: zodResolver(FILE_FORM_SCHEMA),
-    defaultValues: DEFAULT_FILE_FORM_VALUE
+    resolver: zodResolver(fileFormSchema),
+    defaultValues: defaultFileFormValue
   })
 
   // Methods
-  const insertFileNodes = async (fieldValues: z.output<typeof FILE_FORM_SCHEMA>) => {
+  const insertFileNodes = async (fieldValues: z.output<typeof fileFormSchema>) => {
     try {
       // Upload file
       const uploadedFiles = (await Promise.all(fieldValues.files.map(async (file) => await uploadFile(file)))).filter(
@@ -125,7 +125,7 @@ const FileButton = memo<{
                   <FieldLabel htmlFor={`editor-${id}-image-button-image-form-files`}>Files</FieldLabel>
                   <FileUpload
                     value={field.value}
-                    dropzoneOptions={FILE_UPLOADER_DROPZONE_OPTIONS}
+                    dropzoneOptions={fileUploaderDropzoneOptions}
                     className='xl:grid-cols-1'
                     onValueChange={field.onChange}
                   >

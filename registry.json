@@ -289,7 +289,6 @@
       "dependencies": [
         "date-fns",
         "lucide-react",
-        "react-day-picker",
         "@radix-ui/react-slot",
         "class-variance-authority",
         "react-day-picker",
@@ -371,7 +370,7 @@
     {
       "name": "field",
       "type": "registry:ui",
-      "title": "field",
+      "title": "Field",
       "description": "Combine labels, controls, and help text to compose accessible form fields and grouped inputs.",
       "files": [
         {
@@ -1102,7 +1101,6 @@
         "lucide-react",
         "@radix-ui/react-slot",
         "class-variance-authority",
-        "embla-carousel-react",
         "@radix-ui/react-popover",
         "@radix-ui/react-checkbox",
         "cmdk",
@@ -1315,6 +1313,587 @@
         "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
         "https://ntt-shadcn-registry.vercel.app/r/command.json",
         "https://ntt-shadcn-registry.vercel.app/r/dialog.json"
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:component",
+      "title": "Data Table",
+      "description": "Powerful table and data grids built using TanStack Table.",
+      "files": [
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-action-cell.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-action-cell.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-additional-info.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-additional-info.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-body.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-body.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-checkbox-cell.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-checkbox-cell.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-checkbox-header.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-checkbox-header.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-column-visibility-selection.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-column-visibility-selection.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-footer.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-footer.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-header.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-header.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-pagination.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-pagination.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-pagination.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-pagination.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table-row-selection.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table-row-selection.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/data-table.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/data-table/data-table.tsx"
+        },
+        {
+          "path": "src/@types/tanstack-table.ts",
+          "type": "registry:file",
+          "target": "src/@types/tanstack-table.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/index.ts",
+          "type": "registry:file",
+          "target": "src/components/organisms/data-table/index.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/data-table/components/lib.ts",
+          "type": "registry:file",
+          "target": "src/components/organisms/data-table/lib.ts"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@radix-ui/react-dropdown-menu",
+        "@tanstack/react-table",
+        "@radix-ui/react-checkbox",
+        "cmdk",
+        "@radix-ui/react-dialog",
+        "lodash.debounce",
+        "react-number-format",
+        "@radix-ui/react-separator",
+        "@radix-ui/react-tooltip"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dropdown-menu.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+        "https://ntt-shadcn-registry.vercel.app/r/table.json",
+        "https://ntt-shadcn-registry.vercel.app/r/checkbox.json",
+        "https://ntt-shadcn-registry.vercel.app/r/command.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dialog.json",
+        "https://ntt-shadcn-registry.vercel.app/r/number-input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+        "https://ntt-shadcn-registry.vercel.app/r/tooltip.json",
+        "https://ntt-shadcn-registry.vercel.app/r/loading-overlay.json"
+      ]
+    },
+    {
+      "name": "editor",
+      "type": "registry:component",
+      "title": "Editor",
+      "description": "Rich text editor built with Tiptap providing essential formatting tools and markdown support.",
+      "files": [
+        {
+          "path": "src/registry/new-york/organisms/editor/components/blockquote-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/blockquote-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/bold-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/bold-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/color-picker-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/color-picker-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/custom-image-extension.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/custom-image-extension.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/custom-youtube-extension.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/custom-youtube-extension.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/editor-content.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/editor-content.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/editor.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/editor.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/file-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/file-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/file-extension.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/file-extension.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/highlight-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/highlight-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/history-buttons.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/history-buttons.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/image-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/image-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/index.ts",
+          "type": "registry:file",
+          "target": "src/components/organisms/editor/index.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/internal-editor-content.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/internal-editor-content.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/italic-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/italic-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/lib.ts",
+          "type": "registry:file",
+          "target": "src/components/organisms/editor/lib.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/link-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/link-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/list-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/list-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/preview-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/preview-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/strike-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/strike-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/table-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/table-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/text-align-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/text-align-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/text-color-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/text-color-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/text-style-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/text-style-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/toolbar-separator.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/toolbar-separator.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/tooltip-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/tooltip-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/underline-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/underline-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/youtube-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/youtube-button.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/editor/components/zoom-button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/editor/zoom-button.tsx"
+        },
+        {
+          "path": "src/@types/tiptap.ts",
+          "type": "registry:file",
+          "target": "src/@types/tiptap.ts"
+        }
+      ],
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@tiptap/react",
+        "lucide-react",
+        "@radix-ui/react-slider",
+        "color",
+        "@radix-ui/react-select",
+        "@radix-ui/react-popover",
+        "@radix-ui/react-tooltip",
+        "@tiptap/extension-image",
+        "@radix-ui/react-dropdown-menu",
+        "@radix-ui/react-separator",
+        "@tiptap/extension-youtube",
+        "html-react-parser",
+        "lodash.throttle",
+        "@hookform/resolvers",
+        "react-dropzone",
+        "react-hook-form",
+        "sonner",
+        "zod",
+        "@radix-ui/react-label",
+        "@radix-ui/react-tabs",
+        "motion"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+        "https://ntt-shadcn-registry.vercel.app/r/color-picker.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/select.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dropdown-menu.json",
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json",
+        "https://ntt-shadcn-registry.vercel.app/r/skeleton.json",
+        "https://ntt-shadcn-registry.vercel.app/r/label.json",
+        "https://ntt-shadcn-registry.vercel.app/r/tooltip.json",
+        "https://ntt-shadcn-registry.vercel.app/r/kbd.json"
+      ]
+    },
+    {
+      "name": "smart-filter",
+      "type": "registry:component",
+      "title": "Smart Filter",
+      "description": "Powerful component with search and filter by multiple conditions that can switch back and forth.",
+      "files": [
+        {
+          "path": "src/registry/new-york/organisms/smart-filter/components/advanced-filter-name-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-filter/advanced-filter-name-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-filter/components/advanced-filter-operation-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-filter/advanced-filter-operation-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-filter/components/advanced-filter-value-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-filter/advanced-filter-value-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-filter/components/advanced-filter.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-filter/advanced-filter.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-filter/components/basic-search.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-filter/basic-search.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-filter/components/index.ts",
+          "type": "registry:file",
+          "target": "src/components/organisms/smart-filter/index.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-filter/components/lib.ts",
+          "type": "registry:file",
+          "target": "src/components/organisms/smart-filter/lib.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-filter/components/smart-filter.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-filter/smart-filter.tsx"
+        }
+      ],
+      "dependencies": [
+        "react-hook-form",
+        "lucide-react",
+        "cmdk",
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-popover",
+        "date-fns",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@radix-ui/react-checkbox",
+        "@radix-ui/react-separator",
+        "react-number-format",
+        "date-fns",
+        "react-day-picker",
+        "@radix-ui/react-label",
+        "@uidotdev/usehooks"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/combobox.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/multi-select.json",
+        "https://ntt-shadcn-registry.vercel.app/r/badge.json",
+        "https://ntt-shadcn-registry.vercel.app/r/checkbox.json",
+        "https://ntt-shadcn-registry.vercel.app/r/command.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dialog.json",
+        "https://ntt-shadcn-registry.vercel.app/r/number-input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+        "https://ntt-shadcn-registry.vercel.app/r/date-picker.json",
+        "https://ntt-shadcn-registry.vercel.app/r/calendar.json",
+        "https://ntt-shadcn-registry.vercel.app/r/field.json",
+        "https://ntt-shadcn-registry.vercel.app/r/label.json"
+      ]
+    },
+    {
+      "name": "smart-form",
+      "type": "registry:component",
+      "title": "Smart Form",
+      "description": "Entire form component with dynamic fields render on top of the configuration.",
+      "files": [
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/autocomplete-with-infinite-query-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/autocomplete-with-infinite-query-field.tsx"
+        },
+        {
+          "path": "src/types/base.ts",
+          "type": "registry:file",
+          "target": "src/types/base.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/autocomplete-with-options-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/autocomplete-with-options-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/autocomplete-with-query-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/autocomplete-with-query-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/checkbox-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/checkbox-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/date-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/date-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/editor-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/editor-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/field-container.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/field-container.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/file-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/file-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/index.ts",
+          "type": "registry:file",
+          "target": "src/components/organisms/smart-form/index.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/input-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/input-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/lib.ts",
+          "type": "registry:file",
+          "target": "src/components/organisms/smart-form/lib.ts"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/multi-file-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/multi-file-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/multi-select-with-infinite-query-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/multi-select-with-infinite-query-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/multi-select-with-options-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/multi-select-with-options-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/multi-select-with-query-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/multi-select-with-query-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/number-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/number-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/password-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/password-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/phone-number-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/phone-number-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/select-with-infinite-query-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/select-with-infinite-query-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/select-with-options-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/select-with-options-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/select-with-query-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/select-with-query-field.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/smart-form.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/smart-form.tsx"
+        },
+        {
+          "path": "src/registry/new-york/organisms/smart-form/components/textarea-field.tsx",
+          "type": "registry:ui",
+          "target": "src/components/organisms/smart-form/textarea-field.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@radix-ui/react-popover",
+        "@radix-ui/react-checkbox",
+        "cmdk",
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-separator",
+        "date-fns",
+        "react-day-picker",
+        "@tiptap/react",
+        "@radix-ui/react-slider",
+        "color",
+        "@radix-ui/react-select",
+        "@radix-ui/react-popover",
+        "@radix-ui/react-tooltip",
+        "@tiptap/extension-image",
+        "@radix-ui/react-dropdown-menu",
+        "@tiptap/extension-youtube",
+        "html-react-parser",
+        "lodash.throttle",
+        "@hookform/resolvers",
+        "react-dropzone",
+        "react-hook-form",
+        "sonner",
+        "zod",
+        "@radix-ui/react-label",
+        "@radix-ui/react-tabs",
+        "motion",
+        "react-phone-number-input",
+        "react-number-format"
+      ],
+      "registryDependencies": [
+        "https://ntt-shadcn-registry.vercel.app/r/multi-select.json",
+        "https://ntt-shadcn-registry.vercel.app/r/badge.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button.json",
+        "https://ntt-shadcn-registry.vercel.app/r/checkbox.json",
+        "https://ntt-shadcn-registry.vercel.app/r/command.json",
+        "https://ntt-shadcn-registry.vercel.app/r/popover.json",
+        "https://ntt-shadcn-registry.vercel.app/r/separator.json",
+        "https://ntt-shadcn-registry.vercel.app/r/spinner.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dialog.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input.json",
+        "https://ntt-shadcn-registry.vercel.app/r/input-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/textarea.json",
+        "https://ntt-shadcn-registry.vercel.app/r/calendar.json",
+        "https://ntt-shadcn-registry.vercel.app/r/color-picker.json",
+        "https://ntt-shadcn-registry.vercel.app/r/dropdown-menu.json",
+        "https://ntt-shadcn-registry.vercel.app/r/skeleton.json",
+        "https://ntt-shadcn-registry.vercel.app/r/label.json",
+        "https://ntt-shadcn-registry.vercel.app/r/tooltip.json",
+        "https://ntt-shadcn-registry.vercel.app/r/kbd.json",
+        "https://ntt-shadcn-registry.vercel.app/r/field.json",
+        "https://ntt-shadcn-registry.vercel.app/r/button-group.json",
+        "https://ntt-shadcn-registry.vercel.app/r/combobox.json"
       ]
     }
   ]

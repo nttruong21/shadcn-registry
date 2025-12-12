@@ -11,7 +11,7 @@ import {
 } from './lib'
 import { useSmartFilterContext } from './smart-filter'
 
-const OPERATION_LABELS: Record<string, Record<string, string | undefined> | undefined> = {
+const operationLabels: Record<string, Record<string, string | undefined> | undefined> = {
   base: {
     equalsTo: 'Equals to',
     doesNotEqualTo: 'Does not equal to',
@@ -63,7 +63,7 @@ const AdvancedFilterOperationField = ({
     return type
       ? operationsPerType[type].map((operation) => ({
           value: operation,
-          label: OPERATION_LABELS[type]?.[operation] ?? OPERATION_LABELS.base?.[operation] ?? ''
+          label: operationLabels[type]?.[operation] ?? operationLabels.base?.[operation] ?? ''
         }))
       : []
   }, [filters, formFilterName])
